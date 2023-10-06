@@ -24,9 +24,21 @@ function MathProblem() {
   var numSecond: Number = Math.floor(Math.random()*20)
   var equation: String = numFirst.toString() +" "+ symbol.toString() +" "+ numSecond.toString()
 
+  var solution: Number
+  if(symbol===Symbol.Plus) {
+    solution=+numFirst + +numSecond
+  } else if(symbol===Symbol.Minus) {
+    solution=-numFirst - -numSecond
+  } else {
+    solution=+numFirst * +numSecond
+  }
+
+  var output: String
+  output = "Question: "+equation+" Solution:"+solution
+
   return (
-      equation
-  );
+  output  
+);
 }
 
 
