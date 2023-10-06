@@ -35,7 +35,6 @@ export default function TimerModule({deadline, timerLength, interval, timeEnded}
 
     useEffect(()=>{
         setTimespan(timerLength);
-        // return ()=>setTimespan(-21);
     },[timeEnded]);
 
     return(

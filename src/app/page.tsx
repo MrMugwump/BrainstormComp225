@@ -3,6 +3,7 @@
 import Image from 'next/image'
 import React from 'react';
 import { useState } from 'react';
+import TimerModule from './timer';
 
 function MathProblem() {
   enum Symbol {
@@ -43,6 +44,12 @@ function MathProblem() {
 
 
 export default function Home() {
+
+  const [deadline, setDeadline] = useState(new Date());
+  const [timerLength, setTimerLength] = useState(10000);
+  const [interval, setInterval] = useState(1000);
+  const [timeEnded, setTimeEnded] = useState(1);
+  //const {seconds} = useTimer(time,10000);
   return (
 
     <html>
@@ -58,6 +65,14 @@ export default function Home() {
           </form>
         <br></br>
         <MathProblem></MathProblem>
+        <hr/>
+        <TimerModule 
+        deadline = {deadline}
+        timerLength={timerLength}
+        interval={interval}
+        timeEnded={timeEnded}/>
+        <hr/>
+        <button className='button button1' onClick={()=>setTimeEnded((_timeEnded)=>-1*_timeEnded)}>skdjfhsdk + {timeEnded}</button>
       </body>
     </html>
       )
