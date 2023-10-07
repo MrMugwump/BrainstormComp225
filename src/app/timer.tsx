@@ -38,7 +38,10 @@ export default function TimerModule({timerLength, interval, timeEnded}:any){
   },[interval]);
 
   useEffect(()=>{
-      setTimespan(timerLength);
+      setTimespan(() =>{
+        setKeyID((_keyID)=>_keyID+1); // pretty sure I have this here, haven't tested tho lmao
+        return timerLength;
+      });
       
       // return ()=>setTimespan(-21);
   },[timeEnded]);
