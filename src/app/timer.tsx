@@ -12,44 +12,45 @@ const ProgressBar = ({ progress, interval }:any) => (
   </div>
 )
 
-const SECOND = 1_000;
-const MINUTE = SECOND * 60;
-const HOUR = MINUTE * 60;
-const DAY = HOUR * 24;
+const SECOND = 1_000; // 1000ms = 1s
 
+/**
+ * @param timerLength - length of the timer
+ * @param interval - what chunk of time we want to decrement by
+ * @param timeEnded - if set to true, TimerModule will reset the progress bar
+ * 
+ * @returns - returns the progress bar
+ */
 export default function TimerModule({timerLength, interval, timeEnded}:any){
   const [timespan,setTimespan] = useState(timerLength);
-  const [keyID,setKeyID] = useState(0);
-  useEffect(()=>{
+  const [keyID,setKeyID] = useState(0); // used to reset the progress bar
+
+  useEffect(()=>{ 
     const intervalId = setInterval(()=>{
         setTimespan((_timespan: number)=>{
             if(_timespan <= 0){
-              setKeyID((_keyID)=>_keyID+1);
+              setKeyID((_keyID)=>_keyID+1); //resets the progress bar back to full
               return timerLength;
             }
             else{
-              return _timespan - interval*0.1;
+              return _timespan - interval*0.1; //decrements timer by 1/10th of a second
             }
         });
-    }, interval*0.1);
+    }, interval*0.1); // pauses for a tenth of a second
 
-    return () => {clearInterval(intervalId)}
+    return () => {clearInterval(intervalId)} // don't actually know what this does, prob parallel processing stuff
     
-  },[interval]);
+  },[interval]); //triggers every time setInterval is called
 
   useEffect(()=>{
       setTimespan(() =>{
-        setKeyID((_keyID)=>_keyID+1); // pretty sure I have this here, haven't tested tho lmao
-        return timerLength;
+        setKeyID((_keyID)=>_keyID+1); // resets the progress bar 
+        return timerLength; // resets the time back to full
       });
-      
-      // return ()=>setTimespan(-21);
-  },[timeEnded]);
+  },[timeEnded]); // triggers every time timeEnded is changed
 
   return(
       <>
-        <p>{timespan/SECOND}</p>
-        <hr/>
         <ProgressBar 
           key = {keyID}
           progress={10*timespan/SECOND}
