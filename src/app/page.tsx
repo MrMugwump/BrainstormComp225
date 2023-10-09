@@ -15,10 +15,19 @@ export default function Home() {
   const [interval, setInterval] = useState(1000);
   const [timeEnded, setTimeEnded] = useState(1);
   //const {seconds} = useTimer(time,10000);
-  return (
 
+  return (
     <html>
-      <body>
+      <head><title> {/*Metadata title for the webpage:*/} Brainstorm Game </title></head>
+
+      <body> {/*All elements of the webpage follow:*/}
+
+        <header>
+          <i>Brainstorm</i> by Herb Jury
+        </header>
+
+        <div className="content">
+
         <h1>
           Brainstorm Game
         </h1>
@@ -34,6 +43,8 @@ export default function Home() {
         timeEnded={timeEnded}/>
         <hr/>
         <button className='button button1' onClick={()=>setTimeEnded((_timeEnded)=>-1*_timeEnded)}>skdjfhsdk + {timeEnded}</button>
+
+        </div> {/*End of content.*/}
       </body>
     </html>
       )
