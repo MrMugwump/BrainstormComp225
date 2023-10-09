@@ -5,7 +5,7 @@ import "./timerStyle.css"
 const ProgressBar = ({ progress, interval }:any) => ( 
   <div className="progressbar">
     <div className="progress" style={{ 
-      width: `${progress}%`,
+      height: `${progress}%`,
       transitionDuration: `${interval}ms`,
       }}>
     </div>
@@ -27,15 +27,15 @@ export default function TimerModule({timerLength, interval, timeEnded}:any){
 
   useEffect(()=>{ 
     const intervalId = setInterval(()=>{
-        setTimespan((_timespan: number)=>{
-            if(_timespan <= 0){
-              setKeyID((_keyID)=>_keyID+1); //resets the progress bar back to full
-              return timerLength;
-            }
-            else{
-              return _timespan - interval*0.1; //decrements timer by 1/10th of a second
-            }
-        });
+      setTimespan((_timespan: number)=>{
+        if(_timespan <= 0){
+          setKeyID((_keyID)=>_keyID+1); //resets the progress bar back to full
+          return timerLength;
+        }
+        else{
+          return _timespan - interval*0.1; //decrements timer by 1/10th of a second
+        }
+      });
     }, interval*0.1); // pauses for a tenth of a second
 
     return () => {clearInterval(intervalId)} // don't actually know what this does, prob parallel processing stuff
@@ -43,10 +43,10 @@ export default function TimerModule({timerLength, interval, timeEnded}:any){
   },[interval]); //triggers every time setInterval is called
 
   useEffect(()=>{
-      setTimespan(() =>{
-        setKeyID((_keyID)=>_keyID+1); // resets the progress bar 
-        return timerLength; // resets the time back to full
-      });
+    setKeyID((_keyID)=>_keyID+1); // resets the progress bar 
+    setTimespan(() =>{
+      return timerLength; // resets the time back to full
+    });
   },[timeEnded]); // triggers every time timeEnded is changed
 
   return(

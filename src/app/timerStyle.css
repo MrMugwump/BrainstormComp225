@@ -1,17 +1,24 @@
 /* code taken from https://codepen.io/vaughnantonyan/pen/baypWZ*/
 .progressbar{
-    width: 90%;
+    width: 20px;
     margin: 10px auto;
-    height: 22px;
+    height: 100px;
     background-color: #efd0d0;
+    position: relative;
+    /* text-align: left; */
 }
 
 .progressbar .progress {
     height: 100%;
     text-align: right;
     padding: 0 10px;
+    bottom: 0;
+    position: absolute;
+    transition: height linear;
+    transform: rotate(180deg);
     line-height: 22px; /* same as #progressBar height if we want text middle aligned */
     width: 0;
     background-color: #d05656;
     box-sizing: border-box;
+    
   }
