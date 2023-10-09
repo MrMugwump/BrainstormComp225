@@ -29,13 +29,13 @@ function MathProblem() {
   if(symbol===Symbol.Plus) {
     solution=+numFirst + +numSecond
   } else if(symbol===Symbol.Minus) {
-    solution=-numFirst - -numSecond
+    solution=+numFirst - +numSecond
   } else {
     solution=+numFirst * +numSecond
   }
 
   var output: String
-  output = "Question: "+equation+" Solution:"+solution
+  output = "Question: "+equation+" Solution: "+solution
 
   return (
   output  
