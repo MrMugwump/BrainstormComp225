@@ -8,6 +8,7 @@ import EquationDisplay from './equationDisplay';
 
 
 
+
 export default function Home() {
 
   const [deadline, setDeadline] = useState(new Date());
@@ -22,26 +23,35 @@ export default function Home() {
 
       <body> {/*All elements of the webpage follow:*/}
 
-        <header>
-          <i>Brainstorm</i> by Herb Jury
-        </header>
+          <table className="headerMenu">
+          <tbody>
+            <tr>
+              <td className="menuLeftBox">
+                <a href='https://google.com/'>Instructions & Info</a>
+              </td>
+              <td className="menuCenterBox">
+                <h3><i>Brainstorm</i> by Herb Jury</h3>
+              </td>
+              <td className="menuRightBox">
+              <a href='https://google.com/'>Settings</a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
 
         <div className="content">
 
-        <h1>
-          Brainstorm Game
-        </h1>
         <p>Equation display:</p>
         <br></br>
         <EquationDisplay></EquationDisplay>
 
-        <hr/>
+        <p>Timer module:</p>
+        <br></br>
         <TimerModule 
         deadline = {deadline}
         timerLength={timerLength}
         interval={interval}
         timeEnded={timeEnded}/>
-        <hr/>
         <button className='button button1' onClick={()=>setTimeEnded((_timeEnded)=>-1*_timeEnded)}>skdjfhsdk + {timeEnded}</button>
 
         </div> {/*End of content.*/}
