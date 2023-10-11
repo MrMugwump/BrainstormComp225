@@ -19,15 +19,19 @@ export default function EquationDisplay({}:any){
         }
     }, [inputVal3]);
     return(<>
-        <tr>
-            <td><NumberSlot number = {equation[0]} isInput = {inputArray[0]} inputVal={setInputVal0}/></td>
-            <td><NumberSlot number = {equation[1]} isInput = {inputArray[1]}/></td>
-            <td><NumberSlot number = {equation[2]} isInput = {inputArray[2]} inputVal={setInputVal2}/></td>
-            <td>=</td>
-            <td><NumberSlot number = {equation[3]} isInput = {inputArray[3]} inputVal={setInputVal3}/></td>
-            <td><p>Input = {inputVal3}</p></td>
-            <td><p>Correct = {isCorrect}</p></td>
-        </tr>
+        <table>
+        <tbody>
+            <tr>
+                <td><NumberSlot number = {equation[0]} isInput = {inputArray[0]} inputVal={setInputVal0}/></td>
+                <td><NumberSlot number = {equation[1]} isInput = {inputArray[1]}/></td>
+                <td><NumberSlot number = {equation[2]} isInput = {inputArray[2]} inputVal={setInputVal2}/></td>
+                <td>=</td>
+                <td><NumberSlot number = {equation[3]} isInput = {inputArray[3]} inputVal={setInputVal3}/></td>
+                <td><p>Input = {inputVal3}</p></td>
+                <td><p>Correct = {isCorrect}</p></td>
+            </tr>
+        </tbody>
+        </table>
         </>)
 }
 
