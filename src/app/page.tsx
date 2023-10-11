@@ -19,7 +19,7 @@ export default function Home() {
 
   return (
     <html>
-      <head><title> Brainstorm Game {/*Metadata title for the webpage:*/}</title></head>
+      <head><title> Brainstorm by Herb Jury {/*Metadata title for the webpage:*/}</title></head>
 
       <body> {/*All elements of the webpage follow:*/}
 
