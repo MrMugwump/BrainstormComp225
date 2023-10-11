@@ -23,11 +23,12 @@ export default function Home() {
 
       <body> {/*All elements of the webpage follow:*/}
 
+          {/*Header:*/}
           <table className="headerMenu">
           <tbody>
             <tr>
               <td className="menuLeftBox">
-                <a href='https://google.com/'>Instructions & Info</a>
+                <a href='https://docs.google.com/document/d/1AptnwPwv4SSi0qF9lezG9_6FiOP8LKhDsg6TUamVKog/edit?usp=sharing'>Project Info</a>
               </td>
               <td className="menuCenterBox">
                 <h3><i>Brainstorm</i> by Herb Jury</h3>
@@ -40,6 +41,9 @@ export default function Home() {
         </table>
 
         <div className="content">
+
+        <p>Difficulty display:</p>
+        <br></br>
 
         <p>Equation display:</p>
         <br></br>
@@ -54,7 +58,7 @@ export default function Home() {
         timeEnded={timeEnded}/>
         <button className='button button1' onClick={()=>setTimeEnded((_timeEnded)=>-1*_timeEnded)}>skdjfhsdk + {timeEnded}</button>
 
-        </div> {/*End of content.*/}
+        </div> {/*End of non-header/footer content.*/}
       </body>
     </html>
       )
