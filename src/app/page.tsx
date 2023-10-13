@@ -3,7 +3,7 @@
 import Image from 'next/image'
 import React from 'react';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import TimerModule from './timer';
 import EquationDisplay from './equationDisplay';
 import SettingsModule from './settings';
