@@ -5,6 +5,7 @@ import React from 'react';
 import { useState } from 'react';
 import TimerModule from './timer';
 import EquationDisplay from './equationDisplay';
+import SettingsModule from './settings';
 
 
 
@@ -15,6 +16,8 @@ export default function Home() {
   const [timerLength, setTimerLength] = useState(10000);
   const [interval, setInterval] = useState(1000);
   const [timeEnded, setTimeEnded] = useState(1);
+  const [isActive, setActive] = useState(false);
+  const [difficulty, setDifficulty] = useState(0);
   //const {seconds} = useTimer(time,10000);
 
   return (
@@ -44,6 +47,14 @@ export default function Home() {
 
         <p>Difficulty display:</p>
         <br></br>
+        <SettingsModule
+        isActive = {isActive}
+        difficulty = {difficulty}/>
+        <button className='button button2' onClick={()=>setDifficulty(1)}>change difficulty</button>
+        <button className='button button3' onClick={
+          ()=>setActive(true)
+        }>toggle menu</button>
+
 
         <p>Equation display:</p>
         <br></br>
