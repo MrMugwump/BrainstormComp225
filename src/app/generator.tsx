@@ -5,7 +5,7 @@ enum Operators {
     Division="÷"
 }
 
-class Generator {
+export class Generator {
     difficulty: number = 0;
     firstNumber: number = 0;
     secondNumber: number = 0;
