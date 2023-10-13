@@ -49,11 +49,11 @@ export default function EquationDisplay({}:any){
         <table key = {key} className="EquationDisplay">
         <tbody>
             <tr>
-                <td><NumberSlot number = {equation[0]} isInput = {inputArray[0]} inputVal={setInputVal}/></td>
-                <td><p>{operation}</p></td>
-                <td><NumberSlot number = {equation[1]} isInput = {inputArray[1]} inputVal={setInputVal}/></td>
-                <td>=</td>
-                <td><NumberSlot number = {equation[2]} isInput = {inputArray[2]} inputVal={setInputVal}/></td>
+                <td className="TextSlot"><NumberSlot number = {equation[0]} isInput = {inputArray[0]} inputVal={setInputVal}/></td>
+                <td className="TextSlot"><p>{operation}</p></td>
+                <td className="TextSlot"><NumberSlot number = {equation[1]} isInput = {inputArray[1]} inputVal={setInputVal}/></td>
+                <td className="TextSlot">=</td>
+                <td className="TextSlot"><NumberSlot number = {equation[2]} isInput = {inputArray[2]} inputVal={setInputVal}/></td>
                 {/*<td><p>Correct = {isCorrect}</p></td>*/}
                 {/*<td><p>location = {location}</p></td>*/}
                 <td className="timercell">
@@ -69,11 +69,18 @@ export default function EquationDisplay({}:any){
 }
 
 function NumberSlot({number, isInput = false, inputVal}:any){
+    const [width,setWidth]=useState('1ch');
+    function onInputChange(e:any){
+        inputVal(e.target.value);
+        setWidth(e.target.value.length+'ch')
+    }
     if (isInput){
-        return(<><input 
-            onChange={e=>{inputVal(e.target.value)} /*sends player input to eq. disp.*/} 
+        return( 
+        <><input className="InputArea"
+            onChange={e=>{onInputChange(e)} /*sends player input to eq. disp.*/} 
             autoFocus={true /*when instantiated, cursor auto selects*/} 
-            size={2  /*how many chars wide input field is (there is a lim to how small)*/} />
+            style={{width: `${width}`}}
+            />
             </>)
     }
     return(<><p>{number}</p></>)
@@ -81,6 +88,6 @@ function NumberSlot({number, isInput = false, inputVal}:any){
 
 function generateRandomInteger(min: number, max: number){ // Taken from https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
     min = Math.ceil(min);
-    max = Math.floor(max)+1; //+1 to make max inclusive inclusive
+    max = Math.floor(max)+1; //+1 to make max inclusive
     return Math.floor(Math.random() * (max - min) + min); // The maximum and the minimum are inclusive
 }
