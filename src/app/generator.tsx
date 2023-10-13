@@ -51,6 +51,8 @@ class Generator {
     }
 
     generateProblem() {
+        // FOR LATER: Only increase difficulty when a problem is solved, not when a new problem is generated.
+        // As new problems will be generated when the timer runs out
         this.difficulty = this.difficulty + 1;
         this.getFirstNumber();
         this.getOperator();
