@@ -58,15 +58,8 @@ export default function Home() {
 
         <p>Equation display:</p>
         <br></br>
-        <EquationDisplay></EquationDisplay>
-
-        <p>Timer module:</p>
+        <EquationDisplay/>
         <br></br>
-        <TimerModule 
-        deadline = {deadline}
-        timerLength={timerLength}
-        interval={interval}
-        timeEnded={timeEnded}/>
         <button className='button button1' onClick={()=>setTimeEnded((_timeEnded)=>-1*_timeEnded)}>skdjfhsdk + {timeEnded}</button>
 
         </div> {/*End of non-header/footer content.*/}
