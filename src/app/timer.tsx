@@ -30,7 +30,7 @@ export default function TimerModule({timerLength, interval, timeEnded,actualSetT
     const intervalId = setInterval(()=>{
       setTimespan((_timespan: number)=>{
         if(_timespan <= 0){
-          //actualSetTimeEnded(true);
+          actualSetTimeEnded(true);
           setKeyID((_keyID)=>_keyID+1); //resets the progress bar back to full
           return timerLength;
         }

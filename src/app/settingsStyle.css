@@ -1,6 +1,6 @@
 .settingsMenu {
     position:absolute;
-    height:100%;
+    height:(100%)-50px;
     top:50px;
     width:20%;
     left:80%;
