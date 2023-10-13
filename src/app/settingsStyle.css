@@ -1,0 +1,13 @@
+.settingsMenu {
+    position:absolute;
+    height:100%;
+    top:50px;
+    width:20%;
+    left:80%;
+    padding: 10px;
+    background-color: darkgray;
+  }
+  
+  .settingsMenuBox {
+    vertical-align:top;
+  }
