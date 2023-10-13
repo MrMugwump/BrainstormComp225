@@ -3,6 +3,7 @@
 import Image from 'next/image'
 import React from 'react';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import TimerModule from './timer';
 import EquationDisplay from './equationDisplay';
 import SettingsModule from './settings';
@@ -37,7 +38,7 @@ export default function Home() {
                 <h3><i>Brainstorm</i> by Herb Jury</h3>
               </td>
               <td className="menuRightBox">
-              <a href='https://google.com/'>Settings</a>
+              <a href='#' onClick={ ()=>setActive(!isActive) }>Settings</a>
               </td>
             </tr>
           </tbody>
@@ -51,10 +52,6 @@ export default function Home() {
         isActive = {isActive}
         difficulty = {difficulty}/>
         <button className='button button2' onClick={()=>setDifficulty(1)}>change difficulty</button>
-        <button className='button button3' onClick={
-          ()=>setActive(!isActive)
-        }>toggle menu</button>
-
 
         <p>Equation display:</p>
         <br></br>
