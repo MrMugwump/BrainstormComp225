@@ -52,7 +52,7 @@ export default function Home() {
         difficulty = {difficulty}/>
         <button className='button button2' onClick={()=>setDifficulty(1)}>change difficulty</button>
         <button className='button button3' onClick={
-          ()=>setActive(true)
+          ()=>setActive(!isActive)
         }>toggle menu</button>
 
 
