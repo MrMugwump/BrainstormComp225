@@ -1,11 +1,20 @@
-.settingsMenu {
+  .settingsMenu {
     position:absolute;
-    height:(100%)-50px;
+    height:calc(100% - 50px);
     top:50px;
     width:20%;
     left:80%;
     padding: 10px;
-    background-color: darkgray;
+  }
+
+  .settingsMenuBackground {
+    position:absolute;
+    height:calc(100% - 50px);
+    top:50px;
+    width:20%;
+    left:80%;
+    background-color: lightgray;
+    opacity:0.5;
   }
   
   .settingsMenuBox {

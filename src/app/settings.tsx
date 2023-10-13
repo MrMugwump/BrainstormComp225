@@ -3,15 +3,20 @@ import { useState, useEffect } from 'react';
 import "./settingsStyle.css"
 
 const SettingsMenu = ({difficulty}:any) => (
-    <table className="settingsMenu">
-        <tbody>
-            <tr>
-              <td className="settingsMenuBox">
-                Difficulty is {difficulty}. <br/>
-              </td>
-            </tr>
-        </tbody>
-    </table>
+    <html>
+        <div className="settingsMenuBackground"/>
+        <table className="settingsMenu">
+            <tbody>
+                <tr>
+                <td className="settingsMenuBox">
+                    <h3>Settings</h3>
+                    <br/>
+                    Difficulty is {difficulty}. <br/>
+                </td>
+                </tr>
+            </tbody>
+        </table>
+    </html>
 )
 
 export default function SettingsModule({isActive, difficulty}:any) {
