@@ -1,4 +1,4 @@
-import { Console } from "console";
+'use client'; // pretty sure this gets rid of one hydration error
 import React from "react"
 import { useState, useEffect } from 'react';
 import TimerModule from "./timer";
@@ -6,15 +6,6 @@ import "./equationDisplayStyle.css"
 import {Generator} from './generator'
 
 export default function EquationDisplay({setLives}:any){
-    const [generator] = useState(()=>{ // initialize our equation generator class
-        var gen = new Generator(0);
-        gen.generateProblem(); // prevents weird issues where .generateProblem() gets called any time React calls a new render
-        return gen;
-    });
-    
-    const [eq,setEq] = useState([generator.firstNumber,generator.secondNumber,generator.solution]);
-    const [operation, setOperation] = useState(generator.operator);
-
     //const equation: [firstVar:number, secondVal:number, answer:any] = [generator.firstNumber,generator.secondNumber,generator.solution]; // dummy equation for testing
     const inputArray = [false,false,false]; //array to set which place to be input, true=input mode
     const [inputVal,setInputVal] = useState(''); //what the player types
@@ -24,7 +15,17 @@ export default function EquationDisplay({setLives}:any){
     const [timeLength] = useState(10000); //param for timer
     const [timeEnded,setTimeEnded] = useState(false); //TimerModule has ability to change this, triggers a reset if true
     // const [isCorrect, setIsCorrect] = useState('incorrect'); //debugging thing
-    useEffect(()=>{inputArray[location] = true;},[])
+
+    const [generator] = useState(()=>{ // initialize our equation generator class
+        var gen = new Generator(0);
+        gen.generateProblem(); // prevents weird issues where .generateProblem() gets called any time React calls a new render
+        return gen;
+    });
+
+    const [eq,setEq] = useState([generator.firstNumber,generator.secondNumber,generator.solution]);
+    const [operation, setOperation] = useState(generator.operator);
+
+    inputArray[location] = true;
 
     function generateEquation(){
         var problem:any[] = generator.generateProblem();
