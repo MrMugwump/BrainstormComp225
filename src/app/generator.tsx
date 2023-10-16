@@ -9,7 +9,7 @@ export class Generator {
     difficulty: number = 0;
     firstNumber: number = 0;
     secondNumber: number = 0;
-    operator: String = "";
+    operator: Operators = Operators.Addition;
     solution: number = 0;
     
     // Difficulty can be measured as the number of correct answers this far, starting at 0 by default
@@ -100,6 +100,8 @@ export class Generator {
         } else {
             i = 1 + Math.floor(Math.random() * 4);
         }
+
+        this.operator = this.getOperatorByNumber(i);
         return this.getOperatorByNumber(i);
     }
 
