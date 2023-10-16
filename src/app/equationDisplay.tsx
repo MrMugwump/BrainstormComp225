@@ -78,6 +78,7 @@ export default function EquationDisplay({difficulty}:any){
                     interval={interval}/>
                 </td>
                 <td><p>{eq[0]+operation+eq[1]+'='+eq[2]}</p></td>
+                <td className="timercell"><p>diff = {generator.difficulty}</p></td>
             </tr>
         </tbody>
         </table>
