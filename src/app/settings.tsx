@@ -11,6 +11,8 @@ const SettingsMenu = ({difficulty}:any) => (
                 <td className="settingsMenuBox">
                     <h3>Settings</h3>
                     <br/>
+                    Settings will go here.
+                    <br/>
                     Difficulty is {difficulty}. <br/>
                 </td>
                 </tr>
