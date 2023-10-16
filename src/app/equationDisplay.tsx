@@ -77,7 +77,7 @@ export default function EquationDisplay({difficulty}:any){
                     actualSetTimeEnded={setTimeEnded}
                     interval={interval}/>
                 </td>
-                <td><p>{String(generator.generateProblem())}</p></td>
+                <td><p>{eq[0]+operation+eq[1]+'='+eq[2]}</p></td>
             </tr>
         </tbody>
         </table>

@@ -71,21 +71,22 @@ export class Generator {
     getSecondNumber() {
         // If division problem, come up with a list of even divisors of the first number and choose from there.
         if(this.operator === Operators.Division) {
-            let divisors: Array<Number> = [];
+            let divisors: Array<number> = new Array<number>();
             for(let i = 1; i <= this.firstNumber / 2; i++) {
                 if(this.firstNumber % i === 0) {
                     divisors.push(i);
                 }
             }
             // Choose a random even divisor
-            return divisors[this.randomInt(0, divisors.length)];
+            this.secondNumber = divisors[this.randomInt(0, divisors.length)]
+            //return divisors[this.randomInt(0, divisors.length)];
         }
 
         // For other operations, proceed as normal.
         else {
-            this.firstNumber = this.randomInt(1, this.findLimit(this.difficulty, this.operator));
+            this.secondNumber = this.randomInt(1, this.findLimit(this.difficulty, this.operator));
             if(this.randomInt(1, 2) === 2) {
-                this.firstNumber = this.firstNumber * -1;
+                this.secondNumber = this.secondNumber * -1;
             }
         }
     }
