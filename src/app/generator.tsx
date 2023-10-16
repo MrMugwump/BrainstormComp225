@@ -54,41 +54,25 @@ export class Generator {
         // FOR LATER: Only increase difficulty when a problem is solved, not when a new problem is generated.
         // As new problems will be generated when the timer runs out
         this.difficulty = this.difficulty + 1;
-        this.getFirstNumber();
-        this.getOperator();
-        this.getSecondNumber();
-        return [this.firstNumber, this.operator, this.secondNumber, this.solution]
-    }
-
-    getFirstNumber() {
-        this.firstNumber = this.randomInt(1, this.findLimit(this.difficulty, this.operator));
-        // 50% chance to return a negative number instead of a positive number
-        if(this.randomInt(1, 2) === 2) {
-            this.firstNumber = this.firstNumber * -1;
-        }
-    }
-
-    getSecondNumber() {
-        // If division problem, come up with a list of even divisors of the first number and choose from there.
+        this.operator = this.getOperator();
+        this.firstNumber = this.getOperand();
+        this.secondNumber = this.getOperand();
+        this.solution = this.getSolution();
         if(this.operator === Operators.Division) {
-            let divisors: Array<number> = new Array<number>();
-            for(let i = 1; i <= this.firstNumber / 2; i++) {
-                if(this.firstNumber % i === 0) {
-                    divisors.push(i);
-                }
-            }
-            // Choose a random even divisor
-            this.secondNumber = divisors[this.randomInt(0, divisors.length)]
-            //return divisors[this.randomInt(0, divisors.length)];
+            return [this.firstNumber, this.operator, this.solution, this.secondNumber]
+        } else {
+            return [this.firstNumber, this.operator, this.secondNumber, this.solution]
         }
+    }
 
-        // For other operations, proceed as normal.
-        else {
-            this.secondNumber = this.randomInt(1, this.findLimit(this.difficulty, this.operator));
-            if(this.randomInt(1, 2) === 2) {
-                this.secondNumber = this.secondNumber * -1;
-            }
-        }
+    getOperand() {
+        var output = 0;
+        output = this.randomInt(1, this.findLimit(this.difficulty, this.operator));
+        // 50% chance to return a negative number instead of a positive number
+        // if(this.randomInt(1, 2) === 2) {
+        //     output = output * -1;
+        // }
+        return output;
     }
 
     getOperator() {
@@ -103,7 +87,6 @@ export class Generator {
             i = 1 + Math.floor(Math.random() * 4);
         }
 
-        this.operator = this.getOperatorByNumber(i);
         return this.getOperatorByNumber(i);
     }
 
@@ -129,10 +112,11 @@ export class Generator {
             return this.firstNumber + this.secondNumber;
         } else if(this.operator === Operators.Subtraction) {
             return this.firstNumber - this.secondNumber;
-        } else if(this.operator === Operators.Multiplication) {
+        } else if(this.operator === Operators.Multiplication || this.operator === Operators.Division) {
+            // For division, multiply the numbers together and return them in a different order
             return this.firstNumber * this.secondNumber;
         } else {
-            return this.firstNumber / this.secondNumber;
+            return 0;
         }
     }
 }
