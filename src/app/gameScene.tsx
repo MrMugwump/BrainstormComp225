@@ -11,6 +11,8 @@ enum GameState {
 
 export default function GameScene() {
     const [gameState, setGameState] = useState(GameState.Start);
+    const [timeEnded,setTimeEnded] = useState(false); //Returns true when timer reaches 0, timerModule modifies this.
+
 
     const StartScreen = () => (
         <div className="startScreen">
@@ -24,7 +26,9 @@ export default function GameScene() {
     
     const PlayScreen = () => (
         <div className="playScreen">
-            <EquationDisplay/>
+            <EquationDisplay
+            timeEnded={timeEnded}
+            setTimeEnded={setTimeEnded}/>
         </div>
     )
     

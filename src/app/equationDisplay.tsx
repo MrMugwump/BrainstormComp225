@@ -5,7 +5,7 @@ import TimerModule from "./timer";
 import "./equationDisplayStyle.css"
 import {Generator} from './generator'
 
-export default function EquationDisplay({setLives}:any){
+export default function EquationDisplay({setLives,timeEnded,setTimeEnded}:any){
     //const equation: [firstVar:number, secondVal:number, answer:any] = [generator.firstNumber,generator.secondNumber,generator.solution]; // dummy equation for testing
     const inputArray = [false,false,false]; //array to set which place to be input, true=input mode
     const [inputVal,setInputVal] = useState(''); //what the player types
@@ -13,7 +13,6 @@ export default function EquationDisplay({setLives}:any){
     const [key, setKey] = useState(0); // this is used to reset the display instantly (no transition time for timer)
     const [interval] = useState(100); //param for timer, not super necessary, will likely get rid of later
     const [timeLength] = useState(10000); //param for timer
-    const [timeEnded,setTimeEnded] = useState(false); //TimerModule has ability to change this, triggers a reset if true
     // const [isCorrect, setIsCorrect] = useState('incorrect'); //debugging thing
 
     const [generator] = useState(()=>{ // initialize our equation generator class
