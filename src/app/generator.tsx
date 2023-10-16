@@ -62,6 +62,7 @@ export class Generator {
 
     getFirstNumber() {
         this.firstNumber = this.randomInt(1, this.findLimit(this.difficulty, this.operator));
+        // 50% chance to return a negative number instead of a positive number
         if(this.randomInt(1, 2) === 2) {
             this.firstNumber = this.firstNumber * -1;
         }
@@ -71,13 +72,13 @@ export class Generator {
         // If division problem, come up with a list of even divisors of the first number and choose from there.
         if(this.operator === Operators.Division) {
             let divisors: Array<Number> = [];
-            for(let i = 0; i <= this.firstNumber; i++) {
+            for(let i = 1; i <= this.firstNumber / 2; i++) {
                 if(this.firstNumber % i === 0) {
                     divisors.push(i);
                 }
             }
             // Choose a random even divisor
-            return divisors[this.randomInt(1,divisors.length)];
+            return divisors[this.randomInt(0, divisors.length)];
         }
 
         // For other operations, proceed as normal.
