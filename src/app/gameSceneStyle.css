@@ -4,6 +4,18 @@
     text-align:center;
 }
 
+.playScreen {
+    margin:auto;
+    width:100%;
+    text-align:center;
+}
+
+.endScreen {
+    margin:auto;
+    width:100%;
+    text-align:center;
+}
+
 .startButton {
     background-color: darkred;
     border-color:black;

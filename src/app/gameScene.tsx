@@ -24,7 +24,7 @@ export default function GameScene() {
     
     const PlayScreen = () => (
         <div className="playScreen">
-            Playing the game.
+            <EquationDisplay/>
         </div>
     )
     
