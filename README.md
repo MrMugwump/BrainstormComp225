@@ -2,7 +2,14 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Getting Started
 
-First, run the development server:
+First, run:
+
+```bash
+npm install
+```
+This should add a node_modules folder into brainstorm-comp-225
+
+Then, run the development server:
 
 ```bash
 npm run dev
