@@ -2,7 +2,7 @@ import React from "react"
 import { useState, useEffect } from 'react';
 import "./settingsStyle.css"
 
-const SettingsMenu = ({difficulty}:any) => (
+const SettingsMenu = ({difficultySetting}:any) => (
     <html>
         <div className="settingsMenuBackground"/>
         <table className="settingsMenu">
@@ -13,7 +13,7 @@ const SettingsMenu = ({difficulty}:any) => (
                     <br/>
                     Settings will go here.
                     <br/>
-                    Difficulty is {difficulty}. <br/>
+                    Difficulty is {difficultySetting}. <br/>
                 </td>
                 </tr>
             </tbody>
@@ -21,9 +21,9 @@ const SettingsMenu = ({difficulty}:any) => (
     </html>
 )
 
-export default function SettingsModule({isActive, difficulty}:any) {
+export default function SettingsModule({isActive, difficultySetting}:any) {
     if(isActive) {
-        return SettingsMenu({difficulty});
+        return SettingsMenu({difficultySetting});
     } else {
         return (<></>);
     }

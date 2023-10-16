@@ -18,7 +18,7 @@ export default function Home() {
   const [interval, setInterval] = useState(1000);
   const [timeEnded, setTimeEnded] = useState(1);
   const [isActive, setActive] = useState(false);
-  const [difficulty, setDifficulty] = useState(0);
+  const [difficultySetting, setDifficultySetting] = useState(0);
   //const {seconds} = useTimer(time,10000);
 
   return (
@@ -47,7 +47,7 @@ export default function Home() {
         <div className="content">
         <SettingsModule
         isActive={isActive}
-        difficulty={difficulty}/>
+        difficultySetting={difficultySetting}/>
 
 
         <p>Game state display:</p>
