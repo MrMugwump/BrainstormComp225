@@ -13,16 +13,20 @@ export default function GameScene() {
     const [gameState, setGameState] = useState(GameState.Start);
     const [timeEnded,setTimeEnded] = useState(false); //Returns true when timer reaches 0, timerModule modifies this.
 
+    useEffect(()=> {
+        if(timeEnded) {
+            setGameState(GameState.End);
+        }
+    },[timeEnded]);
+
 
     const StartScreen = () => (
         <div className="startScreen">
             Press here to start the game.
             <br/><br/>
-            <button className="startButton" onClick={()=>{
-                setGameState(GameState.Play);
-            }}>Begin Game</button>
+            {StartButton()}
         </div>
-    )
+    );
     
     const PlayScreen = () => (
         <div className="playScreen">
@@ -30,13 +34,21 @@ export default function GameScene() {
             timeEnded={timeEnded}
             setTimeEnded={setTimeEnded}/>
         </div>
-    )
+    );
     
     const EndScreen = () => (
         <div className="endScreen">
-            End screen text.
+            You ran out of time! Try again!
+            <br/><br/>
+            {StartButton()}
         </div>
-    )
+    );
+
+    const StartButton = () => (
+        <button className="startButton" onClick={()=>{
+            setGameState(GameState.Play);
+        }}>Begin Game</button>
+    );
 
     if(gameState==GameState.Start) {
         return (StartScreen());
