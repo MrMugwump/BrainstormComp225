@@ -3,10 +3,18 @@ import React from "react"
 import { useState, useEffect } from 'react';
 import TimerModule from "./timer";
 import "./equationDisplayStyle.css"
+import {Generator} from './generator'
 
-export default function EquationDisplay({}:any){
-    const equation: [firstVar:number, secondVal:number, answer:any] = [1,2,3]; // dummy equation for testing
-    var operation = '+';
+export default function EquationDisplay({difficulty}:any){
+    const [generator,setGenerator] = useState(new Generator(0));
+    generator.generateProblem();
+    const [eq,setEq] = useState([generator.firstNumber,generator.secondNumber,generator.solution]);
+    //var equation: [firstVar:number, secondVal:number, answer:any] = [generator.firstNumber,generator.secondNumber,generator.solution];
+    const [operation, setOperation] = useState(String(generator.operator));
+    //var operation:String = '+';
+
+    //const equation: [firstVar:number, secondVal:number, answer:any] = [generator.firstNumber,generator.secondNumber,generator.solution]; // dummy equation for testing
+    
     const inputArray = [false,false,false]; //array to set which place to be input, true=input mode
     const [inputVal,setInputVal] = useState(''); //what the player types
     const [location,setLocation] = useState(generateRandomInteger(0,2)); //this variable keeps track of which location is our input now
@@ -15,8 +23,13 @@ export default function EquationDisplay({}:any){
     const [timeLength,setTimeLength] = useState(10000); //param for timer
     const [timeEnded,setTimeEnded] = useState(false); //TimerModule has ability to change this, triggers a reset if true
     // const [isCorrect, setIsCorrect] = useState('incorrect'); //debugging thing
-
     inputArray[location] = true;
+
+    function generateEquation(){
+        var problem:any[] = generator.generateProblem();
+        setEq([problem[0],problem[2],problem[3]]);
+        setOperation(String(generator.operator));
+    }
 
     function resetDisplay(){
         //choose new location for player input
@@ -29,7 +42,8 @@ export default function EquationDisplay({}:any){
     }
 
     useEffect(()=>{
-        if(inputVal==equation[location]){
+        if(inputVal==String(eq[location])){
+            generateEquation();
             resetDisplay();
             //setIsCorrect('correct!');
         }
@@ -40,6 +54,7 @@ export default function EquationDisplay({}:any){
 
     useEffect(()=>{
         if(timeEnded){
+            generateEquation();
             resetDisplay();
             setTimeEnded(false);
         }
@@ -49,11 +64,11 @@ export default function EquationDisplay({}:any){
         <table key = {key} className="EquationDisplay">
         <tbody>
             <tr>
-                <td className="TextSlot"><NumberSlot number = {equation[0]} isInput = {inputArray[0]} inputVal={setInputVal}/></td>
+                <td className="TextSlot"><NumberSlot number = {eq[0]} isInput = {inputArray[0]} inputVal={setInputVal}/></td>
                 <td className="TextSlot"><p>{operation}</p></td>
-                <td className="TextSlot"><NumberSlot number = {equation[1]} isInput = {inputArray[1]} inputVal={setInputVal}/></td>
+                <td className="TextSlot"><NumberSlot number = {eq[1]} isInput = {inputArray[1]} inputVal={setInputVal}/></td>
                 <td className="TextSlot">=</td>
-                <td className="TextSlot"><NumberSlot number = {equation[2]} isInput = {inputArray[2]} inputVal={setInputVal}/></td>
+                <td className="TextSlot"><NumberSlot number = {eq[2]} isInput = {inputArray[2]} inputVal={setInputVal}/></td>
                 {/*<td><p>Correct = {isCorrect}</p></td>*/}
                 {/*<td><p>location = {location}</p></td>*/}
                 <td className="timercell">
@@ -62,6 +77,7 @@ export default function EquationDisplay({}:any){
                     actualSetTimeEnded={setTimeEnded}
                     interval={interval}/>
                 </td>
+                <td><p>{String(generator.generateProblem())}</p></td>
             </tr>
         </tbody>
         </table>
