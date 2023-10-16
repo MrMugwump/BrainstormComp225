@@ -7,7 +7,7 @@ import { useState } from 'react';
 import TimerModule from './timer';
 import EquationDisplay from './equationDisplay';
 import SettingsModule from './settings';
-
+import GameScene from './gameScene';
 
 
 
@@ -45,13 +45,14 @@ export default function Home() {
         </table>
 
         <div className="content">
-
-        <p>Difficulty display:</p>
-        <br></br>
         <SettingsModule
-        isActive = {isActive}
-        difficulty = {difficulty}/>
-        <button className='button button2' onClick={()=>setDifficulty(1)}>change difficulty</button>
+        isActive={isActive}
+        difficulty={difficulty}/>
+
+
+        <p>Game state display:</p>
+        <br></br>
+        <GameScene/>
 
         <p>Equation display:</p>
         <br></br>
