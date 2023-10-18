@@ -43,7 +43,7 @@ export default function EquationDisplay({setLives}:any){
         setKey((_key)=>_key+1); // instantly fully refresh display
     }
 
-    useEffect(()=>{
+    useEffect(()=>{ //triggers when they type
         if(inputVal==String(eq[location])){
             generateEquation();
             resetDisplay();
@@ -51,7 +51,7 @@ export default function EquationDisplay({setLives}:any){
         }
     }, [inputVal]);
 
-    useEffect(()=>{
+    useEffect(()=>{ // triggers when time runs out
         if(timeEnded){
             generateEquation();
             resetDisplay();
