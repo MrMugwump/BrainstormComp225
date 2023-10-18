@@ -59,7 +59,7 @@ export class Generator {
         this.secondNumber = this.getOperand();
         this.solution = this.getSolution();
         if(this.operator === Operators.Division) {
-            return [this.firstNumber, this.operator, this.solution, this.secondNumber]
+            return [this.solution, this.operator, this.firstNumber, this.secondNumber]
         } else {
             return [this.firstNumber, this.operator, this.secondNumber, this.solution]
         }
