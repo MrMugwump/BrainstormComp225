@@ -45,20 +45,15 @@ export default function Home() {
         </table>
 
         <div className="content">
+
+        {/* SettingsModule handles the settings sidebar. */}
         <SettingsModule
         isActive={isActive}
         difficultySetting={difficultySetting}/>
 
-
-        <p>Game state display:</p>
-        <br></br>
+        {/* GameScene handles all of the processes of the actual gameplay. This is where the EquationDisplay is displayed. */}
         <GameScene/>
 
-        <p>Equation display:</p>
-        <br></br>
-        <EquationDisplay/>
-        <br></br>
-        <button className='button button1' onClick={()=>setTimeEnded((_timeEnded)=>-1*_timeEnded)}>skdjfhsdk + {timeEnded}</button>
 
         </div> {/*End of non-header/footer content.*/}
       </body>
