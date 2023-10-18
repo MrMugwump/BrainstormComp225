@@ -12,6 +12,7 @@ enum GameState {
 export default function GameScene() {
     const [gameState, setGameState] = useState(GameState.Start);
     const [timeEnded,setTimeEnded] = useState(false); //Returns true when timer reaches 0, timerModule modifies this.
+    const [difficulty, setDifficulty] = useState(0);
 
     useEffect(()=> {
         if(timeEnded) {
@@ -32,13 +33,16 @@ export default function GameScene() {
         <div className="playScreen">
             <EquationDisplay
             timeEnded={timeEnded}
-            setTimeEnded={setTimeEnded}/>
+            setTimeEnded={setTimeEnded}
+            setDifficulty={setDifficulty}/>
         </div>
     );
     
     const EndScreen = () => (
         <div className="endScreen">
             You ran out of time! Try again!
+            <br/><br/>
+            Your score was: {difficulty}
             <br/><br/>
             {StartButton()}
         </div>
