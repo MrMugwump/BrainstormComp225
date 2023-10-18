@@ -28,7 +28,7 @@ export default function EquationDisplay({setLives,timeEnded,setTimeEnded,setDiff
     inputArray[location] = true;
 
     function generateEquation(){
-        setDifficulty(generator.difficulty);
+        setDifficulty(generator.difficulty - 1);
         var problem:any[] = generator.generateProblem();
         setEq([problem[0],problem[2],problem[3]]);
         setOperation(generator.operator);
