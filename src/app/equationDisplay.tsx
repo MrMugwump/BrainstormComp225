@@ -69,16 +69,16 @@ export default function EquationDisplay({setLives,timeEnded,setTimeEnded,setDiff
                 <td className="TextSlot"><NumberSlot number = {eq[1]} isInput = {inputArray[1]} inputVal={setInputVal}/></td>
                 <td className="TextSlot">=</td>
                 <td className="TextSlot"><NumberSlot number = {eq[2]} isInput = {inputArray[2]} inputVal={setInputVal}/></td>
-                {/*<td><p>Correct = {isCorrect}</p></td>*/}
-                {/*<td><p>location = {location}</p></td>*/}
                 <td className="timercell">
                     <TimerModule
                     timerLength={timeLength}
                     actualSetTimeEnded={setTimeEnded}
                     interval={interval}/>
                 </td>
-                <td><p>{eq[0]+operation+eq[1]+'='+eq[2]}</p></td>
-                <td className="timercell"><p>diff = {generator.difficulty}</p></td>
+                {/*<td><p>Correct = {isCorrect}</p></td>*/}
+                {/*<td><p>location = {location}</p></td>*/}
+                {/*<td><p>{eq[0]+operation+eq[1]+'='+eq[2]}</p></td>*/}
+                {/*<td className="timercell"><p>diff = {generator.difficulty}</p></td>*/}
             </tr>
         </tbody>
         </table>

@@ -2,6 +2,12 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Getting Started
 
+If you just wanna try what has been built, go to:
+
+# https://brainstorm-comp225.vercel.app/ 
+
+To be able to generate a local server:
+
 First, run:
 
 ```bash
