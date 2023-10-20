@@ -37,29 +37,30 @@ export class Generator {
         }
 
         // For multiplication and division
-        else if(op === Operators.Multiplication || op === Operators.Division) {
+        else /*if(op === Operators.Multiplication || op === Operators.Division)*/ {
             if(diff <= 75*Math.PI) {
                 return Math.floor(75 * Math.sin(diff/75.0 - Math.PI/2) + 55);
             } else {
                 return 100;
             }
         }
-
-        else { //More operators to be added later, dummy return statement for now so it doesn't get mad at me
-            return 0;
-        }
     }
 
     generateProblem() {
         // FOR LATER: Only increase difficulty when a problem is solved, not when a new problem is generated.
-        // As new problems will be generated when the timer runs out
+        // New problems will be generated when the timer runs out
         this.difficulty = this.difficulty + 1;
         this.operator = this.getOperator();
         this.firstNumber = this.getOperand();
         this.secondNumber = this.getOperand();
         this.solution = this.getSolution();
+        // Since division problems are formed by rearranging multiplication problems, ensure that the operands are in the correct order.
         if(this.operator === Operators.Division) {
-            return [this.solution, this.operator, this.firstNumber, this.secondNumber]
+            if(this.firstNumber > this.secondNumber) {
+                return [this.solution, this.operator, this.firstNumber, this.secondNumber]
+            } else {
+                return [this.solution, this.operator, this.secondNumber, this.firstNumber]
+            }
         } else {
             return [this.firstNumber, this.operator, this.secondNumber, this.solution]
         }
@@ -67,7 +68,9 @@ export class Generator {
 
     getOperand() {
         var output = 0;
-        output = this.randomInt(1, this.findLimit(this.difficulty, this.operator));
+        while(output === 0) {
+            output = Math.abs(this.randomInt(1, this.findLimit(this.difficulty, this.operator)));
+        }
         // 50% chance to return a negative number instead of a positive number
         // if(this.randomInt(1, 2) === 2) {
         //     output = output * -1;
