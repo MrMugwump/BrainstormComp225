@@ -16,14 +16,14 @@ export class Generator {
     // and would slowly increase as more correct answers are entered. The difficulty can start at a
     // higher (nonzero) number so the game starts out just that much harder than the default.
     constructor(diff: number) {
-        this.difficulty = diff;
+        this.difficulty = 250;
         if(diff < 0) {
             this.difficulty = 0;
         }
     }
 
     // Based on the difficulty and operator, find the limit for the absolute value of operands
-    // Visualization of limits: https://www.desmos.com/calculator/31neiprxux
+    // Visualization of limits: https://www.desmos.com/calculator/ikzfjyj5de
     findLimit(diff: number, op: String) {
         // For addition and subtraction
         if(op === Operators.Addition || op === Operators.Subtraction) {
@@ -51,19 +51,19 @@ export class Generator {
         // New problems will be generated when the timer runs out
         this.difficulty = this.difficulty + 1;
         this.operator = this.getOperator();
-        this.firstNumber = this.getOperand();
-        this.secondNumber = this.getOperand();
-        this.solution = this.getSolution();
-        // Since division problems are formed by rearranging multiplication problems, ensure that the operands are in the correct order.
+        
+        // Evaluate in a different order for division (multiplication but rearranged)
         if(this.operator === Operators.Division) {
-            if(this.firstNumber > this.secondNumber) {
-                return [this.solution, this.operator, this.firstNumber, this.secondNumber]
-            } else {
-                return [this.solution, this.operator, this.secondNumber, this.firstNumber]
-            }
+            this.solution = this.getOperand();
+            this.secondNumber = this.getOperand();
+            this.firstNumber = this.getSolution();
         } else {
-            return [this.firstNumber, this.operator, this.secondNumber, this.solution]
+            this.firstNumber = this.getOperand();
+            this.secondNumber = this.getOperand();
+            this.solution = this.getSolution();
         }
+
+        return [this.firstNumber, this.operator, this.secondNumber, this.solution]
     }
 
     getOperand() {
@@ -115,9 +115,10 @@ export class Generator {
             return this.firstNumber + this.secondNumber;
         } else if(this.operator === Operators.Subtraction) {
             return this.firstNumber - this.secondNumber;
-        } else if(this.operator === Operators.Multiplication || this.operator === Operators.Division) {
-            // For division, multiply the numbers together and return them in a different order
+        } else if(this.operator === Operators.Multiplication) {
             return this.firstNumber * this.secondNumber;
+        } else if(this.operator === Operators.Division) {
+            return this.solution * this.secondNumber;
         } else {
             return 0;
         }
