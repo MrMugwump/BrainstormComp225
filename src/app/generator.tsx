@@ -16,7 +16,7 @@ export class Generator {
     // and would slowly increase as more correct answers are entered. The difficulty can start at a
     // higher (nonzero) number so the game starts out just that much harder than the default.
     constructor(diff: number) {
-        this.difficulty = 250;
+        this.difficulty = diff;
         if(diff < 0) {
             this.difficulty = 0;
         }
