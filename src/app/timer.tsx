@@ -3,13 +3,17 @@ import { useState, useEffect } from 'react';
 import "./timerStyle.css"
 
 const ProgressBar = ({ progress, interval }:any) => ( 
-  <div className="progressbar">
-    <div className="progress" style={{ 
+  <>
+  <div id="progressbar">
+    <div id="progress" style={{ 
       height: `${progress}%`,
       transitionDuration: `${interval}ms`,
-      }}>
+      }}></div>
+    <div id="dot">
+      <div id="border"></div>
     </div>
   </div>
+  </>
 )
 
 const SECOND = 1_000; // 1000ms = 1s
@@ -35,7 +39,7 @@ export default function TimerModule({timerLength, interval, timeEnded,actualSetT
           return timerLength;
         }
         else{
-          return _timespan - interval; //decrements timer by 1/10th of a second
+          return _timespan-interval; //decrements timer by 1/10th of a second
         }
       });
     }, interval); // pauses for a tenth of a second

@@ -87,10 +87,12 @@ export default function EquationDisplay({setLives,timeEnded,setTimeEnded,setDiff
 
 function NumberSlot({number, isInput = false, inputVal}:any){
     const [width,setWidth]=useState('1ch');
+    
     function onInputChange(e:any){
         inputVal(e.target.value);
         setWidth(e.target.value.length+'ch')
     }
+
     if (isInput){
         return( 
             <>
