@@ -9,7 +9,7 @@ export default function EquationDisplay({setLives,timeEnded,setTimeEnded,setDiff
     //const equation: [firstVar:number, secondVal:number, answer:any] = [generator.firstNumber,generator.secondNumber,generator.solution]; // dummy equation for testing
     const inputArray = [false,false,false]; //array to set which place to be input, true=input mode
     const [inputVal,setInputVal] = useState(''); //what the player types
-    const [location,setLocation] = useState(generateRandomInteger(0,2)); //this variable keeps track of which location is our input now
+    const [location,setLocation] = useState(2); //this variable keeps track of which location is our input now
     const [key, setKey] = useState(0); // this is used to reset the display instantly (no transition time for timer)
     const [interval] = useState(100); //param for timer, not super necessary, will likely get rid of later
     const [timeLength] = useState(10000); //param for timer
@@ -37,7 +37,7 @@ export default function EquationDisplay({setLives,timeEnded,setTimeEnded,setDiff
     function resetDisplay(){
         //choose new location for player input
         inputArray[location] = false;
-        setLocation(generateRandomInteger(0,2));
+        setLocation(2);
         inputArray[location] = true;
 
         setInputVal(''); //set input to blank because nothing has been typed yet
