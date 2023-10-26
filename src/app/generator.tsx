@@ -11,6 +11,7 @@ export class Generator {
     secondNumber: number = 0;
     operator: Operators = Operators.Addition;
     solution: number = 0;
+    // debugVar: any = "nothing to note";
     
     // Difficulty can be measured as the number of correct answers this far, starting at 0 by default
     // and would slowly increase as more correct answers are entered. The difficulty can start at a
@@ -28,7 +29,7 @@ export class Generator {
         // For addition and subtraction
         if(op === Operators.Addition || op === Operators.Subtraction) {
             if(diff <= 50) {
-                return Math.floor(80 * Math.sin(diff/29.5 - 25*Math.PI/2) + 90);
+                return Math.floor(80 * Math.sin(diff/29.5 - (25*Math.PI)/2) + 90);
             } else if(diff <= 1000) {
                 return 18 * diff - 800;
             } else {
@@ -39,7 +40,7 @@ export class Generator {
         // For multiplication and division
         else /*if(op === Operators.Multiplication || op === Operators.Division)*/ {
             if(diff <= 75*Math.PI) {
-                return Math.floor(75 * Math.sin(diff/75.0 - Math.PI/2) + 55);
+                return Math.floor(45 * Math.sin(diff/75.0 - Math.PI/2) + 55);
             } else {
                 return 100;
             }
@@ -68,8 +69,14 @@ export class Generator {
 
     getOperand() {
         var output = 0;
-        while(output === 0) {
-            output = Math.abs(this.randomInt(1, this.findLimit(this.difficulty, this.operator)));
+        while(output === 0) { // I think this is the culprit for our crash
+            // this.debugVar = "current limit: "+ this.findLimit(this.difficulty,this.operator);
+            var x = this.randomInt(1/* lower bound */, this.findLimit(this.difficulty, this.operator));
+            // if(x === 0){
+            //     x = 1337;
+            // }
+
+            output = Math.abs(x);
         }
         // 50% chance to return a negative number instead of a positive number
         // if(this.randomInt(1, 2) === 2) {
