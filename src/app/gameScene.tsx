@@ -35,14 +35,16 @@ export default function GameScene() {
         <div className="playScreen">
             <div style={{
             position: `fixed`,
-            
             right: `10px`
-            }}><ScoreDisplay difficulty = {difficulty}/></div>
+            }}>
+                <ScoreDisplay difficulty = {difficulty}/>
+            </div>
+
             <EquationDisplay
             timeEnded={timeEnded}
             setTimeEnded={setTimeEnded}
             setDifficulty={setDifficulty}/>
-            <p>diff: {difficulty}</p>
+            
             <div style={{
                 position: `fixed`,
                 bottom: `0`,

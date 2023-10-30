@@ -5,7 +5,7 @@ export function ScoreDisplay({difficulty}:any){
         <div style={{
             border: `2px solid black`
         }}>
-            <p>Score: {difficulty}</p>
+            <p>Score: {difficulty-1}</p>
         </div>
     </>)
 }
