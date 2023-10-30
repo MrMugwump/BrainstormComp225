@@ -52,7 +52,12 @@ export default function Home() {
         difficultySetting={difficultySetting}/>
 
         {/* GameScene handles all of the processes of the actual gameplay. This is where the EquationDisplay is displayed. */}
+        <div style={{
+          position:`relative`,
+          top: `-1em`
+        }}> 
         <GameScene/>
+        </div>
 
 
         </div> {/*End of non-header/footer content.*/}

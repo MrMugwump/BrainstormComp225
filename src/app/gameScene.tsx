@@ -2,7 +2,8 @@ import React from "react"
 import { useState, useEffect } from 'react';
 import EquationDisplay from "./equationDisplay";
 import "./gameSceneStyle.css"
-import { OperationDisplay } from "./operationNotification";
+import { OperationDisplay } from "./player-info-components/operationNotification";
+import { ScoreDisplay } from "./player-info-components/scoreDisplay";
 
 enum GameState {
     Start = 0,
@@ -32,7 +33,11 @@ export default function GameScene() {
     
     const PlayScreen = () => (
         <div className="playScreen">
+            <div style={{
+            position: `fixed`,
             
+            right: `10px`
+            }}><ScoreDisplay difficulty = {difficulty}/></div>
             <EquationDisplay
             timeEnded={timeEnded}
             setTimeEnded={setTimeEnded}
