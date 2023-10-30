@@ -8,30 +8,37 @@ export function OperationDisplay({difficulty}:any){
     }
 
     useEffect(()=>{
-        if(difficulty < 5){
+        if(difficulty == 1){
             setIsLocked((_operators)=>updateArray(_operators,0));
         }
-        else if(difficulty < 15){ //subtraction
+        else if(difficulty == 5){ //subtraction
             setIsLocked((_operators)=>updateArray(_operators,1));
-        } else if (difficulty < 20) { //multiplication
+        } else if (difficulty == 15) { //multiplication
             setIsLocked((_operators)=>updateArray(_operators,2));
-        } else{ //division
+        } else if (difficulty == 20) { //division
             setIsLocked((_operators)=>updateArray(_operators,3));
         }
     },[difficulty]);
 
-
     return(<>
         <table>
             <tbody>
-                <tr>
-                    <td>Addition :</td>
+                <td style={{textAlign:`right`}}>
+                    <tr><p>Addition :</p>
                     <td><LockIndicator isLocked={operatorIsLocked[0]}/></td>
-                    <td>Subtraction :</td>
+                    </tr>
+                    <tr><p>Subtraction :</p>
                     <td><LockIndicator isLocked={operatorIsLocked[1]}/></td>
-                    <td>{operatorIsLocked.toString()}</td>
-                    <td>{difficulty}</td>
-                </tr>
+                    </tr>
+                    <tr><p>Multiplication :</p>
+                    <td><LockIndicator isLocked={operatorIsLocked[2]}/></td>
+                    </tr>
+                    <tr><p>Division :</p>
+                    <td><LockIndicator isLocked={operatorIsLocked[3]}/></td>
+                    </tr>
+                    {/* <td>{operatorIsLocked.toString()}</td> */}
+                    {/* <td>{difficulty}</td> */}
+                </td>
             </tbody>
         </table>
     </>)
@@ -40,7 +47,7 @@ export function OperationDisplay({difficulty}:any){
 function LockIndicator({isLocked}:any){
     function changeColor(isTrue:boolean){
         if(isTrue){
-            return '#008000' //green
+            return '#60d056' //green
         } else{
             return '#ff0000' //red
         }
@@ -48,7 +55,10 @@ function LockIndicator({isLocked}:any){
 
     return(<>
         <div style={{
-            border: `10px solid ${changeColor(isLocked)}`,
+            width:`1em`,
+            height:`1em`,
+            backgroundColor: `${changeColor(isLocked)}`,
+            border: `0.1em solid black`,
             borderRadius: `50%`
         }}></div>
     </>)

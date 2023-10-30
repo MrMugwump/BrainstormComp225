@@ -32,12 +32,19 @@ export default function GameScene() {
     
     const PlayScreen = () => (
         <div className="playScreen">
-            <OperationDisplay difficulty={difficulty}/>
+            
             <EquationDisplay
             timeEnded={timeEnded}
             setTimeEnded={setTimeEnded}
             setDifficulty={setDifficulty}/>
             <p>diff: {difficulty}</p>
+            <div style={{
+                position: `fixed`,
+                bottom: `0`,
+                right: `0`
+            }}>
+                <OperationDisplay difficulty={difficulty}/>
+            </div>
         </div>
     );
     
