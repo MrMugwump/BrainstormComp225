@@ -1,17 +1,22 @@
 import React from "react"
 import { useState, useEffect } from 'react';
 import "./timerStyle.css"
+import { motion, useAnimation } from "framer-motion";
 
 const ProgressBar = ({ progress, interval }:any) => ( 
   <>
   <div id="progressbar">
-    <div id="progress" style={{ 
-      height: `${progress}%`,
-      transitionDuration: `${interval}ms`,
-      }}></div>
-    <div id="dot">
+    <motion.div id="progress" style={{ 
+      }}
+      animate={{backgroundColor:['hsl(115, 56%, 58%)','hsl(115, 56%, 58%)',	`hsl(0, 100%, 50%)`],
+      height:['100%','0%'],
+      }}
+      transition={{ease:"linear", duration:'10'}}></motion.div>
+    <motion.div id="dot"
+      animate={{backgroundColor:['hsl(115, 56%, 58%)','hsl(115, 56%, 58%)',	`hsl(0, 100%, 50%)`]}}
+      transition={{ease:"linear",duration:'10'}}>
       <div id="border"></div>
-    </div>
+    </motion.div>
   </div>
   </>
 )

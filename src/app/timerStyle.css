@@ -32,8 +32,8 @@
     padding: 0 10px;
     bottom: 0;
     position: absolute;
-    transition: height linear;
-    transition-duration: 1ms;
+    /* transition: height linear;
+    transition-duration: 1ms; */
     transform: rotate(180deg);
     line-height: 22px; /* same as #progressBar height if we want text middle aligned */
     background-color: #60d056;

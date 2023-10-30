@@ -4,6 +4,8 @@ import EquationDisplay from "./equationDisplay";
 import "./gameSceneStyle.css"
 import { OperationDisplay } from "./player-info-components/operationNotification";
 import { ScoreDisplay } from "./player-info-components/scoreDisplay";
+import { ShakeDaBox } from "./testingShaking";
+import { motion, useAnimation } from "framer-motion";
 
 enum GameState {
     Start = 0,
@@ -15,10 +17,17 @@ export default function GameScene() {
     const [gameState, setGameState] = useState(GameState.Start);
     const [timeEnded,setTimeEnded] = useState(false); //Returns true when timer reaches 0, timerModule modifies this.
     const [difficulty, setDifficulty] = useState(0);
+    const controls = useAnimation();
+    
 
     useEffect(()=> {
+
         if(timeEnded) {
-            setGameState(GameState.End);
+            controls.start(i=>({
+                rotateZ: [0, -5, 5, -5, 5, -5, 5, 0],
+                transition: { duration: 1 }
+            }))
+            //setGameState(GameState.End);
         }
     },[timeEnded]);
 
@@ -39,11 +48,16 @@ export default function GameScene() {
             }}>
                 <ScoreDisplay difficulty = {difficulty}/>
             </div>
-
+            <motion.div
+                custom={1}
+                animate={controls}
+                style={{position:`fixed`}}>
             <EquationDisplay
             timeEnded={timeEnded}
             setTimeEnded={setTimeEnded}
             setDifficulty={setDifficulty}/>
+            </motion.div>
+            <div><ShakeDaBox/></div>
             
             <div style={{
                 position: `fixed`,
@@ -53,6 +67,7 @@ export default function GameScene() {
                 <OperationDisplay difficulty={difficulty}/>
             </div>
         </div>
+
     );
     
     const EndScreen = () => (
