@@ -28,8 +28,8 @@ export default function EquationDisplay({setLives,timeEnded,setTimeEnded,setDiff
     inputArray[location] = true;
 
     function generateEquation(){
-        setDifficulty(generator.difficulty - 1);
         var problem:any[] = generator.generateProblem();
+        setDifficulty(generator.difficulty);
         setEq([problem[0],problem[2],problem[3]]);
         setOperation(generator.operator);
     }
@@ -77,9 +77,9 @@ export default function EquationDisplay({setLives,timeEnded,setTimeEnded,setDiff
                 </td>
                 {/* <td><p>Correct = {isCorrect}</p></td> */}
                 {/* <td><p>location = {location}</p></td> */}
-                {/* <td><p>{eq[0]+operation+eq[1]+'='+eq[2]}</p></td>
+                {/* <td><p>{eq[0]+operation+eq[1]+'='+eq[2]}</p></td> */}
                 <td className="timercell"><p>diff = {generator.difficulty}</p></td>
-                <td><p>{generator.debugVar}</p></td> */}
+                {/* <td><p>{generator.debugVar}</p></td> */}
             </tr>
         </tbody>
         </table>
