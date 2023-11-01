@@ -11,7 +11,6 @@ export class Generator {
     secondNumber: number = 0;
     operator: Operators = Operators.Addition;
     solution: number = 0;
-    // debugVar: any = "nothing to note";
     
     // Difficulty can be measured as the number of correct answers this far, starting at 0 by default
     // and would slowly increase as more correct answers are entered. The difficulty can start at a
@@ -51,41 +50,36 @@ export class Generator {
         // FOR LATER: Only increase difficulty when a problem is solved, not when a new problem is generated.
         // New problems will be generated when the timer runs out
         this.difficulty = this.difficulty + 1;
-        this.operator = this.getOperator();
+        this.operator = this.nextOperator();
         
         // Evaluate in a different order for division (multiplication but rearranged)
         if(this.operator === Operators.Division) {
-            this.solution = this.getOperand();
-            this.secondNumber = this.getOperand();
-            this.firstNumber = this.getSolution();
+            this.solution = this.nextOperand();
+            this.secondNumber = this.nextOperand();
+            this.firstNumber = this.nextSolution();
         } else {
-            this.firstNumber = this.getOperand();
-            this.secondNumber = this.getOperand();
-            this.solution = this.getSolution();
+            this.firstNumber = this.nextOperand();
+            this.secondNumber = this.nextOperand();
+            this.solution = this.nextSolution();
         }
 
         return [this.firstNumber, this.operator, this.secondNumber, this.solution]
     }
 
-    getOperand() {
+    // Returns one of the numbers to be used in the equation
+    nextOperand() {
         var output = 0;
-        while(output === 0) { // I think this is the culprit for our crash
-            // this.debugVar = "current limit: "+ this.findLimit(this.difficulty,this.operator);
-            var x = this.randomInt(1/* lower bound */, this.findLimit(this.difficulty, this.operator));
-            // if(x === 0){
-            //     x = 1337;
-            // }
+        while(output === 0) {
+            var x = this.nextRandomInt(1, this.findLimit(this.difficulty, this.operator));
 
             output = Math.abs(x);
         }
-        // 50% chance to return a negative number instead of a positive number
-        // if(this.randomInt(1, 2) === 2) {
-        //     output = output * -1;
-        // }
+
         return output;
     }
 
-    getOperator() {
+    // Returns the operator to be used in the equation
+    nextOperator() {
         var i: number = 0;
         if(this.difficulty < 5) {
             i = 1;
@@ -97,10 +91,10 @@ export class Generator {
             i = 1 + Math.floor(Math.random() * 4);
         }
 
-        return this.getOperatorByNumber(i);
+        return this.nextOperatorByNumber(i);
     }
 
-    getOperatorByNumber(i: number) {
+    nextOperatorByNumber(i: number) {
         if(i === 1) {
             return Operators.Addition;
         } else if(i === 2) {
@@ -112,12 +106,13 @@ export class Generator {
         }
     }
 
-    // Min and max are inclusive
-    randomInt(min:number, max:number) {
+    // Random integer. Min and max are inclusive
+    nextRandomInt(min:number, max:number) {
         return min + Math.floor(Math.random() * (max + 1 - min));
     }
 
-    getSolution() {
+    // Returns the solution of the equation, given operands and operator.
+    nextSolution() {
         if(this.operator === Operators.Addition) {
             return this.firstNumber + this.secondNumber;
         } else if(this.operator === Operators.Subtraction) {
