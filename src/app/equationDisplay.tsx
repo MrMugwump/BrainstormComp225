@@ -79,7 +79,7 @@ export default function EquationDisplay({setLives,timeEnded,setTimeEnded,setDiff
                 {/* <td><p>Correct = {isCorrect}</p></td> */}
                 {/* <td><p>location = {location}</p></td> */}
                 {/* <td><p>{eq[0]+operation+eq[1]+'='+eq[2]}</p></td> */}
-                <td className="timercell"><p>diff = {generator.difficulty}</p></td>
+                {/* <td className="timercell"><p>diff = {generator.difficulty}</p></td> */}
                 {/* <td><p>{generator.debugVar}</p></td> */}
             </tr>
         </tbody>
