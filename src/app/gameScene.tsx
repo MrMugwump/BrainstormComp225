@@ -17,6 +17,7 @@ export default function GameScene() {
     const [gameState, setGameState] = useState(GameState.Start);
     const [timeEnded,setTimeEnded] = useState(false); //Returns true when timer reaches 0, timerModule modifies this.
     const [difficulty, setDifficulty] = useState(0);
+    const [userInput, setUserInput] = useState(''); //represents what the user types into the answer box
 
     useEffect(()=> {
         if(timeEnded) {
@@ -42,11 +43,14 @@ export default function GameScene() {
                 <ScoreDisplay difficulty = {difficulty}/>
             </div>
 
-            <AnswerBox/>
+            <AnswerBox
+            setUserInput={setUserInput}/>
             <EquationDisplay
             timeEnded={timeEnded}
             setTimeEnded={setTimeEnded}
-            setDifficulty={setDifficulty}/>
+            setDifficulty={setDifficulty}
+            userInput={userInput}
+            setUserInput={setUserInput}/>
             
             <div style={{
                 position: `fixed`,

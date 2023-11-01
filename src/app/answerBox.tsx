@@ -1,10 +1,13 @@
 import React from "react"
 import { useState, useEffect } from 'react';
 
-export default function AnswerBox() {
+
+
+export default function AnswerBox({setUserInput}:any) {
     return (
-        <html>
-            <input type="text"></input>
-        </html>
+            <input 
+            className="AnswerBox"
+            onChange={e=>{setUserInput(e.target.value);}}
+            autoFocus={true} /*When instantiated, cursor auto selects.*/ />
     )
 }

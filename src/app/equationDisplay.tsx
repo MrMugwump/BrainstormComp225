@@ -5,7 +5,7 @@ import TimerModule from "./timer";
 import "./equationDisplayStyle.css"
 import {Generator} from './generator'
 
-export default function EquationDisplay({setLives,timeEnded,setTimeEnded,setDifficulty}:any){
+export default function EquationDisplay({setLives,timeEnded,setTimeEnded,setDifficulty,userInput,setUserInput}:any){
     //const equation: [firstVar:number, secondVal:number, answer:any] = [generator.firstNumber,generator.secondNumber,generator.solution]; // dummy equation for testing
     const inputArray = [false,false,false]; //array to set which place to be input, true=input mode
     const [inputVal,setInputVal] = useState(''); //what the player types
@@ -40,17 +40,17 @@ export default function EquationDisplay({setLives,timeEnded,setTimeEnded,setDiff
         setLocation(2);
         inputArray[location] = true;
 
-        setInputVal(''); //set input to blank because nothing has been typed yet
+        setUserInput(''); //set input to blank because nothing has been typed yet
         setKey((_key)=>_key+1); // instantly fully refresh display
     }
 
     useEffect(()=>{ //triggers when they type
-        if(inputVal==String(eq[location])){
+        if(userInput==String(eq[location])){
             generateEquation();
             resetDisplay();
             //setIsCorrect('correct!');
         }
-    }, [inputVal]);
+    }, [userInput]);
 
     useEffect(()=>{ // triggers when time runs out
         if(timeEnded){
@@ -97,11 +97,7 @@ function NumberSlot({number, isInput = false, inputVal}:any){
     if (isInput){
         return( 
             <>
-            <input className="InputArea"
-                onChange={e=>{onInputChange(e)} /*sends player input to eq. disp.*/} 
-                autoFocus={true /*when instantiated, cursor auto selects*/} 
-                style={{width: `${width}`}}
-                />  
+            ?
             </>
             )
     }
