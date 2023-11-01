@@ -4,6 +4,8 @@ import EquationDisplay from "./equationDisplay";
 import "./gameSceneStyle.css"
 import { OperationDisplay } from "./player-info-components/operationNotification";
 import { ScoreDisplay } from "./player-info-components/scoreDisplay";
+import AnswerBox from "./answerBox";
+import "./answerBoxStyle.css";
 
 enum GameState {
     Start = 0,
@@ -40,6 +42,7 @@ export default function GameScene() {
                 <ScoreDisplay difficulty = {difficulty}/>
             </div>
 
+            <AnswerBox/>
             <EquationDisplay
             timeEnded={timeEnded}
             setTimeEnded={setTimeEnded}
