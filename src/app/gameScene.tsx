@@ -51,6 +51,12 @@ export default function GameScene() {
             setDifficulty={setDifficulty}
             userInput={userInput}
             setUserInput={setUserInput}/>
+            <EquationDisplay
+            timeEnded={timeEnded}
+            setTimeEnded={setTimeEnded}
+            setDifficulty={setDifficulty}
+            userInput={userInput}
+            setUserInput={setUserInput}/>
             
             <div style={{
                 position: `fixed`,
