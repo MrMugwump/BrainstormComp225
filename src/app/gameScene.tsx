@@ -6,6 +6,7 @@ import { OperationDisplay } from "./player-info-components/operationNotification
 import { ScoreDisplay } from "./player-info-components/scoreDisplay";
 import AnswerBox from "./answerBox";
 import "./answerBoxStyle.css";
+import { Generator } from "./generator";
 
 enum GameState {
     Start = 0,
@@ -16,8 +17,11 @@ enum GameState {
 export default function GameScene() {
     const [gameState, setGameState] = useState(GameState.Start);
     const [timeEnded,setTimeEnded] = useState(false); //Returns true when timer reaches 0, timerModule modifies this.
-    const [difficulty, setDifficulty] = useState(0);
+    const [difficulty1, setDifficulty1] = useState(0);
+    const [difficulty2, setDifficulty2] = useState(0);
     const [userInput, setUserInput] = useState(''); //represents what the user types into the answer box
+
+    
 
     useEffect(()=> {
         if(timeEnded) {
@@ -40,7 +44,7 @@ export default function GameScene() {
             position: `fixed`,
             right: `10px`
             }}>
-                <ScoreDisplay difficulty = {difficulty}/>
+                <ScoreDisplay difficulty = {difficulty1}/>
             </div>
 
             <AnswerBox
@@ -48,13 +52,13 @@ export default function GameScene() {
             <EquationDisplay
             timeEnded={timeEnded}
             setTimeEnded={setTimeEnded}
-            setDifficulty={setDifficulty}
+            setDifficulty={setDifficulty1}
             userInput={userInput}
             setUserInput={setUserInput}/>
             <EquationDisplay
             timeEnded={timeEnded}
             setTimeEnded={setTimeEnded}
-            setDifficulty={setDifficulty}
+            setDifficulty={setDifficulty2}
             userInput={userInput}
             setUserInput={setUserInput}/>
             
@@ -63,7 +67,7 @@ export default function GameScene() {
                 bottom: `0`,
                 right: `0`
             }}>
-                <OperationDisplay difficulty={difficulty}/>
+                <OperationDisplay difficulty={difficulty1}/>
             </div>
         </div>
     );
@@ -72,7 +76,7 @@ export default function GameScene() {
         <div className="endScreen">
             You ran out of time! Try again!
             <br/><br/>
-            Your score was: {difficulty}
+            Your score was: {difficulty1}
             <br/><br/>
             {StartButton()}
         </div>
