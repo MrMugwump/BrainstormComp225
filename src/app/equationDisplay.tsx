@@ -41,6 +41,7 @@ export default function EquationDisplay({setLives,timeEnded,setTimeEnded,setDiff
         inputArray[location] = true;
 
         setUserInput(''); //set input to blank because nothing has been typed yet
+        (document.getElementById('AnswerBox') as HTMLInputElement).value='';
         setKey((_key)=>_key+1); // instantly fully refresh display
     }
 
