@@ -11,6 +11,18 @@
     /*https://codepen.io/Arkellys/pen/rgpNBK */
     
 }
+#progressbar2{
+  width: 20px;
+  height: 200px;
+  background-color: #c3ffbe;
+  border: 3px solid black;
+  border-radius: 10px;
+  position: relative;
+  top: -10px;
+  /* text-align: left; */
+  /*https://codepen.io/Arkellys/pen/rgpNBK */
+  
+}
 /* #wrapper ::before{      
     position: absolute; 
     content: "";
@@ -66,7 +78,6 @@
     width: 117%;
     border-radius: 50%;
     display: table;
-    
     position: absolute;
     transform: translate(-2.5px,-2.5px); /*10px*/
   }

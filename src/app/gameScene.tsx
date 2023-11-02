@@ -23,7 +23,7 @@ export default function GameScene() {
     useEffect(()=> {
 
         if(timeEnded) {
-            controls.start(i=>({
+            controls.start(()=>({
                 rotateZ: [0, -5, 5, -5, 5, -5, 5, 0],
                 transition: { duration: 1 }
             }))
