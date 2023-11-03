@@ -16,7 +16,7 @@ enum GameState {
 export default function GameScene() {
     const [gameState, setGameState] = useState(GameState.Start);
     const [timeEnded,setTimeEnded] = useState(false); //Returns true when timer reaches 0, timerModule modifies this.
-    const [difficulty, setDifficulty] = useState(0);
+    const [score, setScore] = useState(0);
     const [userInput, setUserInput] = useState(''); //represents what the user types into the answer box
 
     useEffect(()=> {
@@ -40,7 +40,7 @@ export default function GameScene() {
             position: `fixed`,
             right: `10px`
             }}>
-                <ScoreDisplay difficulty = {difficulty}/>
+                <ScoreDisplay score = {score}/>
             </div>
 
             <AnswerBox
@@ -48,13 +48,15 @@ export default function GameScene() {
             <EquationDisplay
             timeEnded={timeEnded}
             setTimeEnded={setTimeEnded}
-            setDifficulty={setDifficulty}
+            score={score}
+            setScore={setScore}
             userInput={userInput}
             setUserInput={setUserInput}/>
             <EquationDisplay
             timeEnded={timeEnded}
             setTimeEnded={setTimeEnded}
-            setDifficulty={setDifficulty}
+            score={score}
+            setScore={setScore}
             userInput={userInput}
             setUserInput={setUserInput}/>
             
@@ -63,7 +65,7 @@ export default function GameScene() {
                 bottom: `0`,
                 right: `0`
             }}>
-                <OperationDisplay difficulty={difficulty}/>
+                <OperationDisplay score={score}/>
             </div>
         </div>
     );
@@ -72,7 +74,7 @@ export default function GameScene() {
         <div className="endScreen">
             You ran out of time! Try again!
             <br/><br/>
-            Your score was: {difficulty}
+            Your score was: {score-1}
             <br/><br/>
             {StartButton()}
         </div>
@@ -80,6 +82,7 @@ export default function GameScene() {
 
     const StartButton = () => (
         <button className="startButton" onClick={()=>{
+            setScore(0);
             setGameState(GameState.Play);
         }}>Begin Game</button>
     );

@@ -5,7 +5,7 @@ import TimerModule from "./timer";
 import "./equationDisplayStyle.css"
 import {Generator} from './generator'
 
-export default function EquationDisplay({setLives,timeEnded,setTimeEnded,setDifficulty,userInput,setUserInput}:any){
+export default function EquationDisplay({setLives,timeEnded,setTimeEnded,score,setScore,userInput,setUserInput}:any){
     //const equation: [firstVar:number, secondVal:number, answer:any] = [generator.firstNumber,generator.secondNumber,generator.solution]; // dummy equation for testing
     const inputArray = [false,false,false]; //array to set which place to be input, true=input mode
     const [inputVal,setInputVal] = useState(''); //what the player types
@@ -29,7 +29,7 @@ export default function EquationDisplay({setLives,timeEnded,setTimeEnded,setDiff
 
     function generateEquation(){
         var problem:any[] = generator.generateProblem();
-        setDifficulty(generator.difficulty);
+        setScore(score + 1);
         setEq([problem[0],problem[2],problem[3]]);
         setOperation(generator.operator);
     }

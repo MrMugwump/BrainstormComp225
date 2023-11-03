@@ -1,11 +1,11 @@
-export function ScoreDisplay({difficulty}:any){
-    function calcScore(difficulty:number){
+export function ScoreDisplay({score}:any){
+    function calcScore(score:number){
     }
     return(<>
         <div style={{
             border: `2px solid black`
         }}>
-            <p>Score: {difficulty-1}</p>
+            <p>Score: {score}</p>
         </div>
     </>)
 }
