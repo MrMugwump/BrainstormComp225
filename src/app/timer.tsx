@@ -7,6 +7,7 @@ const ProgressBar = ({ progress, interval }:any) => (
   <div id="progressbar">
     <div id="progress" style={{ 
       height: `${progress}%`,
+      width: `100%`,
       transitionDuration: `${interval}ms`,
       }}></div>
     <div id="dot">
