@@ -1,9 +1,14 @@
 .EquationDisplay {
     border: 1px solid black;
-    border-collapse: collapse;
+    border-radius: 10px;
+    border-collapse: separate;
+    border-spacing: 0px;
+    width: 7em;
     font-size: 100%;
+    box-shadow: 3px 3px 3px #000000aa;
 }
 .EquationDisplay .TextSlot{
+    padding: 3px;
     font-size: 5em;
     height: 230px;
 }
@@ -12,6 +17,5 @@
     padding:.5em; 
 }
 .timercell {
-    border: 1px solid black;
-    padding: 5px;
+    padding: 10px;
 }

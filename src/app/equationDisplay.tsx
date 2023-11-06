@@ -62,6 +62,7 @@ export default function EquationDisplay({setLives,timeEnded,setTimeEnded,userInp
     },[timeEnded]);
 
     return(<>
+    <div style={{padding:`5px`}}>
         <table key = {key} className="EquationDisplay">
         <tbody>
             <tr>
@@ -84,6 +85,7 @@ export default function EquationDisplay({setLives,timeEnded,setTimeEnded,userInp
             </tr>
         </tbody>
         </table>
+        </div>
         </>)
 }
 
