@@ -39,7 +39,7 @@ export default function TimerModule({timerLength, interval, timeEnded,actualSetT
           return timerLength;
         }
         else{
-          return _timespan; //decrements timer by 1/10th of a second
+          return _timespan-interval; //decrements timer by 1/10th of a second
         }
       });
     }, interval); // pauses for a tenth of a second
