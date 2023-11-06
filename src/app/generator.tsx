@@ -6,7 +6,6 @@ enum Operators {
 }
 
 export class Generator {
-    difficulty: number = 0;
     firstNumber: number = 0;
     secondNumber: number = 0;
     operator: Operators = Operators.Addition;
@@ -15,11 +14,8 @@ export class Generator {
     // Difficulty can be measured as the number of correct answers this far, starting at 0 by default
     // and would slowly increase as more correct answers are entered. The difficulty can start at a
     // higher (nonzero) number so the game starts out just that much harder than the default.
-    constructor(diff: number) {
-        this.difficulty = diff;
-        if(diff < 0) {
-            this.difficulty = 0;
-        }
+    constructor() {
+
     }
 
     // Based on the difficulty and operator, find the limit for the absolute value of operands
@@ -46,20 +42,21 @@ export class Generator {
         }
     }
 
-    generateProblem() {
-        // FOR LATER: Only increase difficulty when a problem is solved, not when a new problem is generated.
+    /**
+     * Returns a random problem based on the input difficulty.
+     */
+    generateProblem(diff:number) {
         // New problems will be generated when the timer runs out
-        this.difficulty = this.difficulty + 1;
-        this.operator = this.nextOperator();
+        this.operator = this.nextOperator(diff);
         
         // Evaluate in a different order for division (multiplication but rearranged)
         if(this.operator === Operators.Division) {
-            this.solution = this.nextOperand();
-            this.secondNumber = this.nextOperand();
+            this.solution = this.nextOperand(diff);
+            this.secondNumber = this.nextOperand(diff);
             this.firstNumber = this.nextSolution();
         } else {
-            this.firstNumber = this.nextOperand();
-            this.secondNumber = this.nextOperand();
+            this.firstNumber = this.nextOperand(diff);
+            this.secondNumber = this.nextOperand(diff);
             this.solution = this.nextSolution();
         }
 
@@ -67,10 +64,10 @@ export class Generator {
     }
 
     // Returns one of the numbers to be used in the equation
-    nextOperand() {
+    nextOperand(diff:number) {
         var output = 0;
         while(output === 0) {
-            var x = this.nextRandomInt(1, this.findLimit(this.difficulty, this.operator));
+            var x = this.nextRandomInt(1, this.findLimit(diff, this.operator));
 
             output = Math.abs(x);
         }
@@ -79,13 +76,13 @@ export class Generator {
     }
 
     // Returns the operator to be used in the equation
-    nextOperator() {
+    nextOperator(diff:number) {
         var i: number = 0;
-        if(this.difficulty < 5) {
+        if(diff < 5) {
             i = 1;
-        } else if(this.difficulty < 15) {
+        } else if(diff < 15) {
             i = 1 + Math.floor(Math.random() * 2);
-        } else if(this.difficulty < 20) {
+        } else if(diff < 20) {
             i = 1 + Math.floor(Math.random() * 3);
         } else {
             i = 1 + Math.floor(Math.random() * 4);

@@ -5,7 +5,7 @@ import TimerModule from "./timer";
 import "./equationDisplayStyle.css"
 import {Generator} from './generator'
 
-export default function EquationDisplay({setLives,timeEnded,setTimeEnded,score,setScore,userInput,setUserInput}:any){
+export default function EquationDisplay({setLives,timeEnded,setTimeEnded,userInput,setUserInput,difficulty,setDifficulty}:any){
     //const equation: [firstVar:number, secondVal:number, answer:any] = [generator.firstNumber,generator.secondNumber,generator.solution]; // dummy equation for testing
     const inputArray = [false,false,false]; //array to set which place to be input, true=input mode
     const [inputVal,setInputVal] = useState(''); //what the player types
@@ -17,8 +17,8 @@ export default function EquationDisplay({setLives,timeEnded,setTimeEnded,score,s
     // const [isCorrect, setIsCorrect] = useState('incorrect'); //debugging thing
 
     const [generator] = useState(()=>{ // initialize our equation generator class
-        var gen = new Generator(0);
-        gen.generateProblem(); // prevents weird issues where .generateProblem() gets called any time React calls a new render
+        var gen = new Generator();
+        gen.generateProblem(difficulty); // prevents weird issues where .generateProblem() gets called any time React calls a new render
         return gen;
     });
 
@@ -28,8 +28,8 @@ export default function EquationDisplay({setLives,timeEnded,setTimeEnded,score,s
     inputArray[location] = true;
 
     function generateEquation(){
-        var problem:any[] = generator.generateProblem();
-        setScore(score + 1);
+        var problem:any[] = generator.generateProblem(difficulty);
+        setDifficulty(difficulty + 1);
         setEq([problem[0],problem[2],problem[3]]);
         setOperation(generator.operator);
     }
@@ -79,7 +79,7 @@ export default function EquationDisplay({setLives,timeEnded,setTimeEnded,score,s
                 {/* <td><p>Correct = {isCorrect}</p></td> */}
                 {/* <td><p>location = {location}</p></td> */}
                 {/* <td><p>{eq[0]+operation+eq[1]+'='+eq[2]}</p></td> */}
-                {/* <td className="timercell"><p>diff = {generator.difficulty}</p></td> */}
+                {/* <td className="timercell"><p>diff = {difficulty}</p></td> */}
                 {/* <td><p>{generator.debugVar}</p></td> */}
             </tr>
         </tbody>

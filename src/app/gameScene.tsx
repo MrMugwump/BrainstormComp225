@@ -16,7 +16,7 @@ enum GameState {
 export default function GameScene() {
     const [gameState, setGameState] = useState(GameState.Start);
     const [timeEnded,setTimeEnded] = useState(false); //Returns true when timer reaches 0, timerModule modifies this.
-    const [score, setScore] = useState(0);
+    const [difficulty, setDifficulty] = useState(0);
     const [userInput, setUserInput] = useState(''); //represents what the user types into the answer box
 
     useEffect(()=> {
@@ -40,7 +40,7 @@ export default function GameScene() {
             position: `fixed`,
             right: `10px`
             }}>
-                <ScoreDisplay score = {score}/>
+                <ScoreDisplay score = {difficulty}/>
             </div>
 
             <AnswerBox
@@ -48,24 +48,24 @@ export default function GameScene() {
             <EquationDisplay
             timeEnded={timeEnded}
             setTimeEnded={setTimeEnded}
-            score={score}
-            setScore={setScore}
             userInput={userInput}
-            setUserInput={setUserInput}/>
+            setUserInput={setUserInput}
+            difficulty={difficulty}
+            setDifficulty={setDifficulty}/>
             <EquationDisplay
             timeEnded={timeEnded}
             setTimeEnded={setTimeEnded}
-            score={score}
-            setScore={setScore}
             userInput={userInput}
-            setUserInput={setUserInput}/>
+            setUserInput={setUserInput}
+            difficulty={difficulty}
+            setDifficulty={setDifficulty}/>
             
             <div style={{
                 position: `fixed`,
                 bottom: `0`,
                 right: `0`
             }}>
-                <OperationDisplay score={score}/>
+                <OperationDisplay difficulty={difficulty}/>
             </div>
         </div>
     );
@@ -74,7 +74,7 @@ export default function GameScene() {
         <div className="endScreen">
             You ran out of time! Try again!
             <br/><br/>
-            Your score was: {score-1}
+            Your score was: {difficulty-1}
             <br/><br/>
             {StartButton()}
         </div>
@@ -82,7 +82,7 @@ export default function GameScene() {
 
     const StartButton = () => (
         <button className="startButton" onClick={()=>{
-            setScore(0);
+            setDifficulty(0);
             setGameState(GameState.Play);
         }}>Begin Game</button>
     );
