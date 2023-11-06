@@ -6,6 +6,8 @@ import { OperationDisplay } from "./player-info-components/operationNotification
 import { ScoreDisplay } from "./player-info-components/scoreDisplay";
 import AnswerBox from "./answerBox";
 import "./answerBoxStyle.css";
+import LivesDisplay from "./lives"
+import "./livesStyle.css";
 
 enum GameState {
     Start = 0,
@@ -16,12 +18,17 @@ enum GameState {
 export default function GameScene() {
     const [gameState, setGameState] = useState(GameState.Start);
     const [timeEnded,setTimeEnded] = useState(false); //Returns true when timer reaches 0, timerModule modifies this.
-    const [difficulty, setDifficulty] = useState(0);
+    const [difficulty, setDifficulty] = useState(250);
     const [userInput, setUserInput] = useState(''); //represents what the user types into the answer box
+    const [livesRemaining, setLivesRemaining] = useState(2);
 
     useEffect(()=> {
         if(timeEnded) {
-            setGameState(GameState.End);
+            if(livesRemaining > 0) {
+                // Decrement lives remaining
+            } else {
+                setGameState(GameState.End);
+            }
         }
     },[timeEnded]);
 
@@ -45,6 +52,7 @@ export default function GameScene() {
 
             <AnswerBox
             setUserInput={setUserInput}/>
+
             <EquationDisplay
             timeEnded={timeEnded}
             setTimeEnded={setTimeEnded}
@@ -59,6 +67,11 @@ export default function GameScene() {
             setUserInput={setUserInput}
             difficulty={difficulty}
             setDifficulty={setDifficulty}/>
+
+            <LivesDisplay 
+            LivesDisplay = {LivesDisplay}
+            livesRemaining = {livesRemaining}
+            setLivesRemaining = {setLivesRemaining}/>
             
             <div style={{
                 position: `fixed`,
