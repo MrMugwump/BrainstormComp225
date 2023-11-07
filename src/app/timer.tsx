@@ -1,6 +1,46 @@
 import React from "react"
 import { useState, useEffect } from 'react';
 import "./timerStyle.css"
+import { motion, useAnimation } from "framer-motion";
+
+function ProgBar({progress,timeLength}:any){
+  const controls = useAnimation();
+  const [animationFlag,setAnimationFlag] = useState(false);
+
+  useEffect(()=>{
+    if(progress<0.33*timeLength){
+      setAnimationFlag(true);
+    }
+  },[progress]);
+
+  useEffect(()=>{
+    if(animationFlag){ //shakes the progress bar if the animation flag is set to true
+      controls.start(()=>({
+        rotateZ: [0, -1, 1,-1,1, -2, 2,-2,2,-2,2,-3, 3, -3,3,-3,3],
+        transition: {duration: 3.2, ease:'linear'}
+      }));
+    }
+  },[animationFlag]);
+
+  return(<>
+  <motion.div
+    animate={controls}> 
+    <div id="progressbar">
+      <motion.div  id="progress" style={{ 
+        }}
+        animate={{backgroundColor:['hsl(115, 56%, 58%)','hsl(115, 56%, 58%)',	`hsl(0, 100%, 50%)`],
+        height:['100%','0%'],
+        }}
+        transition={{ease:"linear", duration:'10'}}></motion.div>
+      <motion.div id="dot"
+        animate={{backgroundColor:['hsl(115, 56%, 58%)','hsl(115, 56%, 58%)',	`hsl(0, 100%, 50%)`]}}
+        transition={{ease:"linear",duration:'10'}}>
+        <div id="border"></div> 
+      </motion.div>
+    </div>
+  </motion.div>
+  </>)
+}
 
 const ProgressBar = ({ progress, interval }:any) => ( 
   <>
@@ -58,11 +98,9 @@ export default function TimerModule({timerLength, interval, timeEnded,actualSetT
 
   return(
       <>
-        <ProgressBar 
-          key = {keyID}
-          progress={10*timespan/SECOND}
-          interval={interval}
-          />
+        <ProgBar key={keyID+1}
+          progress={10*timespan}
+          timeLength={10*timerLength}/>
       </>
   );
 }

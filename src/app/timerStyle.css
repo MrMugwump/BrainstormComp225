@@ -26,15 +26,28 @@
 } */
 
 #progress {
-    border-radius: 3px;
+    /* border-radius: 3px;
     height: 100%;
-    width: 10%;
+    
     text-align: right;
     padding: 0;
     left: 0;
     bottom: 0;
     position: absolute;
     transition: height linear;
+    transform: rotate(180deg);
+    line-height: 22px; */
+    /*background-color: #60d056;
+    box-sizing: border-box;*/
+    border-radius: 7px;
+    height: 100%;
+    width: 100%;
+    text-align: right;
+
+    bottom: 0;
+    position: absolute;
+    /* transition: height linear;
+    transition-duration: 1ms; */
     transform: rotate(180deg);
     line-height: 22px; /* same as #progressBar height if we want text middle aligned */
     background-color: #60d056;
