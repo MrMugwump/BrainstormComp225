@@ -45,7 +45,6 @@ function ProgBar({timeLeft,timeLength}:any){
   },[animationFlag]);
 
   return(<>
-  <p>{timeLeft}+ {0.33*timeLength}</p>
     <motion.div
       custom={0.00032*timeLength}
       animate={controls}
