@@ -24,10 +24,9 @@ export default function GameScene() {
 
     useEffect(()=> {
         if(timeEnded) {
-            if(livesRemaining > 0) {
-                // Decrement lives remaining
-            } else {
+            if(livesRemaining === 0) {
                 setGameState(GameState.End);
+                setLivesRemaining(2);
             }
         }
     },[timeEnded]);
@@ -59,16 +58,20 @@ export default function GameScene() {
             userInput={userInput}
             setUserInput={setUserInput}
             difficulty={difficulty}
-            setDifficulty={setDifficulty}/>
+            setDifficulty={setDifficulty}
+            livesRemaining = {livesRemaining}
+            setLivesRemaining = {setLivesRemaining}/>
             <EquationDisplay
             timeEnded={timeEnded}
             setTimeEnded={setTimeEnded}
             userInput={userInput}
             setUserInput={setUserInput}
             difficulty={difficulty}
-            setDifficulty={setDifficulty}/>
+            setDifficulty={setDifficulty}
+            livesRemaining = {livesRemaining}
+            setLivesRemaining = {setLivesRemaining}/>
 
-            <LivesDisplay 
+            <LivesDisplay
             LivesDisplay = {LivesDisplay}
             livesRemaining = {livesRemaining}
             setLivesRemaining = {setLivesRemaining}/>

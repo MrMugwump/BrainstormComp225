@@ -4,8 +4,10 @@ import { useState, useEffect } from 'react';
 import TimerModule from "./timer";
 import "./equationDisplayStyle.css"
 import {Generator} from './generator'
+import LivesDisplay from "./lives"
+import "./livesStyle.css";
 
-export default function EquationDisplay({setLives,timeEnded,setTimeEnded,userInput,setUserInput,difficulty,setDifficulty}:any){
+export default function EquationDisplay({livesRemaining,setLivesRemaining,timeEnded,setTimeEnded,userInput,setUserInput,difficulty,setDifficulty}:any){
     //const equation: [firstVar:number, secondVal:number, answer:any] = [generator.firstNumber,generator.secondNumber,generator.solution]; // dummy equation for testing
     const inputArray = [false,false,false]; //array to set which place to be input, true=input mode
     const [inputVal,setInputVal] = useState(''); //what the player types
@@ -55,6 +57,8 @@ export default function EquationDisplay({setLives,timeEnded,setTimeEnded,userInp
 
     useEffect(()=>{ // triggers when time runs out
         if(timeEnded){
+            setLivesRemaining(livesRemaining - 1); // decrement # of lives remaining
+            livesRemaining = {livesRemaining};
             generateEquation();
             resetDisplay();
             setTimeEnded(false);
