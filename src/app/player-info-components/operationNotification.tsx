@@ -1,5 +1,8 @@
 import { useEffect, useState } from "react"
 
+/*
+ * Graphical element that shows which operation types could possibly be generated, based on difficulty.
+ */
 export function OperationDisplay({difficulty}:any){
     const [operatorIsLocked, setIsLocked] = useState([true,false,false,false]);
     function updateArray(_operators:boolean[],index:number){ //definitely a simpler way to do this

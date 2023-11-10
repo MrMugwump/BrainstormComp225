@@ -1,3 +1,8 @@
+import React from "react"
+
+/*
+ * Graphical text element that presents the user's score.
+ */
 export function ScoreDisplay({score}:any){
     function calcScore(score:number){
     }
