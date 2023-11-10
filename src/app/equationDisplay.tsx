@@ -7,7 +7,7 @@ import {Generator} from './generator'
 import {Operator} from './generator'
 
 export default function EquationDisplay({userInput,setUserInput,difficulty,setDifficulty,livesRemaining,setLivesRemaining}:any){
-    const [variableLocation,setVariableLocation] = useState(2); //This variable keeps track of which location is our input now
+    const [variableLocation,setVariableLocation] = useState(2); //This variable keeps track of which location is the equation's solution.
     const [key, setKey] = useState(0); //This is used to reset the display instantly (no transition time for timer).
 
     const [interval] = useState(100); //For timer: Rate of timer's checks for updates
@@ -31,8 +31,8 @@ export default function EquationDisplay({userInput,setUserInput,difficulty,setDi
      * Generates a new equation and sets "terms" and "operator" to match the new equation.
      */
     function generateEquation(){
-        var equation:any[] = generator.generateEquation(difficulty);
-        terms = [equation[0],equation[2],equation[3]];
+        var generatorOutput:any[] = generator.generateEquation(difficulty);
+        terms = [generatorOutput[0],generatorOutput[2],generatorOutput[3]];
         operator = generator.operator;
 
         //UNCOMMENT for algebra, chooses random location for player input
