@@ -7,9 +7,7 @@ import {Generator} from './generator'
 import LivesDisplay from "./lives"
 import "./livesStyle.css";
 
-export default function EquationDisplay({livesRemaining,setLivesRemaining,userInput,setUserInput,difficulty,setDifficulty}:any){
-    //const equation: [firstVar:number, secondVal:number, answer:any] = [generator.firstNumber,generator.secondNumber,generator.solution]; // dummy equation for testing
-    const [inputVal,setInputVal] = useState(''); //what the player types
+export default function EquationDisplay({userInput,setUserInput,difficulty,setDifficulty,livesRemaining,setLivesRemaining}:any){
     const [location,setLocation] = useState(2); //this variable keeps track of which location is our input now
     const [key, setKey] = useState(0); // this is used to reset the display instantly (no transition time for timer)
     const [interval] = useState(100); //param for timer, not super necessary, will likely get rid of later
@@ -66,11 +64,11 @@ export default function EquationDisplay({livesRemaining,setLivesRemaining,userIn
         <table key = {key} className="EquationDisplay">
         <tbody>
             <tr>
-                <td className="TextSlot"><NumberSlot number = {eq[0]} isInput = {location==0} inputVal={setInputVal}/></td>
+                <td className="TextSlot"><NumberSlot number = {eq[0]} isVariable = {location==0}/></td>
                 <td className="TextSlot"><p>{operation}</p></td>
-                <td className="TextSlot"><NumberSlot number = {eq[1]} isInput = {location==1} inputVal={setInputVal}/></td>
+                <td className="TextSlot"><NumberSlot number = {eq[1]} isVariable = {location==1}/></td>
                 <td className="TextSlot">=</td>
-                <td className="TextSlot"><NumberSlot number = {eq[2]} isInput = {location==2} inputVal={setInputVal}/></td>
+                <td className="TextSlot"><NumberSlot number = {eq[2]} isVariable = {location==2}/></td>
                 <td className="timercell">
                     <TimerModule
                     timerLength={timeLength}
@@ -89,22 +87,12 @@ export default function EquationDisplay({livesRemaining,setLivesRemaining,userIn
         </>)
 }
 
-function NumberSlot({number, isInput = false, inputVal}:any){
-    const [width,setWidth]=useState('1ch');
-    
-    function onInputChange(e:any){
-        inputVal(e.target.value);
-        setWidth(e.target.value.length+'ch')
+function NumberSlot({number, isVariable}:any){
+    if (isVariable){
+        return(<p>?</p>)
+    } else {
+        return(<p>{number}</p>)
     }
-
-    if (isInput){
-        return( 
-            <>
-            ?
-            </>
-            )
-    }
-    return(<><p>{number}</p></>)
 }
 
 function generateRandomInteger(min: number, max: number){ // Taken from https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
