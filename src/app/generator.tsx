@@ -5,6 +5,9 @@ export enum Operator {
     Division="÷"
 }
 
+/**
+ * Randomly generates math problems based on difficulty. Used by equationDisplay to get random equations.
+ */
 export class Generator {
     firstNumber: number = 0;
     secondNumber: number = 0;
