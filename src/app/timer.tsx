@@ -32,12 +32,13 @@ function ProgBar({timeLeft,timeLength}:any){
       height: ['100%','0%'],
       transition: {duration: timeLength, ease: 'linear'}
     }),
-    //there is likely a way to get rid of this duplicated code, but I don't know how
+    /*there is likely a way to get rid of this duplicated code, but I don't know how yet*/
     changeColor: (timeLength:number) => ({ 
       backgroundColor:['hsl(115, 56%, 58%)','hsl(115, 56%, 58%)',	`hsl(0, 100%, 50%)`],
       transition: {duration: timeLength, ease: 'linear'}
     })
   }
+  
   useEffect(()=>{
     if(animationFlag){ //shakes the progress bar if the animation flag is set to true
       controls.start("shake");

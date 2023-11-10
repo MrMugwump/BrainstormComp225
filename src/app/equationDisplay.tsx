@@ -76,6 +76,7 @@ export default function EquationDisplay({userInput,setUserInput,difficulty,setDi
                     setTimeEnded={setTimeEnded}
                     interval={interval}/>
                 </td>
+                <p>{livesRemaining}</p>
                 {/* <td><p>location = {location}</p></td> */}
                 {/* <td><p>{eq[0]+operation+eq[1]+'='+eq[2]}</p></td> */}
                 {/* <td className="timercell"><p>diff = {difficulty}</p></td> */}
