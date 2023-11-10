@@ -4,8 +4,7 @@ import { useState, useEffect } from 'react';
 import TimerModule from "./timer";
 import "./equationDisplayStyle.css"
 import {Generator} from './generator'
-import LivesDisplay from "./lives"
-import "./livesStyle.css";
+import {Operator} from './generator'
 
 export default function EquationDisplay({userInput,setUserInput,difficulty,setDifficulty,livesRemaining,setLivesRemaining}:any){
     const [variableLocation,setVariableLocation] = useState(2); //This variable keeps track of which location is our input now
@@ -20,83 +19,105 @@ export default function EquationDisplay({userInput,setUserInput,difficulty,setDi
      */
     const [generator] = useState(()=>{
         var gen = new Generator();
-        gen.generateProblem(difficulty); // prevents weird issues where .generateProblem() gets called any time React calls a new render
+        gen.generateEquation(difficulty); // prevents weird issues where .generateProblem() gets called any time React calls a new render
         return gen;
     });
 
-    const [eq,setEq] = useState([generator.firstNumber,generator.secondNumber,generator.solution]);
-    const [operation, setOperation] = useState(generator.operator);
+    //Variables keeping track of the numbers and operator of the equation.
+    var terms:number[] = [generator.firstNumber,generator.secondNumber,generator.solution];
+    var operator:Operator = generator.operator;
 
+    /**
+     * Generates a new equation and sets "terms" and "operator" to match the new equation.
+     */
     function generateEquation(){
-        var problem:any[] = generator.generateProblem(difficulty);
-        setEq([problem[0],problem[2],problem[3]]);
-        setOperation(generator.operator);
-    }
+        var equation:any[] = generator.generateEquation(difficulty);
+        terms = [equation[0],equation[2],equation[3]];
+        operator = generator.operator;
 
-    function resetDisplay(){
         //UNCOMMENT for algebra, chooses random location for player input
         //setVariableLocation(Math.floor((Math.random()*3)));
+    }
 
+    /**
+     * Generates a new equationDisplay and clears player input.
+     *  - Resets timer
+     *  - Generates new equations and displays it
+     *  - Clears player input
+     */
+    function resetDisplay(){
         setUserInput(''); //set input to blank because nothing has been typed yet
         (document.getElementById('AnswerBox') as HTMLInputElement).value='';
         setKey((_key)=>_key+1); // instantly fully refresh display
+
+        generateEquation();
     }
 
+    /**
+     * Checks when the user types: if they get the correct answer, trigger.
+     */
     useEffect(()=>{ //triggers when they type
-        if(userInput==String(eq[variableLocation])){
+        if(userInput==String(terms[variableLocation])){ //if the userInput is the correct answer: new equation & increase difficulty
             setDifficulty(difficulty + 1);
-            generateEquation();
             resetDisplay();
         }
     }, [userInput]);
 
+    /**
+     * Checks for when the timer runs out of time.
+     */
     useEffect(()=>{ // triggers when time runs out
         if(timeEnded){
             setLivesRemaining(livesRemaining - 1); // decrement # of lives remaining
             livesRemaining = {livesRemaining};
-            generateEquation();
             resetDisplay();
             setTimeEnded(false);
         }
-    },[timeEnded]);
+    }, [timeEnded]);
 
-    return(<>
-    <div style={{padding:`5px`}}>
-        <table key = {key} className="EquationDisplay">
-        <tbody>
-            <tr>
-                <td className="TextSlot"><NumberSlot number = {eq[0]} isVariable = {variableLocation==0}/></td>
-                <td className="TextSlot"><p>{operation}</p></td>
-                <td className="TextSlot"><NumberSlot number = {eq[1]} isVariable = {variableLocation==1}/></td>
-                <td className="TextSlot">=</td>
-                <td className="TextSlot"><NumberSlot number = {eq[2]} isVariable = {variableLocation==2}/></td>
-                <td className="timercell">
-                    <TimerModule
-                    timerLength={timeLength}
-                    setTimeEnded={setTimeEnded}
-                    interval={interval}/>
-                </td>
-                {/* <td><p>location = {location}</p></td> */}
-                {/* <td><p>{eq[0]+operation+eq[1]+'='+eq[2]}</p></td> */}
-                {/* <td className="timercell"><p>diff = {difficulty}</p></td> */}
-                {/* <td><p>{generator.debugVar}</p></td> */}
-            </tr>
-        </tbody>
-        </table>
+    /**
+     * Returns the equationDisplay. Returns graphics of the box with equation and timer.
+     */
+    return (
+    <>
+        <div style={{padding:`5px`}}>
+            <table key = {key} className="EquationDisplay">
+                <tbody>
+                    <tr>
+
+                        <td className="TextSlot"><NumberSlot number = {terms[0]} isVariable = {variableLocation==0}/></td>
+                        <td className="TextSlot"><p>{operator}</p></td>
+                        <td className="TextSlot"><NumberSlot number = {terms[1]} isVariable = {variableLocation==1}/></td>
+                        <td className="TextSlot">=</td>
+                        <td className="TextSlot"><NumberSlot number = {terms[2]} isVariable = {variableLocation==2}/></td>
+                        
+                        <td className="TimerCell">
+                            <TimerModule
+                            timerLength={timeLength}
+                            setTimeEnded={setTimeEnded}
+                            interval={interval}/>
+                        </td>
+
+                        {/* Additional text for debugging: variableLocation, terms+operator */}
+
+                        {/* <td><p>variableLocation = {location}</p></td> */} {/* UNCOMMENT: to see location variable */}
+                        {/* <td><p>{eq[0]+operator+eq[1]+'='+eq[2]}</p></td> */} {/* UNCOMMENT: to see generator's output */}
+
+                    </tr>
+                </tbody>
+            </table>
         </div>
-        </>)
+    </>
+    );
 }
 
+/**
+ * Box that holds one term of the equation. Either returns the number itself, or if it is the solution, returns "?"
+ */
 function NumberSlot({number, isVariable}:any){
     if (isVariable){
         return(<p>?</p>)
     } else {
         return(<p>{number}</p>)
     }
-}
-
-function generateRandomInteger(min: number, max: number){ // Taken from https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
-    min = Math.ceil(min);
-    max = Math.floor(max)+1; //+1 to make max inclusive
-    return Math.floor(Math.random() * (max - min) + min); // The maximum and the minimum are inclusive
 }
