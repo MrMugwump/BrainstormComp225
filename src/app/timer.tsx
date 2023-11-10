@@ -91,7 +91,7 @@ const SECOND = 1_000; // 1000ms = 1s
  * 
  * @returns - returns the progress bar
  */
-export default function TimerModule({timerLength, interval, timeEnded,actualSetTimeEnded}:any){
+export default function TimerModule({timerLength, interval, timeEnded,setTimeEnded}:any){
   const [timespan,setTimespan] = useState(timerLength);
   const [keyID,setKeyID] = useState(0); // used to reset the progress bar
 
@@ -99,7 +99,7 @@ export default function TimerModule({timerLength, interval, timeEnded,actualSetT
     const intervalId = setInterval(()=>{
       setTimespan((_timespan: number)=>{
         if(_timespan <= 0){
-          actualSetTimeEnded(true);
+          setTimeEnded(true);
           setKeyID((_keyID)=>_keyID+1); //resets the progress bar back to full
           return timerLength;
         }

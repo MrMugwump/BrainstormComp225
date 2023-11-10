@@ -8,15 +8,17 @@ import LivesDisplay from "./lives"
 import "./livesStyle.css";
 
 export default function EquationDisplay({userInput,setUserInput,difficulty,setDifficulty,livesRemaining,setLivesRemaining}:any){
-    const [location,setLocation] = useState(2); //this variable keeps track of which location is our input now
-    const [key, setKey] = useState(0); // this is used to reset the display instantly (no transition time for timer)
-    const [interval] = useState(100); //param for timer, not super necessary, will likely get rid of later
-    const [timeLength] = useState(10000); //param for timer
-    const [timeEnded,setTimeEnded] = useState(false); //Returns true when timer reaches 0, timerModule modifies this.
+    const [variableLocation,setVariableLocation] = useState(2); //This variable keeps track of which location is our input now
+    const [key, setKey] = useState(0); //This is used to reset the display instantly (no transition time for timer).
 
-    // const [isCorrect, setIsCorrect] = useState('incorrect'); //debugging thing
+    const [interval] = useState(100); //For timer: Rate of timer's checks for updates
+    const [timeLength] = useState(10000); //For timer: Total number of miliseconds before the timer reaches 0.
+    const [timeEnded,setTimeEnded] = useState(false); //For timer: Returns true when timer reaches 0.
 
-    const [generator] = useState(()=>{ // initialize our equation generator class
+    /**
+     * Initialize equation generator class. Takes and modifies 'difficulty' variable.
+     */
+    const [generator] = useState(()=>{
         var gen = new Generator();
         gen.generateProblem(difficulty); // prevents weird issues where .generateProblem() gets called any time React calls a new render
         return gen;
@@ -33,7 +35,7 @@ export default function EquationDisplay({userInput,setUserInput,difficulty,setDi
 
     function resetDisplay(){
         //UNCOMMENT for algebra, chooses random location for player input
-        //setLocation(Math.floor((Math.random()*3)));
+        //setVariableLocation(Math.floor((Math.random()*3)));
 
         setUserInput(''); //set input to blank because nothing has been typed yet
         (document.getElementById('AnswerBox') as HTMLInputElement).value='';
@@ -41,11 +43,10 @@ export default function EquationDisplay({userInput,setUserInput,difficulty,setDi
     }
 
     useEffect(()=>{ //triggers when they type
-        if(userInput==String(eq[location])){
+        if(userInput==String(eq[variableLocation])){
             setDifficulty(difficulty + 1);
             generateEquation();
             resetDisplay();
-            //setIsCorrect('correct!');
         }
     }, [userInput]);
 
@@ -64,18 +65,17 @@ export default function EquationDisplay({userInput,setUserInput,difficulty,setDi
         <table key = {key} className="EquationDisplay">
         <tbody>
             <tr>
-                <td className="TextSlot"><NumberSlot number = {eq[0]} isVariable = {location==0}/></td>
+                <td className="TextSlot"><NumberSlot number = {eq[0]} isVariable = {variableLocation==0}/></td>
                 <td className="TextSlot"><p>{operation}</p></td>
-                <td className="TextSlot"><NumberSlot number = {eq[1]} isVariable = {location==1}/></td>
+                <td className="TextSlot"><NumberSlot number = {eq[1]} isVariable = {variableLocation==1}/></td>
                 <td className="TextSlot">=</td>
-                <td className="TextSlot"><NumberSlot number = {eq[2]} isVariable = {location==2}/></td>
+                <td className="TextSlot"><NumberSlot number = {eq[2]} isVariable = {variableLocation==2}/></td>
                 <td className="timercell">
                     <TimerModule
                     timerLength={timeLength}
-                    actualSetTimeEnded={setTimeEnded}
+                    setTimeEnded={setTimeEnded}
                     interval={interval}/>
                 </td>
-                {/* <td><p>Correct = {isCorrect}</p></td> */}
                 {/* <td><p>location = {location}</p></td> */}
                 {/* <td><p>{eq[0]+operation+eq[1]+'='+eq[2]}</p></td> */}
                 {/* <td className="timercell"><p>diff = {difficulty}</p></td> */}
