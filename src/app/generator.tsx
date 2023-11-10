@@ -1,14 +1,17 @@
-enum Operators {
+export enum Operator {
     Addition="+",
     Subtraction="-",
     Multiplication="*",
     Division="÷"
 }
 
+/**
+ * Randomly generates math problems based on difficulty. Used by equationDisplay to get random equations.
+ */
 export class Generator {
     firstNumber: number = 0;
     secondNumber: number = 0;
-    operator: Operators = Operators.Addition;
+    operator: Operator = Operator.Addition;
     solution: number = 0;
     
     // Difficulty can be measured as the number of correct answers this far, starting at 0 by default
@@ -22,7 +25,7 @@ export class Generator {
     // Visualization of limits: https://www.desmos.com/calculator/ikzfjyj5de
     findLimit(diff: number, op: String) {
         // For addition and subtraction
-        if(op === Operators.Addition || op === Operators.Subtraction) {
+        if(op === Operator.Addition || op === Operator.Subtraction) {
             if(diff <= 50) {
                 return Math.floor(80 * Math.sin(diff/29.5 - (25*Math.PI)/2) + 90);
             } else if(diff <= 1000) {
@@ -45,12 +48,12 @@ export class Generator {
     /**
      * Returns a random problem based on the input difficulty.
      */
-    generateProblem(diff:number) {
+    generateEquation(diff:number) {
         // New problems will be generated when the timer runs out
         this.operator = this.nextOperator(diff);
         
         // Evaluate in a different order for division (multiplication but rearranged)
-        if(this.operator === Operators.Division) {
+        if(this.operator === Operator.Division) {
             this.solution = this.nextOperand(diff);
             this.secondNumber = this.nextOperand(diff);
             this.firstNumber = this.nextSolution();
@@ -93,13 +96,13 @@ export class Generator {
 
     nextOperatorByNumber(i: number) {
         if(i === 1) {
-            return Operators.Addition;
+            return Operator.Addition;
         } else if(i === 2) {
-            return Operators.Subtraction;
+            return Operator.Subtraction;
         } else if(i === 3) {
-            return Operators.Multiplication;
+            return Operator.Multiplication;
         } else {
-            return Operators.Division;
+            return Operator.Division;
         }
     }
 
@@ -110,13 +113,13 @@ export class Generator {
 
     // Returns the solution of the equation, given operands and operator.
     nextSolution() {
-        if(this.operator === Operators.Addition) {
+        if(this.operator === Operator.Addition) {
             return this.firstNumber + this.secondNumber;
-        } else if(this.operator === Operators.Subtraction) {
+        } else if(this.operator === Operator.Subtraction) {
             return this.firstNumber - this.secondNumber;
-        } else if(this.operator === Operators.Multiplication) {
+        } else if(this.operator === Operator.Multiplication) {
             return this.firstNumber * this.secondNumber;
-        } else if(this.operator === Operators.Division) {
+        } else if(this.operator === Operator.Division) {
             return this.solution * this.secondNumber;
         } else {
             return 0;
