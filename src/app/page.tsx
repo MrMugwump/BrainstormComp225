@@ -16,7 +16,6 @@ export default function Home() {
   const [deadline, setDeadline] = useState(new Date());
   const [timerLength, setTimerLength] = useState(10000);
   const [interval, setInterval] = useState(1000);
-  const [timeEnded, setTimeEnded] = useState(1);
   const [isActive, setActive] = useState(false);
   const [difficultySetting, setDifficultySetting] = useState(0);
   //const {seconds} = useTimer(time,10000);

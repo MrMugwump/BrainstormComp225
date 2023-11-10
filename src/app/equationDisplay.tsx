@@ -7,14 +7,14 @@ import {Generator} from './generator'
 import LivesDisplay from "./lives"
 import "./livesStyle.css";
 
-export default function EquationDisplay({livesRemaining,setLivesRemaining,timeEnded,setTimeEnded,userInput,setUserInput,difficulty,setDifficulty}:any){
+export default function EquationDisplay({livesRemaining,setLivesRemaining,userInput,setUserInput,difficulty,setDifficulty}:any){
     //const equation: [firstVar:number, secondVal:number, answer:any] = [generator.firstNumber,generator.secondNumber,generator.solution]; // dummy equation for testing
-    const inputArray = [false,false,false]; //array to set which place to be input, true=input mode
     const [inputVal,setInputVal] = useState(''); //what the player types
     const [location,setLocation] = useState(2); //this variable keeps track of which location is our input now
     const [key, setKey] = useState(0); // this is used to reset the display instantly (no transition time for timer)
     const [interval] = useState(100); //param for timer, not super necessary, will likely get rid of later
     const [timeLength] = useState(10000); //param for timer
+    const [timeEnded,setTimeEnded] = useState(false); //Returns true when timer reaches 0, timerModule modifies this.
 
     // const [isCorrect, setIsCorrect] = useState('incorrect'); //debugging thing
 
@@ -27,20 +27,15 @@ export default function EquationDisplay({livesRemaining,setLivesRemaining,timeEn
     const [eq,setEq] = useState([generator.firstNumber,generator.secondNumber,generator.solution]);
     const [operation, setOperation] = useState(generator.operator);
 
-    inputArray[location] = true;
-
     function generateEquation(){
         var problem:any[] = generator.generateProblem(difficulty);
-        setDifficulty(difficulty + 1);
         setEq([problem[0],problem[2],problem[3]]);
         setOperation(generator.operator);
     }
 
     function resetDisplay(){
-        //choose new location for player input
-        inputArray[location] = false;
-        setLocation(2);
-        inputArray[location] = true;
+        //UNCOMMENT for algebra, chooses random location for player input
+        //setLocation(Math.floor((Math.random()*3)));
 
         setUserInput(''); //set input to blank because nothing has been typed yet
         (document.getElementById('AnswerBox') as HTMLInputElement).value='';
@@ -49,6 +44,7 @@ export default function EquationDisplay({livesRemaining,setLivesRemaining,timeEn
 
     useEffect(()=>{ //triggers when they type
         if(userInput==String(eq[location])){
+            setDifficulty(difficulty + 1);
             generateEquation();
             resetDisplay();
             //setIsCorrect('correct!');
@@ -70,11 +66,11 @@ export default function EquationDisplay({livesRemaining,setLivesRemaining,timeEn
         <table key = {key} className="EquationDisplay">
         <tbody>
             <tr>
-                <td className="TextSlot"><NumberSlot number = {eq[0]} isInput = {inputArray[0]} inputVal={setInputVal}/></td>
+                <td className="TextSlot"><NumberSlot number = {eq[0]} isInput = {location==0} inputVal={setInputVal}/></td>
                 <td className="TextSlot"><p>{operation}</p></td>
-                <td className="TextSlot"><NumberSlot number = {eq[1]} isInput = {inputArray[1]} inputVal={setInputVal}/></td>
+                <td className="TextSlot"><NumberSlot number = {eq[1]} isInput = {location==1} inputVal={setInputVal}/></td>
                 <td className="TextSlot">=</td>
-                <td className="TextSlot"><NumberSlot number = {eq[2]} isInput = {inputArray[2]} inputVal={setInputVal}/></td>
+                <td className="TextSlot"><NumberSlot number = {eq[2]} isInput = {location==2} inputVal={setInputVal}/></td>
                 <td className="timercell">
                     <TimerModule
                     timerLength={timeLength}

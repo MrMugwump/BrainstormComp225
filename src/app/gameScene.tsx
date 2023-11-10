@@ -17,19 +17,16 @@ enum GameState {
 
 export default function GameScene() {
     const [gameState, setGameState] = useState(GameState.Start);
-    const [timeEnded,setTimeEnded] = useState(false); //Returns true when timer reaches 0, timerModule modifies this.
     const [difficulty, setDifficulty] = useState(250);
     const [userInput, setUserInput] = useState(''); //represents what the user types into the answer box
-    const [livesRemaining, setLivesRemaining] = useState(2);
+    const [livesRemaining, setLivesRemaining] = useState(3);
 
     useEffect(()=> {
-        if(timeEnded) {
-            if(livesRemaining === 0) {
-                setGameState(GameState.End);
-                setLivesRemaining(2);
-            }
+        if(livesRemaining === 0) {
+            setGameState(GameState.End);
+            setLivesRemaining(3);
         }
-    },[timeEnded]);
+    },[livesRemaining]);
 
 
     const StartScreen = () => (
@@ -53,8 +50,6 @@ export default function GameScene() {
             setUserInput={setUserInput}/>
 
             <EquationDisplay
-            timeEnded={timeEnded}
-            setTimeEnded={setTimeEnded}
             userInput={userInput}
             setUserInput={setUserInput}
             difficulty={difficulty}
@@ -62,8 +57,6 @@ export default function GameScene() {
             livesRemaining = {livesRemaining}
             setLivesRemaining = {setLivesRemaining}/>
             <EquationDisplay
-            timeEnded={timeEnded}
-            setTimeEnded={setTimeEnded}
             userInput={userInput}
             setUserInput={setUserInput}
             difficulty={difficulty}
@@ -90,7 +83,7 @@ export default function GameScene() {
         <div className="endScreen">
             You ran out of time! Try again!
             <br/><br/>
-            Your score was: {difficulty-1}
+            Your score was: {difficulty}
             <br/><br/>
             {StartButton()}
         </div>
