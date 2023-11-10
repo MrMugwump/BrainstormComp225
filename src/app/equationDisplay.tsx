@@ -6,6 +6,9 @@ import "./equationDisplayStyle.css"
 import {Generator} from './generator'
 import {Operator} from './generator'
 
+/**
+ * Single equation box on screen: randomized equation and timer.
+ */
 export default function EquationDisplay({userInput,setUserInput,difficulty,setDifficulty,livesRemaining,setLivesRemaining}:any){
     const [variableLocation,setVariableLocation] = useState(2); //This variable keeps track of which location is the equation's solution.
     const [key, setKey] = useState(0); //This is used to reset the display instantly (no transition time for timer).
@@ -14,9 +17,6 @@ export default function EquationDisplay({userInput,setUserInput,difficulty,setDi
     const [timeLength] = useState(10000); //For timer: Total number of miliseconds before the timer reaches 0.
     const [timeEnded,setTimeEnded] = useState(false); //For timer: Returns true when timer reaches 0.
 
-    /**
-     * Initialize equation generator class. Takes and modifies 'difficulty' variable.
-     */
     const [generator] = useState(()=>{
         var gen = new Generator();
         gen.generateEquation(difficulty); // prevents weird issues where .generateProblem() gets called any time React calls a new render
@@ -68,7 +68,7 @@ export default function EquationDisplay({userInput,setUserInput,difficulty,setDi
      */
     useEffect(()=>{ // triggers when time runs out
         if(timeEnded){
-            setLivesRemaining(livesRemaining - 1); // decrement # of lives remaining
+            setLivesRemaining((_livesRemaining:number)=>{return(_livesRemaining - 1)}); // decrement # of lives remaining
             livesRemaining = {livesRemaining};
             resetDisplay();
             setTimeEnded(false);

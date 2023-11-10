@@ -28,7 +28,7 @@ export default function GameScene() {
      * Checks for when livesRemaining is changed. If there are 0 lives left, ends the game.
      */
     useEffect(()=> {
-        if(livesRemaining === 0) {
+        if(livesRemaining <= 0) {
             setGameState(GameState.End);
         }
     },[livesRemaining]);
