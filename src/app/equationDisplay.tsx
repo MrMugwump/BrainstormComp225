@@ -5,6 +5,7 @@ import TimerModule from "./timer";
 import "./equationDisplayStyle.css"
 import {Generator} from './generator'
 import {Operator} from './generator'
+import { motion, useAnimation } from "framer-motion";
 
 /**
  * Single equation box on screen: randomized equation and timer.
@@ -22,6 +23,20 @@ export default function EquationDisplay({userInput,setUserInput,difficulty,setDi
         gen.generateEquation(difficulty); // prevents weird issues where .generateProblem() gets called any time React calls a new render
         return gen;
     });
+
+    const controls = useAnimation(); // used to trigger animations
+
+    const animiations = { // all the animations used in this element
+        shake: {
+            rotateZ: [-3,3,-3,3,-3,3,0],
+            transition: {duration: 1,ease:'linear'}
+        },
+        flashGreen: {
+            scale: ['100%','102%','100%'],
+            boxShadow: ['3px 3px 3px #000000aa', '5px 5px 5px #60d056aa', '3px 3px 3px #000000aa'],
+            transition: {duration: 0.5}
+        }
+    }
 
     //Variables keeping track of the numbers and operator of the equation.
     var terms:number[] = [generator.firstNumber,generator.secondNumber,generator.solution];
@@ -48,8 +63,7 @@ export default function EquationDisplay({userInput,setUserInput,difficulty,setDi
     function resetDisplay(){
         setUserInput(''); //set input to blank because nothing has been typed yet
         (document.getElementById('AnswerBox') as HTMLInputElement).value='';
-        setKey((_key)=>_key+1); // instantly fully refresh display
-
+        setKey((_key)=>_key+1); // instantly fully refresh display and timer
         generateEquation();
     }
 
@@ -60,6 +74,7 @@ export default function EquationDisplay({userInput,setUserInput,difficulty,setDi
         if(userInput==String(terms[variableLocation])){ //if the userInput is the correct answer: new equation & increase difficulty
             setDifficulty(difficulty + 1);
             resetDisplay();
+            controls.start('flashGreen');
         }
     }, [userInput]);
 
@@ -69,9 +84,9 @@ export default function EquationDisplay({userInput,setUserInput,difficulty,setDi
     useEffect(()=>{ // triggers when time runs out
         if(timeEnded){
             setLivesRemaining((_livesRemaining:number)=>{return(_livesRemaining - 1)}); // decrement # of lives remaining
-            livesRemaining = {livesRemaining};
             resetDisplay();
             setTimeEnded(false);
+            controls.start('shake');
         }
     }, [timeEnded]);
 
@@ -81,8 +96,10 @@ export default function EquationDisplay({userInput,setUserInput,difficulty,setDi
     return (
     <>
         <div style={{padding:`5px`}}>
-            <table key = {key} className="EquationDisplay">
-                <tbody>
+            <motion.table className="EquationDisplay"
+             animate= {controls}
+             variants={animiations}>
+                <tbody key = {key}>
                     <tr>
 
                         <td className="TextSlot"><NumberSlot number = {terms[0]} isVariable = {variableLocation==0}/></td>
@@ -105,7 +122,7 @@ export default function EquationDisplay({userInput,setUserInput,difficulty,setDi
 
                     </tr>
                 </tbody>
-            </table>
+            </motion.table>
         </div>
     </>
     );
