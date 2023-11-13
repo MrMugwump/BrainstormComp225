@@ -32,7 +32,7 @@ export default function EquationDisplay({userInput,setUserInput,difficulty,setDi
             transition: {duration: 1,ease:'linear'}
         },
         flashGreen: {
-            scale: ['100%','102%','100%'],
+            scale: ['100%','102%','100%'], //should use a different method, this messes up some css stuff
             boxShadow: ['3px 3px 3px #000000aa', '5px 5px 5px #60d056aa', '3px 3px 3px #000000aa'],
             transition: {duration: 0.5}
         }

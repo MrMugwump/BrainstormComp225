@@ -6,6 +6,9 @@ import { useState, useEffect } from 'react';
  * Graphical text box element. Takes in player input and translates it to the "userInput" variable.
  */
 export default function AnswerBox({setUserInput}:any) {
+    function update(){
+        
+    }
     return (
             <input
             className="AnswerBox"

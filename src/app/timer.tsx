@@ -95,15 +95,16 @@ const SECOND = 1_000; // 1000ms = 1s
 export default function TimerModule({timerLength, interval, timeEnded,setTimeEnded}:any){
   const [timespan,setTimespan] = useState(timerLength);
   const [keyID,setKeyID] = useState(0); // used to reset the progress bar
-
+  const startTime = Date.now();
   useEffect(()=>{
     const intervalId = setInterval(()=>{
       setTimespan((_timespan: number)=>{
-        if(_timespan <= 0){
+        if((Math.abs(startTime-Date.now())>(timerLength+300))){
           setTimeEnded(true);
           setKeyID((_keyID)=>_keyID+1); //resets the progress bar back to full
           return timerLength;
         }
+
         else{
           return _timespan-interval; //decrements timer by 1/10th of a second
         }
