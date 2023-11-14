@@ -1,5 +1,20 @@
-.LivesDisplay {
-    color: rgb(214, 61, 61);
-    font-size: 50px;
-    top: 50px;
+.Heart1 {
+    max-height:100%;
+    max-width:100%;
+    height: auto;
+    width: auto;
+}
+
+.Heart2 {
+    max-height:100%;
+    max-width:100%;
+    height: auto;
+    width: auto;
+}
+
+.Heart3 {
+    max-height:100%;
+    max-width:100%;
+    height: auto;
+    width: auto;
 }
