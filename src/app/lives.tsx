@@ -8,7 +8,7 @@ import emptyHeart from './emptyHeartMC.png';
  */
 export default function LivesDisplay({setLivesRemaining, livesRemaining}:any) {
     return (
-        <div>
+        <div className="Lives" id="Lives">
             {nextHeart(1, livesRemaining)}
             {nextHeart(2, livesRemaining)}
             {nextHeart(3, livesRemaining)}
