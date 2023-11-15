@@ -1,20 +1,12 @@
-.Heart1 {
-    max-height:100%;
-    max-width:100%;
+.EmptyHeart {
+    max-height:100px;
+    max-width:100px;
     height: auto;
     width: auto;
 }
-
-.Heart2 {
-    max-height:100%;
-    max-width:100%;
-    height: auto;
-    width: auto;
-}
-
-.Heart3 {
-    max-height:100%;
-    max-width:100%;
+.FullHeart {
+    max-height:100px;
+    max-width:100px;
     height: auto;
     width: auto;
 }
