@@ -23,7 +23,7 @@ export class Generator {
     }
 
     // Based on the difficulty and operator, find the limit for the absolute value of operands
-    // Visualization of limits: https://www.desmos.com/calculator/ikzfjyj5de
+    // Visualization of limits: https://www.desmos.com/calculator/bqlg33m89x
     findLimit(diff: number, op: String) {
         // For addition and subtraction
         if(op === Operator.Addition || op === Operator.Subtraction) {
