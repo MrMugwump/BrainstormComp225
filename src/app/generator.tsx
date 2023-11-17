@@ -27,10 +27,8 @@ export class Generator {
     findLimit(diff: number, op: String) {
         // For addition and subtraction
         if(op === Operator.Addition || op === Operator.Subtraction) {
-            if(diff <= 50) {
-                return Math.floor(80 * Math.sin(diff/29.5 - (25*Math.PI)/2) + 90);
-            } else if(diff <= 1000) {
-                return 18 * diff - 800;
+            if(diff <= Math.floor(100 * Math.PI)) {
+                return Math.floor(495 * Math.sin(diff/100 - Math.PI/2) + 505);
             } else {
                 return 1000;
             }
@@ -38,8 +36,8 @@ export class Generator {
 
         // For multiplication and division
         else /*if(op === Operators.Multiplication || op === Operators.Division)*/ {
-            if(diff <= 75*Math.PI) {
-                return Math.floor(45 * Math.sin(diff/75.0 - Math.PI/2) + 55);
+            if(diff <= 110*Math.PI) {
+                return Math.floor(48.5 * Math.sin(diff/110 - Math.PI/2) + 51.5);
             } else {
                 return 100;
             }
