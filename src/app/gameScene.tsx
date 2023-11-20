@@ -61,24 +61,7 @@ export default function GameScene() {
             <AnswerBox
             setUserInput={setUserInput}/>
 
-            <EquationDisplay
-            userInput={userInput}
-            setUserInput={setUserInput}
-            difficulty={difficulty}
-            setDifficulty={setDifficulty}
-            setLivesRemaining = {setLivesRemaining}
-            currAnswers = {currAnswers}
-            setCurrAnswers = {setCurrAnswers}
-            boxID={0}/>
-            <EquationDisplay
-            userInput={userInput}
-            setUserInput={setUserInput}
-            difficulty={difficulty}
-            setDifficulty={setDifficulty}
-            setLivesRemaining = {setLivesRemaining}
-            currAnswers = {currAnswers}
-            setCurrAnswers = {setCurrAnswers}
-            boxID={1}/>
+            {EqTable()}
 
             <LivesDisplay
             LivesDisplay = {LivesDisplay}
@@ -118,6 +101,29 @@ export default function GameScene() {
             setGameState(GameState.Play);
         }}>Begin Game</button>
     );
+
+    function EqTable() {
+        let table = [];
+
+        for(let i=0; i<2; i++) {
+            let children = [];
+            for(let j=0;j<2;j++) {
+                children.push(<td>
+                        <EquationDisplay
+                        userInput={userInput}
+                        setUserInput={setUserInput}
+                        difficulty={difficulty}
+                        setDifficulty={setDifficulty}
+                        setLivesRemaining = {setLivesRemaining}
+                        currAnswers = {currAnswers}
+                        setCurrAnswers = {setCurrAnswers}
+                        boxID={i*2+j}/>
+                    </td>);
+            }
+            table.push(<tr>{children}</tr>);
+        }
+        return table;
+    }
 
     /**
      * Return statement: returns the screen for the current GameState.
