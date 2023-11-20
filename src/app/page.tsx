@@ -6,7 +6,6 @@ import { useState } from 'react';
 // import { Link } from 'react-router-dom';
 import TimerModule from './timer';
 import EquationDisplay from './equationDisplay';
-import SettingsModule from './settings';
 import GameScene from './gameScene';
 
 
@@ -37,18 +36,12 @@ export default function Home() {
                 <h3><i>Brainstorm</i> by Herb Jury</h3>
               </td>
               <td className="menuRightBox">
-              <a href='#' onClick={ ()=>setActive(!isActive) }>Settings</a>
               </td>
             </tr>
           </tbody>
         </table>
 
         <div className="content">
-
-        {/* SettingsModule handles the settings sidebar. */}
-        <SettingsModule
-        isActive={isActive}
-        difficultySetting={difficultySetting}/>
 
         {/* GameScene handles all of the processes of the actual gameplay. This is where the EquationDisplay is displayed. */}
         <div style={{
