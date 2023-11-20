@@ -10,7 +10,7 @@ import { motion, useAnimation } from "framer-motion";
 /**
  * Single equation box on screen: randomized equation and timer.
  */
-export default function EquationDisplay({userInput,setUserInput,difficulty,setDifficulty,livesRemaining,setLivesRemaining}:any){
+export default function EquationDisplay({userInput,setUserInput,difficulty,setDifficulty,setLivesRemaining,boxID,currAnswers,setCurrAnswers}:any){
     const [variableLocation,setVariableLocation] = useState(2); //This variable keeps track of which location is the equation's solution.
     const [key, setKey] = useState(0); //This is used to reset the display instantly (no transition time for timer).
 
@@ -18,9 +18,12 @@ export default function EquationDisplay({userInput,setUserInput,difficulty,setDi
     const [timeLength] = useState(10000); //For timer: Total number of miliseconds before the timer reaches 0.
     const [timeEnded,setTimeEnded] = useState(false); //For timer: Returns true when timer reaches 0.
 
-    const [generator] = useState(()=>{
+    const [generator] = useState(()=>{ // prevents weird issues where .generateProblem() gets called any time React calls a new render
         var gen = new Generator();
-        gen.generateEquation(difficulty); // prevents weird issues where .generateProblem() gets called any time React calls a new render
+        gen.genEquationWithLocation(difficulty,currAnswers,boxID); 
+        setCurrAnswers((_currAnswers:number[])=>{
+            _currAnswers[boxID]=terms[2];
+            return _currAnswers});
         return gen;
     });
 
@@ -46,10 +49,12 @@ export default function EquationDisplay({userInput,setUserInput,difficulty,setDi
      * Generates a new equation and sets "terms" and "operator" to match the new equation.
      */
     function generateEquation(){
-        var generatorOutput:any[] = generator.generateEquation(difficulty);
+        var generatorOutput:any[] = generator.genEquationWithLocation(difficulty,currAnswers,boxID);
         terms = [generatorOutput[0],generatorOutput[2],generatorOutput[3]];
         operator = generator.operator;
-
+        setCurrAnswers((_currAnswers:number[])=>{
+            _currAnswers[boxID]=terms[2];
+            return _currAnswers});
         //UNCOMMENT for algebra, chooses random location for player input
         //setVariableLocation(Math.floor((Math.random()*3)));
     }
@@ -117,7 +122,7 @@ export default function EquationDisplay({userInput,setUserInput,difficulty,setDi
 
                         {/* Additional text for debugging: variableLocation, terms+operator */}
 
-                        {/* <td><p>variableLocation = {location}</p></td> */} {/* UNCOMMENT: to see location variable */}
+                        {/* <td><p>thing worked = {currAnswers.toString()}</p></td> UNCOMMENT: to see location variable */}
                         {/* <td><p>{eq[0]+operator+eq[1]+'='+eq[2]}</p></td> */} {/* UNCOMMENT: to see generator's output */}
 
                     </tr>

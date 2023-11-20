@@ -13,7 +13,6 @@ export class Generator {
     secondNumber: number = 0;
     operator: Operator = Operator.Addition;
     solution: number = 0;
-    storedAnswers: number[] = [0,0,0,0];
     
     // Difficulty can be measured as the number of correct answers this far, starting at 0 by default
     // and would slowly increase as more correct answers are entered. The difficulty can start at a
@@ -65,10 +64,12 @@ export class Generator {
         return [this.firstNumber, this.operator, this.secondNumber, this.solution]
     }
 
-    genEquationWithLocation(diff:number,location:number){
+    /**
+     * generates an equation, but avoids generating overlapping answers such as 12 and 123
+     */
+    genEquationWithLocation(diff:number,otherAnswers:number[],location:number){
         //rules for generating a number
         //  Can't generate an answer that contains a different answer at the beginning
-        this.operator = this.nextOperator(diff);
         function checkIfContainsOtherAnswer(_answers:number[],_currAnswer:number, location:number){
             var strAnswer = _currAnswer.toString();
             for (let index = 0; index < _answers.length; index++) {
@@ -81,20 +82,11 @@ export class Generator {
             }
             return false;
         }
-        do{
-            // Evaluate in a different order for division (multiplication but rearranged)
-            if(this.operator === Operator.Division) {
-                this.solution = this.nextOperand(diff);
-                this.secondNumber = this.nextOperand(diff);
-                this.firstNumber = this.nextSolution();
-            } else {
-                this.firstNumber = this.nextOperand(diff);
-                this.secondNumber = this.nextOperand(diff);
-                this.solution = this.nextSolution();
-            }
-        } while(checkIfContainsOtherAnswer(this.storedAnswers,this.solution,location));
 
-        this.storedAnswers[location] = this.solution;
+        do{ // this is the first time I've ever actually had a reason to use a do-while loop lmao
+            this.generateEquation(diff);
+        } while(checkIfContainsOtherAnswer(otherAnswers,this.solution,location));
+
         return [this.firstNumber, this.operator, this.secondNumber, this.solution]
     }
     // Returns one of the numbers to be used in the equation

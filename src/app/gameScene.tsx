@@ -4,10 +4,11 @@ import EquationDisplay from "./equationDisplay";
 import "./gameSceneStyle.css"
 import { OperationDisplay } from "./player-info-components/operationNotification";
 import { ScoreDisplay } from "./player-info-components/scoreDisplay";
-import AnswerBox from "./answerBox";
-import "./answerBoxStyle.css";
+import AnswerBox from "./player-info-components/answerBox";
+import "./player-info-components/answerBoxStyle.css";
 import LivesDisplay from "./lives"
 import "./livesStyle.css";
+import { Generator } from "./generator";
 
 enum GameState {
     Start = 0,
@@ -23,6 +24,7 @@ export default function GameScene() {
     const [difficulty, setDifficulty] = useState(0);
     const [userInput, setUserInput] = useState(''); //represents what the user types into the answer box
     const [livesRemaining, setLivesRemaining] = useState(3);
+    const [currAnswers, setCurrAnswers] = useState([0,0,0,0]);
 
     /**
      * Checks for when livesRemaining is changed. If there are 0 lives left, ends the game.
@@ -64,15 +66,19 @@ export default function GameScene() {
             setUserInput={setUserInput}
             difficulty={difficulty}
             setDifficulty={setDifficulty}
-            livesRemaining = {livesRemaining}
-            setLivesRemaining = {setLivesRemaining}/>
+            setLivesRemaining = {setLivesRemaining}
+            currAnswers = {currAnswers}
+            setCurrAnswers = {setCurrAnswers}
+            boxID={0}/>
             <EquationDisplay
             userInput={userInput}
             setUserInput={setUserInput}
             difficulty={difficulty}
             setDifficulty={setDifficulty}
-            livesRemaining = {livesRemaining}
-            setLivesRemaining = {setLivesRemaining}/>
+            setLivesRemaining = {setLivesRemaining}
+            currAnswers = {currAnswers}
+            setCurrAnswers = {setCurrAnswers}
+            boxID={1}/>
 
             <LivesDisplay
             LivesDisplay = {LivesDisplay}
