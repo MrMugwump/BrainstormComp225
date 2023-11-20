@@ -1,7 +1,7 @@
 export enum Operator {
     Addition="+",
-    Subtraction="-",
-    Multiplication="*",
+    Subtraction="–",
+    Multiplication='×',
     Division="÷"
 }
 
