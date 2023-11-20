@@ -1,0 +1,9 @@
+#AnswerBox{
+    border:0;
+    font-size: 2em;
+    color: rgba(159, 159, 159, 0.797);
+    caret-color: rgba(159, 159, 159, 0.797);
+}
+#AnswerBox:focus{
+    outline:none!important;
+}
