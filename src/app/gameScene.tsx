@@ -9,6 +9,8 @@ import "./player-info-components/answerBoxStyle.css";
 import LivesDisplay from "./lives"
 import "./livesStyle.css";
 import { Generator } from "./generator";
+import Menu from "./menu";
+import { Settings } from "./settings";
 
 enum GameState {
     Start = 0,
@@ -27,6 +29,7 @@ export default function GameScene() {
     const [currAnswers, setCurrAnswers] = useState([0,0,0,0]);
     const [boxes, setBoxes] = useState(0);
     const [startingBoxes, setStartingBoxes] = useState(2);
+    const [settings, setSettings] = useState(new Settings());
 
     /**
      * Checks for when livesRemaining is changed. If there are 0 lives left, ends the game.
@@ -42,6 +45,9 @@ export default function GameScene() {
      */
     const StartScreen = () => (
         <div className="startScreen">
+            <Menu
+            settings={settings}/>
+
             Press here to start the game.
             <br/><br/>
             {StartButton()}
