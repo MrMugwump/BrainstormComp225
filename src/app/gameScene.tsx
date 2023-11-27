@@ -25,6 +25,8 @@ export default function GameScene() {
     const [userInput, setUserInput] = useState(''); //represents what the user types into the answer box
     const [livesRemaining, setLivesRemaining] = useState(3);
     const [currAnswers, setCurrAnswers] = useState([0,0,0,0]);
+    const [boxes, setBoxes] = useState(0);
+    const [startingBoxes, setStartingBoxes] = useState(2);
 
     /**
      * Checks for when livesRemaining is changed. If there are 0 lives left, ends the game.
@@ -61,7 +63,11 @@ export default function GameScene() {
             <AnswerBox
             setUserInput={setUserInput}/>
 
-            {EqTable()}
+            <br/><br/>
+            {/* Calling this as a function and not an HTML component prevents weird rendering things. */}
+            {EqTable(boxes)}
+
+            <NumberButton/>
 
             <LivesDisplay
             LivesDisplay = {LivesDisplay}
@@ -96,19 +102,27 @@ export default function GameScene() {
      */
     const StartButton = () => (
         <button className="startButton" onClick={()=>{
+            setBoxes(startingBoxes);
             setDifficulty(0);
             setLivesRemaining(3);
             setGameState(GameState.Play);
         }}>Begin Game</button>
     );
 
-    function EqTable() {
+    const NumberButton = () => (
+        <button onClick={()=>{
+            setBoxes(boxes+1);
+        }}>Add a box</button>
+    );
+
+    function EqTable(numBoxes:number) {
         let table = [];
 
         for(let i=0; i<2; i++) {
             let children = [];
             for(let j=0;j<2;j++) {
-                children.push(<td>
+                if(i*2+j<numBoxes) {
+                    children.push(<td className = "equationsCol">
                         <EquationDisplay
                         userInput={userInput}
                         setUserInput={setUserInput}
@@ -119,10 +133,17 @@ export default function GameScene() {
                         setCurrAnswers = {setCurrAnswers}
                         boxID={i*2+j}/>
                     </td>);
+                } else {
+                    children.push(<td className = "equationsCol"></td>);
+                }
             }
             table.push(<tr>{children}</tr>);
         }
-        return table;
+        return (
+            <table className="equations">
+                {table}
+            </table>
+        );
     }
 
     /**
