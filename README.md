@@ -6,6 +6,7 @@ If you just wanna try what has been built, go to:
 
 # https://brainstorm-comp225.vercel.app/ 
 
+
 To be able to generate a local server:
 
 First, run:
@@ -13,9 +14,17 @@ First, run:
 ```bash
 npm install
 ```
+
 This should add a node_modules folder into brainstorm-comp-225
 
-Then, run the development server:
+and then run 
+
+```bash
+npm install framer-motion
+```
+
+Which will install the animation library we use.
+Then, to run the development server:
 
 ```bash
 npm run dev
