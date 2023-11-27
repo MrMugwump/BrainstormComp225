@@ -61,7 +61,8 @@ export default function GameScene() {
             </div>
 
             <AnswerBox
-            setUserInput={setUserInput}/>
+            setUserInput={setUserInput}
+            userInput={userInput}/>
 
             <br/><br/>
             {/* Calling this as a function and not an HTML component prevents weird rendering things. */}

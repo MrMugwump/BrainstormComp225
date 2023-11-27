@@ -67,7 +67,7 @@ export default function EquationDisplay({userInput,setUserInput,difficulty,setDi
      */
     function resetDisplay(){
         setUserInput(''); //set input to blank because nothing has been typed yet
-        (document.getElementById('AnswerBox') as HTMLInputElement).value='';
+        //(document.getElementById('AnswerBox') as HTMLInputElement).value='';
         setKey((_key)=>_key+1); // instantly fully refresh display and timer
         generateEquation();
     }
