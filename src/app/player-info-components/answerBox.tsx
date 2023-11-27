@@ -17,7 +17,7 @@ export default function AnswerBox({userInput, setUserInput}:any) {
         setDisplayText(userInput);
     },[userInput]); 
     function onInput(e:any){
-        const input:string = e.target.value.replace(/\D/g, "");
+        const input:string = e.target.value.replace(/^0-9\-/g, "");
         setUserInput(input);
         // setDisplayText(input);
         setWidth(input.length+'ch')
