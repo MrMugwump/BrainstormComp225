@@ -11,7 +11,7 @@ export default function AnswerBox({userInput, setUserInput}:any) {
     },[userInput]); 
 
     function onInput(e:any){
-        const input:string = e.target.value.replace(/^0-9\-/g, ""); //removes all text other than 0123456789 and -
+        const input:string = e.target.value.replace(/[^0-9&\-]/g, ""); //removes all text other than 0123456789 and -
         setUserInput(input);
         setWidth(input.length+'ch')
     }
@@ -20,6 +20,7 @@ export default function AnswerBox({userInput, setUserInput}:any) {
             <input
             className="AnswerBox"
             id="AnswerBox"
+            autoComplete="off"
             value={displayText}
             onChange={e=>{onInput(e)}}
             style={{width:`${width}`}}
