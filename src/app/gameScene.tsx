@@ -29,7 +29,7 @@ export default function GameScene() {
     const [currAnswers, setCurrAnswers] = useState([0,0,0,0]);
     const [boxes, setBoxes] = useState(0);
     const [startingBoxes, setStartingBoxes] = useState(2);
-    const [settings, setSettings] = useState(new Settings());
+    const [settings, setSettings] = useState(new Settings(2,0,3,false));
     const [initialize, setInitialize] = useState(false);
 
     /**
@@ -60,11 +60,9 @@ export default function GameScene() {
     const StartScreen = () => (
         <div className="startScreen">
             <Menu
-            settings={settings}/>
-
-            Press here to start the game.
-            <br/><br/>
-            {StartButton()}
+            settings={settings}
+            setSettings={setSettings}
+            setInitialize={setInitialize}/>
         </div>
     );
     
