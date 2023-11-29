@@ -30,6 +30,7 @@ export default function GameScene() {
     const [boxes, setBoxes] = useState(0);
     const [startingBoxes, setStartingBoxes] = useState(2);
     const [settings, setSettings] = useState(new Settings());
+    const [initialize, setInitialize] = useState(false);
 
     /**
      * Checks for when livesRemaining is changed. If there are 0 lives left, ends the game.
@@ -39,6 +40,19 @@ export default function GameScene() {
             setGameState(GameState.End);
         }
     },[livesRemaining]);
+
+    /**
+     * 
+     */
+    useEffect(()=> {
+        if(initialize===true) {
+            setBoxes(startingBoxes);
+            setDifficulty(0);
+            setLivesRemaining(3);
+            setInitialize(false);
+            setGameState(GameState.Play);
+        }
+    },[initialize])
 
     /**
      * Graphical element: what the user sees when starting up the game for the first time.
@@ -109,10 +123,7 @@ export default function GameScene() {
      */
     const StartButton = () => (
         <button className="startButton" onClick={()=>{
-            setBoxes(startingBoxes);
-            setDifficulty(0);
-            setLivesRemaining(3);
-            setGameState(GameState.Play);
+            setInitialize(true);
         }}>Begin Game</button>
     );
 
