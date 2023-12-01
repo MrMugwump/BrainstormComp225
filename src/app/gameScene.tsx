@@ -28,7 +28,7 @@ export default function GameScene() {
     const [livesRemaining, setLivesRemaining] = useState(3);
     const [currAnswers, setCurrAnswers] = useState([0,0,0,0]);
     const [boxes, setBoxes] = useState(0);
-    const [settings, setSettings] = useState(new Settings(2,0,3,15,true));
+    const [settings, setSettings] = useState(new Settings(2,0,3,10,false));
     const [initialize, setInitialize] = useState(false);
     const maxBoxes:number=4;
 
