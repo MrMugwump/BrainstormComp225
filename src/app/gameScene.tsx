@@ -126,17 +126,28 @@ export default function GameScene() {
             <br/><br/>
             Your score was: {difficulty-settings.getStartingDifficulty()}
             <br/><br/>
-            {StartButton()}
+            {RestartButton()}
+            <br/><br/>
+            {SettingsButton()}
         </div>
     );
 
     /**
-     * Button to start the game: resets all variables to initial values.
+     * Button to restart the game with the same settings.
      */
-    const StartButton = () => (
-        <button className="startButton" onClick={()=>{
+    const RestartButton = () => (
+        <button className="restartButton" onClick={()=>{
             setInitialize(true);
-        }}>Begin Game</button>
+        }}>Play Again</button>
+    );
+
+    /**
+     * Button to go back to the settings page.
+     */
+    const SettingsButton = () => (
+        <button className="settingsButton" onClick={()=>{
+            setGameState(GameState.Start);
+        }}>Change Settings</button>
     );
 
     function EqTable(numBoxes:number) {

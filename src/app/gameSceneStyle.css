@@ -16,7 +16,7 @@
     text-align:center;
 }
 
-.startButton {
+.restartButton, .settingsButton, .startButton {
     background-color: darkred;
     border-color:black;
     color: white;

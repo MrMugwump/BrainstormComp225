@@ -11,7 +11,7 @@ export default function Menu({settings, setSettings, setInitialize}:any) {
         <button className="startButton" onClick={()=>{
             setSettings(new Settings(numBoxes,startingDifficulty,startingLives,timerSpeed,isFreeplay))
             setInitialize(true);
-        }}>Begin Game</button>
+        }}>Start Game</button>
     );
 
     return (<>
