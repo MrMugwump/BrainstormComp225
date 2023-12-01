@@ -28,9 +28,9 @@ export default function GameScene() {
     const [livesRemaining, setLivesRemaining] = useState(3);
     const [currAnswers, setCurrAnswers] = useState([0,0,0,0]);
     const [boxes, setBoxes] = useState(0);
-    const [startingBoxes, setStartingBoxes] = useState(2);
     const [settings, setSettings] = useState(new Settings(2,0,3,false));
     const [initialize, setInitialize] = useState(false);
+    const maxBoxes:number=4;
 
     /**
      * Checks for when livesRemaining is changed. If there are 0 lives left, ends the game.
@@ -42,17 +42,33 @@ export default function GameScene() {
     },[livesRemaining]);
 
     /**
-     * 
+     * Checks to see if the player has started the game in the menu, if so, starts the game.
      */
     useEffect(()=> {
         if(initialize===true) {
-            setBoxes(startingBoxes);
+            //If the game is in freeplay mode, sets to the selected number of boxes.
+            //If its in normal mode, there's one box at the start.
+            if(settings.getIsFreeplay()) {
+                setBoxes(settings.getNumBoxes());
+            } else {
+                setBoxes(1);
+            }
             setDifficulty(0);
             setLivesRemaining(3);
             setInitialize(false);
             setGameState(GameState.Play);
         }
     },[initialize])
+
+    /**
+     * Checks when the score is increased, and if so adds a new box.
+     * Only adds a box if the player is not in freeplay mode. Doesn't add a box when difficulty is zero because that's the start of the game.
+     */
+    useEffect(()=> {
+        if(settings.getIsFreeplay()===false && boxes<maxBoxes && difficulty!=0) {
+            setBoxes(boxes+1);
+        }
+    },[difficulty])
 
     /**
      * Graphical element: what the user sees when starting up the game for the first time.
@@ -85,8 +101,6 @@ export default function GameScene() {
             <br/><br/>
             {/* Calling this as a function and not an HTML component prevents weird rendering things. */}
             {EqTable(boxes)}
-
-            <NumberButton/>
 
             <LivesDisplay
             LivesDisplay = {LivesDisplay}
@@ -125,12 +139,6 @@ export default function GameScene() {
         }}>Begin Game</button>
     );
 
-    const NumberButton = () => (
-        <button onClick={()=>{
-            setBoxes(boxes+1);
-        }}>Add a box</button>
-    );
-
     function EqTable(numBoxes:number) {
         let table = [];
 
@@ -147,6 +155,7 @@ export default function GameScene() {
                         setLivesRemaining = {setLivesRemaining}
                         currAnswers = {currAnswers}
                         setCurrAnswers = {setCurrAnswers}
+                        settings = {settings}
                         boxID={i*2+j}/>
                     </td>);
                 } else {
