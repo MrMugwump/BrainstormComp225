@@ -28,7 +28,7 @@ export default function GameScene() {
     const [livesRemaining, setLivesRemaining] = useState(3);
     const [currAnswers, setCurrAnswers] = useState([0,0,0,0]);
     const [boxes, setBoxes] = useState(0);
-    const [settings, setSettings] = useState(new Settings(2,0,3,false));
+    const [settings, setSettings] = useState(new Settings(2,0,3,true));
     const [initialize, setInitialize] = useState(false);
     const maxBoxes:number=4;
 
@@ -53,7 +53,7 @@ export default function GameScene() {
             } else {
                 setBoxes(1);
             }
-            setDifficulty(0);
+            setDifficulty(settings.getStartingDifficulty());
             setLivesRemaining(3);
             setInitialize(false);
             setGameState(GameState.Play);
@@ -91,7 +91,7 @@ export default function GameScene() {
             position: `fixed`,
             right: `10px`
             }}>
-                <ScoreDisplay score = {difficulty}/>
+                <ScoreDisplay score = {difficulty-settings.getStartingDifficulty()}/>
             </div>
 
             <AnswerBox
@@ -124,7 +124,7 @@ export default function GameScene() {
         <div className="endScreen">
             You ran out of lives! Try again!
             <br/><br/>
-            Your score was: {difficulty}
+            Your score was: {difficulty-settings.getStartingDifficulty()}
             <br/><br/>
             {StartButton()}
         </div>
