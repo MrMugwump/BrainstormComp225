@@ -15,7 +15,7 @@ export default function EquationDisplay({userInput,setUserInput,difficulty,setDi
     const [key, setKey] = useState(0); //This is used to reset the display instantly (no transition time for timer).
 
     const [interval] = useState(100); //For timer: Rate of timer's checks for updates
-    const [timeLength] = useState(10000); //For timer: Total number of miliseconds before the timer reaches 0.
+    const [timeLength] = useState(Math.trunc(settings.getTimerSpeed()*1000)); //For timer: Total number of miliseconds before the timer reaches 0.
     const [timeEnded,setTimeEnded] = useState(false); //For timer: Returns true when timer reaches 0.
 
     const [generator] = useState(()=>{ // prevents weird issues where .generateProblem() gets called any time React calls a new render
