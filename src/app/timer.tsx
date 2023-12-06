@@ -28,13 +28,13 @@ function ProgBar({timeLeft,timeLength}:any){
       transition: {duration: 1*animationLength, ease:'linear'}
     }),
     changeColorAndHeight: (timeLength:number) => ({
-      backgroundColor:['hsl(115, 56%, 58%)','hsl(115, 56%, 58%)',	`hsl(0, 100%, 50%)`],
+      backgroundColor:['hsl(115, 56%, 58%)','hsl(115, 56%, 58%)',	`hsl(34, 100%, 50%)`,`hsl(0, 100%, 50%)`],
       height: ['100%','0%'],
       transition: {duration: timeLength, ease: 'linear'}
     }),
     /*there is likely a way to get rid of this duplicated code, but I don't know how yet*/
     changeColor: (timeLength:number) => ({ 
-      backgroundColor:['hsl(115, 56%, 58%)','hsl(115, 56%, 58%)',	`hsl(0, 100%, 50%)`],
+      backgroundColor:['hsl(115, 56%, 58%)','hsl(115, 56%, 58%)', `hsl(34, 100%, 50%)`,	`hsl(0, 100%, 50%)`],
       transition: {duration: timeLength, ease: 'linear'}
     })
   }
