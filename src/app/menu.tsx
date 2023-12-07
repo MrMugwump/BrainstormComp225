@@ -95,13 +95,13 @@ export default function Menu({settings, setSettings, setInitialize}:any) {
         <div>
             <StartButton/>
             <br/>
-            <BoxesInput/>
+            {BoxesInput()}
             <br/>
-            <StartingLivesInput/>   
+            {StartingLivesInput()}
             <br/>
-            <StartingDifficulty/>
+            {StartingDifficulty()}
             <br/>
-            <DarkMode/>
+            {DarkMode()}
             <br/>
             <p>That feeling when you settings</p>
         </div>

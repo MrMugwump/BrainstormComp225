@@ -11,6 +11,7 @@ import "./livesStyle.css";
 import { Generator } from "./generator";
 import Menu from "./menu";
 import { Settings } from "./settings";
+import Logo from "./fullsize-logo.png"
 
 enum GameState {
     Start = 0,
@@ -75,6 +76,7 @@ export default function GameScene() {
      */
     const StartScreen = () => (
         <div className="startScreen">
+            <img src={Logo.src} width="300" height="200"/>
             <Menu
             settings={settings}
             setSettings={setSettings}
