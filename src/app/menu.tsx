@@ -21,7 +21,7 @@ export default function Menu({settings, setSettings, setInitialize}:any) {
         setTimerSpeed(event.target.value);
     };
     const changeIsFreeplay = (event:any) => {
-        setIsFreeplay(event.target.value);
+        setIsFreeplay(!isFreeplay);
     };
 
     const StartButton = () => (
@@ -31,9 +31,21 @@ export default function Menu({settings, setSettings, setInitialize}:any) {
         }}>Start Game</button>
     );
 
+    const IsFreeplayInput = () => (
+        <div>
+            <p>Freeplay:&nbsp;
+            <input
+                type="checkbox"
+                checked={isFreeplay}
+                onChange={changeIsFreeplay}
+            />
+            </p>
+        </div>
+    )
+
     const BoxesInput = () => (
         <div>
-            <p>Number of boxes: </p>
+            <p className={"active"+String(isFreeplay)}>Boxes:<br/>
             <input
                 type="range"
                 onChange={changeBoxes}
@@ -41,16 +53,17 @@ export default function Menu({settings, setSettings, setInitialize}:any) {
                 max={9}
                 step={1}
                 value={boxes}
+                disabled={!isFreeplay}
                 className="NumBoxesInput"
                 id="NumBoxesInput"
             />
-            <p>{boxes}</p>
+            &nbsp;{boxes}</p>
         </div>
     )
 
     const StartingLivesInput = () => (
         <div>
-            <p>Number of lives: </p>
+            <p className={"active"+String(isFreeplay)}>Number of lives:<br/>
             <input
                 type="range"
                 onChange={changeStartingLives}
@@ -58,16 +71,17 @@ export default function Menu({settings, setSettings, setInitialize}:any) {
                 max={5}
                 step={1}
                 value={startingLives}
+                disabled={!isFreeplay}
                 className="StartingLivesInput"
                 id="StartingLivesInput"
             />
-            <p>{startingLives}</p>
+            &nbsp;{startingLives}</p>
         </div>
     )
 
     const StartingDifficulty = () => (
         <div>
-            <p>Difficulty: </p>
+            <p className={"active"+String(isFreeplay)}>Difficulty:<br/>
             <input
                 type="range"
                 onChange={changeStartingDifficulty}
@@ -75,19 +89,21 @@ export default function Menu({settings, setSettings, setInitialize}:any) {
                 max={200}
                 step={1}
                 value={startingDifficulty}
+                disabled={!isFreeplay}
                 className="StartingDifficulty"
                 id="StartingDifficulty"
             />
-            <p>{startingDifficulty}</p>
+            &nbsp;{startingDifficulty}</p>
         </div>
     )
 
     const DarkMode = () => (
         <div>
-            <p>Dark Mode:</p>
+            <p>Dark Mode:&nbsp;
             <input
                 type="checkbox"
             />
+            </p>
         </div>
     )
 
@@ -95,15 +111,25 @@ export default function Menu({settings, setSettings, setInitialize}:any) {
         <div>
             <StartButton/>
             <br/>
-            {BoxesInput()}
             <br/>
-            {StartingLivesInput()}
-            <br/>
-            {StartingDifficulty()}
-            <br/>
-            {DarkMode()}
-            <br/>
-            <p>That feeling when you settings</p>
+            <table className="settingsTable">
+                <tbody>
+                    <tr>
+                        <td>
+                            {DarkMode()}
+                        </td>
+                        <td>
+                            {IsFreeplayInput()}
+                            <br/>
+                            {BoxesInput()}
+                            <br/>
+                            {StartingLivesInput()}
+                            <br/>
+                            {StartingDifficulty()}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     );
 }

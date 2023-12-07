@@ -40,3 +40,18 @@
 .equationsCol {
     width:500px;
 }
+
+.settingsTable {
+    margin-left:38%;
+    margin-right:32%;
+}
+
+.settingsTable td {
+    width:30%;
+    text-align:left;
+    vertical-align:top;
+}
+
+.activefalse {
+    opacity: 0.3;
+}
