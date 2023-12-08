@@ -106,13 +106,12 @@ export default function EquationDisplay({userInput,setUserInput,difficulty,setDi
              variants={animiations}>
                 <tbody key = {key}>
                     <tr>
-
                         <td className="TextSlot"><NumberSlot number = {terms[0]} isVariable = {variableLocation==0}/></td>
                         <td className="TextSlot"><p>{operator}</p></td>
                         <td className="TextSlot"><NumberSlot number = {terms[1]} isVariable = {variableLocation==1}/></td>
                         <td className="TextSlot">=</td>
                         <td className="TextSlot"><NumberSlot number = {terms[2]} isVariable = {variableLocation==2}/></td>
-                        
+
                         <td className="TimerCell">
                             <TimerModule
                             timerLength={timeLength}
@@ -130,6 +129,31 @@ export default function EquationDisplay({userInput,setUserInput,difficulty,setDi
             </motion.table>
         </div>
     </>
+    );
+}
+
+function TimerSlot({render, timeLength,setTimeEnded,interval}:any){
+    // if(render){
+    //     return(<>
+    //         <td className="TimerCell">
+    //             <TimerModule
+    //             timerLength={timeLength}
+    //             setTimeEnded={setTimeEnded}
+    //             interval={interval}/>
+    //         </td>
+    //         <td><p>interval = {interval}</p></td>
+    //         </>
+    //     );
+    // }
+    // else {
+    //     return (<></>);
+    // }
+    return(<>
+            <TimerModule
+                            timerLength={timeLength}
+                            setTimeEnded={setTimeEnded}
+                            interval={interval}/>
+        </>
     );
 }
 
