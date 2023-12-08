@@ -25,22 +25,6 @@ export default function Home() {
 
       <body> {/*All elements of the webpage follow:*/}
 
-          {/*Header:*/}
-          <table className="headerMenu">
-          <tbody>
-            <tr>
-              <td className="menuLeftBox">
-                <a href='https://docs.google.com/document/d/1AptnwPwv4SSi0qF9lezG9_6FiOP8LKhDsg6TUamVKog/edit?usp=sharing'>Project Info</a>, <a href="https://docs.google.com/forms/d/e/1FAIpQLSfRulMB4Xc63dNfky0bCGlgkh9csX-EnFJ_1Ah42DL-YQ8POQ/viewform?usp=sf_link">Feedback Form</a>
-              </td>
-              <td className="menuCenterBox">
-                <h3><i>Brainstorm</i> by Herb Jury</h3>
-              </td>
-              <td className="menuRightBox">
-              </td>
-            </tr>
-          </tbody>
-        </table>
-
         <div className="content">
 
         {/* GameScene handles all of the processes of the actual gameplay. This is where the EquationDisplay is displayed. */}
