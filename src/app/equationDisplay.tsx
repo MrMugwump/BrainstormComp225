@@ -106,19 +106,16 @@ export default function EquationDisplay({userInput,setUserInput,difficulty,setDi
              variants={animiations}>
                 <tbody key = {key}>
                     <tr>
+                        <TimerSlot render = {boxID%2==1} setTimeEnded={setTimeEnded} settings={settings}/>
+                        
                         <td className="TextSlot"><NumberSlot number = {terms[0]} isVariable = {variableLocation==0}/></td>
                         <td className="TextSlot"><p>{operator}</p></td>
                         <td className="TextSlot"><NumberSlot number = {terms[1]} isVariable = {variableLocation==1}/></td>
                         <td className="TextSlot">=</td>
                         <td className="TextSlot"><NumberSlot number = {terms[2]} isVariable = {variableLocation==2}/></td>
 
-                        <td className="TimerCell">
-                            <TimerModule
-                            timerLength={timeLength}
-                            setTimeEnded={setTimeEnded}
-                            interval={interval}/>
-                        </td>
-
+                        <TimerSlot render = {boxID%2==0} setTimeEnded={setTimeEnded}
+                                        settings={settings}/>
                         {/* Additional text for debugging: variableLocation, terms+operator */}
 
                         {/* <td><p>thing worked = {currAnswers.toString()}</p></td> UNCOMMENT: to see location variable */}
@@ -132,29 +129,28 @@ export default function EquationDisplay({userInput,setUserInput,difficulty,setDi
     );
 }
 
-function TimerSlot({render, timeLength,setTimeEnded,interval}:any){
-    // if(render){
-    //     return(<>
-    //         <td className="TimerCell">
-    //             <TimerModule
-    //             timerLength={timeLength}
-    //             setTimeEnded={setTimeEnded}
-    //             interval={interval}/>
-    //         </td>
-    //         <td><p>interval = {interval}</p></td>
-    //         </>
-    //     );
-    // }
-    // else {
-    //     return (<></>);
-    // }
+function TimerSlot({render,settings,setTimeEnded}:any){
+    //const [timeEnded,setTimeEnded] = useState(false);
+    const [interval] = useState(100); //For timer: Rate of timer's checks for updates
+    const [timeLength] = useState(Math.trunc(settings.getTimerSpeed()*1000)); 
+    const [localTimeEnded,localSetTimeEnded] = useState(false);
+    useEffect(()=>{
+        setTimeEnded(localTimeEnded);
+    },[localTimeEnded]);
+    if(render){
     return(<>
-            <TimerModule
+            <td className="TimerCell">
+                            <TimerModule
                             timerLength={timeLength}
                             setTimeEnded={setTimeEnded}
                             interval={interval}/>
+                        </td>
         </>
     );
+    }
+    else {
+        return(<></>)
+    }
 }
 
 /**
