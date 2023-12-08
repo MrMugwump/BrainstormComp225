@@ -43,6 +43,24 @@ export default function Menu({settings, setSettings, setInitialize}:any) {
         </div>
     )
 
+    const TimerSpeedInput = () => (
+        <div>
+            <p className={"active"+String(isFreeplay)}>Timer length:<br/>
+            <input
+                type="range"
+                onChange={changeTimerSpeed}
+                min={1}
+                max={30}
+                step={1}
+                value={timerSpeed}
+                disabled={!isFreeplay}
+                className="TimerSpeedInput"
+                id="TimerSpeedInput"
+            />
+            &nbsp;{timerSpeed}s</p>
+        </div>
+    )
+
     const BoxesInput = () => (
         <div>
             <p className={"active"+String(isFreeplay)}>Boxes:<br/>
@@ -54,8 +72,8 @@ export default function Menu({settings, setSettings, setInitialize}:any) {
                 step={1}
                 value={boxes}
                 disabled={!isFreeplay}
-                className="NumBoxesInput"
-                id="NumBoxesInput"
+                className="BoxesInput"
+                id="BoxesInput"
             />
             &nbsp;{boxes}</p>
         </div>
@@ -107,6 +125,12 @@ export default function Menu({settings, setSettings, setInitialize}:any) {
         </div>
     )
 
+    const PossibleOperators = () => (
+        <div>
+
+        </div>
+    )
+
     return (
         <div>
             <StartButton/>
@@ -126,6 +150,8 @@ export default function Menu({settings, setSettings, setInitialize}:any) {
                             {StartingLivesInput()}
                             <br/>
                             {StartingDifficulty()}
+                            <br/>
+                            {TimerSpeedInput()}
                         </td>
                     </tr>
                 </tbody>
