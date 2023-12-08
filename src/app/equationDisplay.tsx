@@ -13,9 +13,7 @@ import { motion, useAnimation } from "framer-motion";
 export default function EquationDisplay({userInput,setUserInput,difficulty,setDifficulty,setLivesRemaining,boxID,currAnswers,setCurrAnswers,settings}:any){
     const [variableLocation,setVariableLocation] = useState(2); //This variable keeps track of which location is the equation's solution.
     const [key, setKey] = useState(0); //This is used to reset the display instantly (no transition time for timer).
-
-    const [interval] = useState(100); //For timer: Rate of timer's checks for updates
-    const [timeLength] = useState(Math.trunc(settings.getTimerSpeed()*1000)); //For timer: Total number of miliseconds before the timer reaches 0.
+    
     const [timeEnded,setTimeEnded] = useState(false); //For timer: Returns true when timer reaches 0.
 
     const [generator] = useState(()=>{ // prevents weird issues where .generateProblem() gets called any time React calls a new render
@@ -107,7 +105,7 @@ export default function EquationDisplay({userInput,setUserInput,difficulty,setDi
                 <tbody key = {key}>
                     <tr>
                         <TimerSlot render = {boxID%2==1} setTimeEnded={setTimeEnded} settings={settings}/>
-                        
+
                         <td className="TextSlot"><NumberSlot number = {terms[0]} isVariable = {variableLocation==0}/></td>
                         <td className="TextSlot"><p>{operator}</p></td>
                         <td className="TextSlot"><NumberSlot number = {terms[1]} isVariable = {variableLocation==1}/></td>
@@ -131,8 +129,8 @@ export default function EquationDisplay({userInput,setUserInput,difficulty,setDi
 
 function TimerSlot({render,settings,setTimeEnded}:any){
     //const [timeEnded,setTimeEnded] = useState(false);
-    const [interval] = useState(100); //For timer: Rate of timer's checks for updates
-    const [timeLength] = useState(Math.trunc(settings.getTimerSpeed()*1000)); 
+    const [interval] = useState(100); //Rate of timer's checks for updates
+    const [timeLength] = useState(Math.trunc(settings.getTimerSpeed()*1000)); //Length of timer
     const [localTimeEnded,localSetTimeEnded] = useState(false);
     useEffect(()=>{
         setTimeEnded(localTimeEnded);
