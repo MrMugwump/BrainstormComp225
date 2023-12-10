@@ -25,6 +25,7 @@ enum GameState {
 export default function GameScene() {
     const [gameState, setGameState] = useState(GameState.Start);
     const [difficulty, setDifficulty] = useState(0);
+    const [score,setScore] = useState(0);
     const [userInput, setUserInput] = useState(''); //represents what the user types into the answer box
     const [livesRemaining, setLivesRemaining] = useState(3);
     const [currAnswers, setCurrAnswers] = useState([0,0,0,0]);
@@ -51,11 +52,14 @@ export default function GameScene() {
             //If its in normal mode, there's one box at the start.
             if(settings.getIsFreeplay()) {
                 setBoxes(settings.getNumBoxes());
-            } else {
+                setDifficulty(settings.getStartingDifficulty());
+                setLivesRemaining(settings.getStartingLives());
+            } else { //regular mode
                 setBoxes(1);
+                setDifficulty(0);
+                setLivesRemaining(3);
             }
-            setDifficulty(settings.getStartingDifficulty());
-            setLivesRemaining(3);
+            setScore(0);
             setInitialize(false);
             setGameState(GameState.Play);
         }
@@ -93,19 +97,23 @@ export default function GameScene() {
             position: `fixed`,
             right: `10px`
             }}>
-                <ScoreDisplay score = {difficulty-settings.getStartingDifficulty()}/>
+                <ScoreDisplay score = {score}/>
             </div>
 
             <AnswerBox
             setUserInput={setUserInput}
             userInput={userInput}/>
 
+            Difficulty: {difficulty} <br/>
+            Starting difficulty: {settings.getStartingDifficulty()}
+            Lives remaining: {livesRemaining}
+
             <br/><br/>
             {/* Calling this as a function and not an HTML component prevents weird rendering things. */}
             {EqTable(boxes)}
 
             <LivesDisplay
-            LivesDisplay = {LivesDisplay}
+            settings = {settings}
             livesRemaining = {livesRemaining}
             setLivesRemaining = {setLivesRemaining}/>
             
@@ -165,6 +173,8 @@ export default function GameScene() {
                         setUserInput={setUserInput}
                         difficulty={difficulty}
                         setDifficulty={setDifficulty}
+                        score={score}
+                        setScore={setScore}
                         setLivesRemaining = {setLivesRemaining}
                         currAnswers = {currAnswers}
                         setCurrAnswers = {setCurrAnswers}

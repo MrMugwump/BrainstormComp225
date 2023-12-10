@@ -8,15 +8,18 @@
     box-shadow: 3px 3px 3px #000000aa;
     margin:auto;
 }
+
 .EquationDisplay .TextSlot{
     padding: 3px;
     font-size: 5em;
     height: 1.5em;
 }
+
 .InputArea{
     font-size:1.3em;
     padding:.5em; 
 }
+
 .TimerCell {
     padding: 10px;
 }

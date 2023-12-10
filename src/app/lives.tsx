@@ -6,18 +6,31 @@ import emptyHeart from './heart-images/emptyHeartMC.png';
 /**
  * Graphical display of the user's lives number.
  */
-export default function LivesDisplay({setLivesRemaining, livesRemaining}:any) {
-    return (
-        <div className="Lives" id="Lives">
-            {nextHeart(1, livesRemaining)}
-            {nextHeart(2, livesRemaining)}
-            {nextHeart(3, livesRemaining)}
-        </div>
-    )
+export default function LivesDisplay({setLivesRemaining, livesRemaining, settings}:any) {
+    let startingLives = 3;
+    if(settings.getIsFreeplay()) {
+        startingLives = settings.getStartingLives()
+    } else {
+        startingLives = 3;
+    }
+
+    let table = [];
+        let children = [];
+        for(let i=0; i<startingLives; i++) {
+                children.push(<td>
+                    {nextHeart(i,livesRemaining)}
+                </td>);
+            }
+            table.push(<tr>{children}</tr>);
+        return (
+            <table className="Lives">
+                {table}
+            </table>
+        );
 }
 
 function nextHeart(pos:number, livesRemaining:number) {
-    if(pos > livesRemaining) {
+    if(pos >= livesRemaining) {
         return <img src={emptyHeart.src} className="EmptyHeart" id="EmptyHeart"/>;
     } else {
         return <img src={fullHeart.src} alt="Heart" className="FullHeart" id="FullHeart"/>;
