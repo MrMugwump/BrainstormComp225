@@ -104,10 +104,6 @@ export default function GameScene() {
             setUserInput={setUserInput}
             userInput={userInput}/>
 
-            Difficulty: {difficulty} <br/>
-            Starting difficulty: {settings.getStartingDifficulty()}
-            Lives remaining: {livesRemaining}
-
             <br/><br/>
             {/* Calling this as a function and not an HTML component prevents weird rendering things. */}
             {EqTable(boxes)}

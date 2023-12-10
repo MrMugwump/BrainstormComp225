@@ -33,7 +33,7 @@ export default function Menu({settings, setSettings, setInitialize}:any) {
 
     const IsFreeplayInput = () => (
         <div>
-            <p>Freeplay:&nbsp;
+            <p>Freeplay mode:&nbsp;
             <input
                 type="checkbox"
                 checked={isFreeplay}
@@ -63,7 +63,7 @@ export default function Menu({settings, setSettings, setInitialize}:any) {
 
     const BoxesInput = () => (
         <div>
-            <p className={"active"+String(isFreeplay)}>Boxes:<br/>
+            <p className={"active"+String(isFreeplay)}>Number of equations:<br/>
             <input
                 type="range"
                 onChange={changeBoxes}
