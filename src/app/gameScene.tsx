@@ -22,7 +22,7 @@ enum GameState {
 /**
  * Handles the "gameplay" portion of the website. Handles the starting screen, gameplay screen, and end screen.
  */
-export default function GameScene() {
+export default function GameScene({dark,setDark}:any) {
     const [gameState, setGameState] = useState(GameState.Start);
     const [difficulty, setDifficulty] = useState(0);
     const [score,setScore] = useState(0);
@@ -84,7 +84,9 @@ export default function GameScene() {
             <Menu
             settings={settings}
             setSettings={setSettings}
-            setInitialize={setInitialize}/>
+            setInitialize={setInitialize}
+            dark={dark}
+            setDark={setDark}/>
         </div>
     );
     
@@ -175,6 +177,7 @@ export default function GameScene() {
                         currAnswers = {currAnswers}
                         setCurrAnswers = {setCurrAnswers}
                         settings = {settings}
+                        dark={dark}
                         boxID={i*2+j}/>
                     </td>);
                 } else {

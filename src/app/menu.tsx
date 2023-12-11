@@ -1,7 +1,7 @@
 import { Settings } from "./settings";
 import { useState, useEffect } from 'react';
 
-export default function Menu({settings, setSettings, setInitialize}:any) {
+export default function Menu({settings, setSettings, setInitialize, dark, setDark}:any) {
     const [boxes, setBoxes] = useState(settings.getNumBoxes());
     const [startingDifficulty, setStartingDifficulty] = useState(settings.getStartingDifficulty());
     const [startingLives, setStartingLives] = useState(settings.getStartingLives());
@@ -120,6 +120,8 @@ export default function Menu({settings, setSettings, setInitialize}:any) {
             <p>Dark Mode:&nbsp;
             <input
                 type="checkbox"
+                checked={dark}
+                onChange={()=>{setDark(!dark)}}
             />
             </p>
         </div>

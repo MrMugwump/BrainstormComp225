@@ -1,3 +1,35 @@
+.darktrue {
+    background:black;
+    color:white;
+}
+
+.darktrue button {
+    background-color:black;
+    color:white;
+    border-color:white;
+}
+
+.darktrue .EquationDisplay {
+    border-color:white;
+}
+
+.darktrue #progressbar {
+    border-color:white;
+    background-color:black
+}
+
+.darktrue #border {
+    background-color:white;
+}
+
+.darktrue .scoreDisplay {
+    border-color:white;
+}
+
+.darktrue #AnswerBox {
+    color:white;
+}
+
 .startScreen {
     margin:auto;
     width:100%;

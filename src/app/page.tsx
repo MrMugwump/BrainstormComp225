@@ -3,10 +3,12 @@
 import Image from 'next/image'
 import React from 'react';
 import { useState } from 'react';
+import { useEffect } from 'react';
 // import { Link } from 'react-router-dom';
 import TimerModule from './timer';
 import EquationDisplay from './equationDisplay';
 import GameScene from './gameScene';
+import './gameSceneStyle.css';
 
 
 
@@ -17,10 +19,11 @@ export default function Home() {
   const [interval, setInterval] = useState(1000);
   const [isActive, setActive] = useState(false);
   const [difficultySetting, setDifficultySetting] = useState(0);
+  const [dark, setDark] = useState(true);
   //const {seconds} = useTimer(time,10000);
 
   return (
-    <html>
+    <html className={"dark"+String(dark)}>
       <head><title> Brainstorm by Herb Jury {/*Metadata title for the webpage:*/}</title></head>
 
       <body> {/*All elements of the webpage follow:*/}
@@ -32,7 +35,7 @@ export default function Home() {
           position:`relative`,
           top: `-1em`
         }}> 
-        <GameScene/>
+        <GameScene dark={dark} setDark={setDark}/>
         </div>
 
 

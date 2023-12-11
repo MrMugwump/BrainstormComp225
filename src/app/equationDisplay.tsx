@@ -10,7 +10,7 @@ import { motion, useAnimation } from "framer-motion";
 /**
  * Single equation box on screen: randomized equation and timer.
  */
-export default function EquationDisplay({userInput,setUserInput,difficulty,setDifficulty,score,setScore,setLivesRemaining,boxID,currAnswers,setCurrAnswers,settings}:any){
+export default function EquationDisplay({userInput,setUserInput,difficulty,setDifficulty,score,setScore,setLivesRemaining,boxID,currAnswers,setCurrAnswers,dark,settings}:any){
     const [variableLocation,setVariableLocation] = useState(2); //This variable keeps track of which location is the equation's solution.
     const [key, setKey] = useState(0); //This is used to reset the display instantly (no transition time for timer).
     
