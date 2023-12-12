@@ -19,7 +19,7 @@ export default function Home() {
   const [interval, setInterval] = useState(1000);
   const [isActive, setActive] = useState(false);
   const [difficultySetting, setDifficultySetting] = useState(0);
-  const [dark, setDark] = useState(true);
+  const [dark, setDark] = useState(false);
   //const {seconds} = useTimer(time,10000);
 
   return (
