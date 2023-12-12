@@ -117,10 +117,17 @@ export default function GameScene({dark,setDark}:any) {
             
             <div style={{
                 position: `fixed`,
-                bottom: `0`,
+                top: `90px`,
                 right: `0`
             }}>
                 <OperationDisplay difficulty={difficulty}/>
+            </div>
+            <div style={{
+                position:`fixed`,
+                top:'0px',
+                left:'0px',
+            }}>
+                <ExitButton/>
             </div>
         </div>
     );
@@ -139,6 +146,15 @@ export default function GameScene({dark,setDark}:any) {
             {SettingsButton()}
         </div>
     );
+
+    /**
+     * Button to end the current game, going back to the main menu
+     */
+    const ExitButton = () => (
+        <button className="exitButton" onClick={()=>{
+            return setGameState(GameState.Start);
+        }}>Exit</button>
+    )
 
     /**
      * Button to restart the game with the same settings.

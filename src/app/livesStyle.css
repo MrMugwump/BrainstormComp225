@@ -1,18 +1,18 @@
 .EmptyHeart {
-    max-height:125px;
-    max-width:125px;
+    max-height:100px;
+    max-width:100px;
     height: auto;
     width: auto;
 }
 .FullHeart {
-    max-height:125px;
-    max-width:125px;
+    max-height:100px;
+    max-width:100px;
     height: auto;
     width: auto;
 }
 
 .Lives {
-    bottom: 0px;
+    top: -10px;
     left: 0px;
     position:fixed;
 }

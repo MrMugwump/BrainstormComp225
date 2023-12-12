@@ -39,8 +39,6 @@ export function OperationDisplay({difficulty}:any){
                     <tr><p>Division :</p>
                     <td><LockIndicator isLocked={operatorIsLocked[3]}/></td>
                     </tr>
-                    {/* <td>{operatorIsLocked.toString()}</td> */}
-                    {/* <td>{difficulty}</td> */}
                 </td>
             </tbody>
         </table>
