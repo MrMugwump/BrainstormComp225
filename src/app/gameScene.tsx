@@ -117,8 +117,8 @@ export default function GameScene({dark,setDark}:any) {
             
             <div style={{
                 position: `fixed`,
-                top: `90px`,
-                right: `0`
+                top: `0px`,
+                right: `100px`
             }}>
                 <OperationDisplay difficulty={difficulty}/>
             </div>

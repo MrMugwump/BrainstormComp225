@@ -24,9 +24,10 @@ export function OperationDisplay({difficulty}:any){
     },[difficulty]);
 
     return(<>
-        <table>
+        <table className="operationDisplay">
             <tbody>
-                <td style={{textAlign:`right`}}>
+                {/* Commented: Previous table format in case we want to switch back */}
+                {/* <td style={{textAlign:`right`}}>
                     <tr><p>Addition :</p>
                     <td><LockIndicator isLocked={operatorIsLocked[0]}/></td>
                     </tr>
@@ -38,6 +39,21 @@ export function OperationDisplay({difficulty}:any){
                     </tr>
                     <tr><p>Division :</p>
                     <td><LockIndicator isLocked={operatorIsLocked[3]}/></td>
+                    </tr>
+                </td> */}
+
+                <td style={{textAlign:`center`,fontSize:`30pt`}}>
+                    <tr>
+                        <td><LockIndicator isLocked={operatorIsLocked[0]}/></td>
+                        <td><LockIndicator isLocked={operatorIsLocked[1]}/></td>
+                        <td><LockIndicator isLocked={operatorIsLocked[2]}/></td>
+                        <td><LockIndicator isLocked={operatorIsLocked[3]}/></td>
+                    </tr>
+                    <tr>
+                        <td><strong>+</strong></td>
+                        <td><strong>–</strong></td>
+                        <td><strong>×</strong></td>
+                        <td><strong>÷</strong></td>
                     </tr>
                 </td>
             </tbody>
