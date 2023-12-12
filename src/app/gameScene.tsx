@@ -106,7 +106,7 @@ export default function GameScene({dark,setDark}:any) {
             setUserInput={setUserInput}
             userInput={userInput}/>
 
-            <br/><br/>
+            <br/><br/><br/>
             {/* Calling this as a function and not an HTML component prevents weird rendering things. */}
             {EqTable(boxes)}
 
@@ -124,8 +124,8 @@ export default function GameScene({dark,setDark}:any) {
             </div>
             <div style={{
                 position:`fixed`,
-                top:'0px',
-                left:'0px',
+                top:'15px',
+                left:'15px',
             }}>
                 <ExitButton/>
             </div>
@@ -152,7 +152,7 @@ export default function GameScene({dark,setDark}:any) {
      */
     const ExitButton = () => (
         <button className="exitButton" onClick={()=>{
-            return setGameState(GameState.Start);
+            setGameState(GameState.Start);
         }}>Exit</button>
     )
 
