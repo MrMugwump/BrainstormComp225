@@ -1,7 +1,7 @@
 import React from "react"
 import { useState, useEffect } from 'react';
-import fullHeart from './heart-images/heartMC.png';
-import emptyHeart from './heart-images/emptyHeartMC.png';
+import fullHeart from './heart-images/heart_full.png';
+import emptyHeart from './heart-images/heart_empty.png';
 
 /**
  * Graphical display of the user's lives number.
