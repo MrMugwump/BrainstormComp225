@@ -102,7 +102,8 @@ export default function EquationDisplay({userInput,setUserInput,difficulty,setDi
         <div style={{padding:`5px`}} role="region" aria-live="polite">
             <motion.table className="EquationDisplay"
              animate= {controls}
-             variants={animiations}>
+             variants={animiations}
+             aria-label={terms[0]+" "+operator+" "+terms[1]+" = ?"}>
                 <tbody key = {key}>
                     <tr>
                         <TimerSlot render = {boxID%2==1} setTimeEnded={setTimeEnded} settings={settings}/>
