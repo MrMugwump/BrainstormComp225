@@ -1,4 +1,13 @@
-import { useEffect, useState } from "react"
+import React from "react";
+import { useEffect, useState } from "react";
+import fullPlus from './symbol-images/plus_filled.png';
+import emptyPlus from './symbol-images/plus_empty.png';
+import fullMinus from './symbol-images/minus_filled.png';
+import emptyMinus from './symbol-images/minus_empty.png';
+import fullMultiply from './symbol-images/multiply_filled.png';
+import emptyMultiply from './symbol-images/multiply_empty.png';
+import fullDivide from './symbol-images/divide_filled.png';
+import emptyDivide from './symbol-images/divide_empty.png';
 
 /*
  * Graphical element that shows which operation types could possibly be generated, based on difficulty.
@@ -44,16 +53,10 @@ export function OperationDisplay({difficulty}:any){
 
                 <td style={{textAlign:`center`,fontSize:`30pt`}}>
                     <tr>
-                        <td><LockIndicator isLocked={operatorIsLocked[0]}/></td>
-                        <td><LockIndicator isLocked={operatorIsLocked[1]}/></td>
-                        <td><LockIndicator isLocked={operatorIsLocked[2]}/></td>
-                        <td><LockIndicator isLocked={operatorIsLocked[3]}/></td>
-                    </tr>
-                    <tr>
-                        <td><strong>+</strong></td>
-                        <td><strong>–</strong></td>
-                        <td><strong>×</strong></td>
-                        <td><strong>÷</strong></td>
+                        <td><LockIndicator isLocked={operatorIsLocked[0]} symbol={"plus"}/></td>
+                        <td><LockIndicator isLocked={operatorIsLocked[1]} symbol={"minus"}/></td>
+                        <td><LockIndicator isLocked={operatorIsLocked[2]} symbol={"multiply"}/></td>
+                        <td><LockIndicator isLocked={operatorIsLocked[3]} symbol={"divide"}/></td>
                     </tr>
                 </td>
             </tbody>
@@ -61,22 +64,26 @@ export function OperationDisplay({difficulty}:any){
     </>)
 }
 
-function LockIndicator({isLocked}:any){
-    function changeColor(isTrue:boolean){
-        if(isTrue){
-            return '#60d056' //green
+function LockIndicator({isLocked,symbol}:any){
+        if(isLocked){
+            if(symbol==="plus") {
+                return (<img src={fullPlus.src} width="70px" height="70px"/>)
+            } else if(symbol=="minus") {
+                return (<img src={fullMinus.src} width="70px" height="30px"/>)
+            } else if(symbol=="multiply") {
+                return (<img src={fullMultiply.src} width="70px" height="70px"/>)
+            } else {
+                return (<img src={fullDivide.src} width="70px" height="70px"/>)
+            }
         } else{
-            return '#ff0000' //red
+            if(symbol==="plus") {
+                return (<img src={emptyPlus.src} width="70px" height="70px"/>)
+            } else if(symbol=="minus") {
+                return (<img src={emptyMinus.src} width="70px" height="30px"/>)
+            } else if(symbol=="multiply") {
+                return (<img src={emptyMultiply.src} width="70px" height="70px"/>)
+            } else {
+                return (<img src={emptyDivide.src} width="70px" height="70px"/>)
+            }
         }
-    }
-
-    return(<>
-        <div style={{
-            width:`1em`,
-            height:`1em`,
-            backgroundColor: `${changeColor(isLocked)}`,
-            border: `0.1em solid black`,
-            borderRadius: `50%`
-        }}></div>
-    </>)
 }

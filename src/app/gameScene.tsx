@@ -2,7 +2,7 @@ import React from "react"
 import { useState, useEffect } from 'react';
 import EquationDisplay from "./equationDisplay";
 import "./gameSceneStyle.css"
-import { OperationDisplay } from "./player-info-components/operationNotification";
+import { OperationDisplay } from "./operationNotification";
 import { ScoreDisplay } from "./player-info-components/scoreDisplay";
 import AnswerBox from "./player-info-components/answerBox";
 import "./player-info-components/answerBoxStyle.css";
