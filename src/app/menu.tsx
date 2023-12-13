@@ -68,7 +68,7 @@ export default function Menu({settings, setSettings, setInitialize, dark, setDar
                 type="range"
                 onChange={changeBoxes}
                 min={1}
-                max={9}
+                max={4}
                 step={1}
                 value={boxes}
                 disabled={!isFreeplay}
