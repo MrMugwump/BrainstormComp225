@@ -137,9 +137,14 @@ export default function GameScene({dark,setDark}:any) {
      */
     const EndScreen = () => (
         <div className="endScreen">
-            You ran out of lives! Try again!
+            <br/>
+            <b>Game Over</b>
             <br/><br/>
-            Your score was: {difficulty-settings.getStartingDifficulty()}
+            <div style={{
+            marginLeft: `auto`,
+            marginRight: `auto`,
+            width: `70px`
+            }}><ScoreDisplay score = {score}/></div>
             <br/><br/>
             {RestartButton()}
             <br/><br/>
