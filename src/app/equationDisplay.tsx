@@ -99,7 +99,7 @@ export default function EquationDisplay({userInput,setUserInput,difficulty,setDi
      */
     return (
     <>
-        <div style={{padding:`5px`}}>
+        <div style={{padding:`5px`}} role="region" aria-live="polite">
             <motion.table className="EquationDisplay"
              animate= {controls}
              variants={animiations}>
