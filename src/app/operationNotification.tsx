@@ -13,21 +13,19 @@ import emptyDivide from './symbol-images/divide_empty.png';
  * Graphical element that shows which operation types could possibly be generated, based on difficulty.
  */
 export function OperationDisplay({difficulty}:any){
-    const [operatorIsLocked, setIsLocked] = useState([true,false,false,false]);
+    const [operatorIsLocked, setIsLocked] = useState([true, difficulty >= 4, difficulty >= 14, difficulty >= 19]);
     function updateArray(_operators:boolean[],index:number){ //definitely a simpler way to do this
         _operators[index] = true;
         return _operators;
     }
 
     useEffect(()=>{
-        if(difficulty == 1){
-            setIsLocked((_operators)=>updateArray(_operators,0));
-        }
-        else if(difficulty == 5){ //subtraction
+        //Addition is always enabled
+        if(difficulty == 4){ //subtraction
             setIsLocked((_operators)=>updateArray(_operators,1));
-        } else if (difficulty == 15) { //multiplication
+        } else if (difficulty == 14) { //multiplication
             setIsLocked((_operators)=>updateArray(_operators,2));
-        } else if (difficulty == 20) { //division
+        } else if (difficulty == 19) { //division
             setIsLocked((_operators)=>updateArray(_operators,3));
         }
     },[difficulty]);
