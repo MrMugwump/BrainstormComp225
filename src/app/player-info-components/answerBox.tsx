@@ -25,7 +25,7 @@ export default function AnswerBox({userInput, setUserInput}:any) {
     
     return (
         <>
-            <TextBox render={render}/>
+            
             <input
             className="AnswerBox"
             id="AnswerBox"
@@ -36,6 +36,8 @@ export default function AnswerBox({userInput, setUserInput}:any) {
             onFocus={onReselect}
             style={{width:`${width}`}}
             autoFocus={true} /*When instantiated, cursor auto selects.*/ />
+            <TextBox render={render}/>
+            
         </>
     )
 }
@@ -43,7 +45,7 @@ export default function AnswerBox({userInput, setUserInput}:any) {
 function TextBox({render}:any){
     if(render){
         return (
-            <p>Click here!</p>
+            <p style={{fontSize:"2.5em"}}>Click the gray box!</p>
         )
     }
     return(
