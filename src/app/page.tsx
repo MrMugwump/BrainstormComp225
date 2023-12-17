@@ -20,7 +20,7 @@ export default function Home() {
   const [isActive, setActive] = useState(false);
   const [difficultySetting, setDifficultySetting] = useState(0);
   const [dark, setDark] = useState(false);
-  const [monospace, setMonospace] = useState(false);
+  const [monospace, setMonospace] = useState(true);
   //const {seconds} = useTimer(time,10000);
 
   return (
