@@ -1,7 +1,7 @@
 import { Settings } from "./settings";
 import { useState, useEffect } from 'react';
 
-export default function Menu({settings, setSettings, setInitialize, dark, setDark}:any) {
+export default function Menu({settings, setSettings, setInitialize, dark, setDark, monospace, setMonospace}:any) {
     const [boxes, setBoxes] = useState(settings.getNumBoxes());
     const [startingDifficulty, setStartingDifficulty] = useState(settings.getStartingDifficulty());
     const [startingLives, setStartingLives] = useState(settings.getStartingLives());
@@ -127,6 +127,18 @@ export default function Menu({settings, setSettings, setInitialize, dark, setDar
         </div>
     )
 
+    const FontCheckbox = () => (
+        <div>
+            <p>Alt Font:&nbsp;
+            <input
+                type="checkbox"
+                checked={monospace}
+                onChange={()=>{setMonospace(!monospace)}}
+            />
+            </p>
+        </div>
+    )
+
     const PossibleOperators = () => (
         <div>
 
@@ -143,6 +155,8 @@ export default function Menu({settings, setSettings, setInitialize, dark, setDar
                     <tr>
                         <td>
                             {DarkMode()}
+                            <br/>
+                            {FontCheckbox()}
                         </td>
                         <td>
                             {IsFreeplayInput()}

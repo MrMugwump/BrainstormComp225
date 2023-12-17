@@ -22,7 +22,7 @@ enum GameState {
 /**
  * Handles the "gameplay" portion of the website. Handles the starting screen, gameplay screen, and end screen.
  */
-export default function GameScene({dark,setDark}:any) {
+export default function GameScene({dark,setDark,monospace,setMonospace}:any) {
     const [gameState, setGameState] = useState(GameState.Start);
     const [difficulty, setDifficulty] = useState(0);
     const [score,setScore] = useState(0);
@@ -86,7 +86,9 @@ export default function GameScene({dark,setDark}:any) {
             setSettings={setSettings}
             setInitialize={setInitialize}
             dark={dark}
-            setDark={setDark}/>
+            setDark={setDark}
+            monospace={monospace}
+            setMonospace={setMonospace}/>
         </div>
     );
     

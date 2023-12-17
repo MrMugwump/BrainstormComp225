@@ -20,10 +20,11 @@ export default function Home() {
   const [isActive, setActive] = useState(false);
   const [difficultySetting, setDifficultySetting] = useState(0);
   const [dark, setDark] = useState(false);
+  const [monospace, setMonospace] = useState(false);
   //const {seconds} = useTimer(time,10000);
 
   return (
-    <html className={"dark"+String(dark)}>
+    <html className={"dark"+String(dark)+" "+"monospace"+String(monospace)}>
       <head><title> Brainstorm by Herb Jury {/*Metadata title for the webpage:*/}</title></head>
 
       <body> {/*All elements of the webpage follow:*/}
@@ -35,7 +36,7 @@ export default function Home() {
           position:`relative`,
           top: `-1em`
         }}> 
-        <GameScene dark={dark} setDark={setDark}/>
+        <GameScene dark={dark} setDark={setDark} monospace={monospace} setMonospace={setMonospace}/>
         </div>
 
 
