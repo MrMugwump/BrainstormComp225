@@ -65,23 +65,23 @@ export function OperationDisplay({difficulty}:any){
 function LockIndicator({isLocked,symbol}:any){
         if(isLocked){
             if(symbol==="plus") {
-                return (<img src={fullPlus.src} width="70px" height="70px"/>)
+                return (<img src={fullPlus.src} alt="Plus sign" width="70px" height="70px"/>)
             } else if(symbol=="minus") {
-                return (<img src={fullMinus.src} width="70px" height="30px"/>)
+                return (<img src={fullMinus.src} alt="Minus sign" width="70px" height="30px"/>)
             } else if(symbol=="multiply") {
-                return (<img src={fullMultiply.src} width="70px" height="70px"/>)
+                return (<img src={fullMultiply.src} alt="Multiply symbol" width="70px" height="70px"/>)
             } else {
-                return (<img src={fullDivide.src} width="70px" height="70px"/>)
+                return (<img src={fullDivide.src} alt="Divide symbol" width="70px" height="70px"/>)
             }
         } else{
             if(symbol==="plus") {
-                return (<img src={emptyPlus.src} width="70px" height="70px"/>)
+                return (<img src={emptyPlus.src} alt="Empty plus sign" width="70px" height="70px"/>)
             } else if(symbol=="minus") {
-                return (<img src={emptyMinus.src} width="70px" height="30px"/>)
+                return (<img src={emptyMinus.src} alt="Empty minus sign" width="70px" height="30px"/>)
             } else if(symbol=="multiply") {
-                return (<img src={emptyMultiply.src} width="70px" height="70px"/>)
+                return (<img src={emptyMultiply.src} alt="Empty multiply symbol" width="70px" height="70px"/>)
             } else {
-                return (<img src={emptyDivide.src} width="70px" height="70px"/>)
+                return (<img src={emptyDivide.src} alt="Empty divide symbol" width="70px" height="70px"/>)
             }
         }
 }

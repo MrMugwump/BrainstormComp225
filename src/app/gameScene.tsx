@@ -80,7 +80,7 @@ export default function GameScene({dark,setDark}:any) {
      */
     const StartScreen = () => (
         <div className="startScreen">
-            <img src={Logo.src} width="300" height="200"/>
+            <img src={Logo.src} alt="Brainstorm" width="300" height="200"/>
             <Menu
             settings={settings}
             setSettings={setSettings}

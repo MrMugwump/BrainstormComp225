@@ -31,7 +31,7 @@ export default function LivesDisplay({setLivesRemaining, livesRemaining, setting
 
 function nextHeart(pos:number, livesRemaining:number) {
     if(pos >= livesRemaining) {
-        return <img src={emptyHeart.src} className="EmptyHeart" id="EmptyHeart"/>;
+        return <img src={emptyHeart.src} alt="Empty heart" className="EmptyHeart" id="EmptyHeart"/>;
     } else {
         return <img src={fullHeart.src} alt="Heart" className="FullHeart" id="FullHeart"/>;
     }
